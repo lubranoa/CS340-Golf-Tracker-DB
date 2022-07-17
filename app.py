@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 import os
 
 # Configuration
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    return "Welcome to our Golf Tracker Database!"
+    return render_template("main.j2")
 
 # Listener
 
