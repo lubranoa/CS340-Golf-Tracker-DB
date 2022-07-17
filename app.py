@@ -1,4 +1,4 @@
-from flask import flask
+from flask import Flask
 import os
 
 # Configuration
@@ -14,6 +14,5 @@ def root():
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT',15432))
-    app.run(port=port)
-    
+    port = int(os.environ.get('PORT', 15432))
+    app.run(port=port, debug=True)
