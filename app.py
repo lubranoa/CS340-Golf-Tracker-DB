@@ -20,6 +20,13 @@ def players():
     results = cursor.fetchall()
     return render_template("players.j2", gt_players=results)
 
+@app.route('/courses')
+def courses():
+    query = "SELECT * FROM courses;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("courses.j2", gt_courses=results)
+
 # Listener
 
 if __name__ == "__main__":
