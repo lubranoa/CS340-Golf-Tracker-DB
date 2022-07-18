@@ -1,6 +1,7 @@
 # CS340-Golf-Tracker-DB
 
 Created by Conner Marchell and Alex Lubrano
+
 CS 340 - Introduction to Databases Portfolio Project
 
 ## Project Description
