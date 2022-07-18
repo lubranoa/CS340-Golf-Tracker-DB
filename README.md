@@ -1,5 +1,11 @@
 # CS340-Golf-Tracker-DB
 
+Created by Conner Marchell and Alex Lubrano
+CS 340 - Introduction to Databases Portfolio Project
+
+## Project Description
+Description goes here.
+
 ## Links
 - Our repo: [CS340-Golf-Tracker-DB](https://github.com/lubranoa/CS340-Golf-Tracker-DB)
 - The main starter app linked in our course explorations: [OSU Flask Starter App](https://github.com/osu-cs340-ecampus/flask-starter-app)
