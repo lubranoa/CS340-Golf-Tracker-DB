@@ -73,9 +73,13 @@ source golf_tracker_DDL.sql
 gunicorn -b 0.0.0.0:15432 -D app:app
 ```
         
-   - To kill the instance of Gunicorn, run:
+   - To kill all your instances of Gunicorn, run:
 ```
 pkill -u onid gunicorn
 ```
 
+   - For more information check the [bottom](https://github.com/osu-cs340-ecampus/flask-starter-app#deploying-the-migrated-project-on-osus-flip-server) of the 340 Flask Starter App repo
+
 **13.** Navigate to web app address at (http://flipX.engr.oregonstate.edu:15432/) changing the X to your preferred flip server.
+
+At this point, it should work!
