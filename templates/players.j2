@@ -4,5 +4,31 @@
     <title>Golf Tracker App</title>
 </head>
 <body>
+    <table>
+    <thead>
+    <tr>
+        <!-- Iterate through each key in the first entry to get the column name -->
+        {% for key in gt_players[0].keys() %}
+
+        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+        <th>{{ key }}</th>
+
+        <!-- End of this for loop -->
+        {% endfor %}
+    </tr>
+    <tbody>
+
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for player in gt_players %}
+    <tr>
+        <!-- Then iterate through every key in the current person dictionary -->
+        {% for key in player.keys() %}
+
+        <!-- Create a <td> element with the value of that key in it -->
+        <td>{{player[key]}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
 </body>
 </html>

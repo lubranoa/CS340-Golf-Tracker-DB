@@ -16,12 +16,9 @@ def root():
 @app.route('/players')
 def players():
     query = "SELECT * FROM players;"
-
     cursor = db.execute_query(db_connection=db_connection, query=query)
-
-    results = json.dumps(cursor.fetchall())
-
-    return results
+    results = cursor.fetchall()
+    return render_template("players.j2", gt_players=results)
 
 # Listener
 
