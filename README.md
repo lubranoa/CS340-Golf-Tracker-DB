@@ -1,9 +1,11 @@
 # CS340-Golf-Tracker-DB
+
 ## Links
 - Our repo: [CS340-Golf-Tracker-DB](https://github.com/lubranoa/CS340-Golf-Tracker-DB)
 - The main starter app linked in our course explorations: [OSU Flask Starter App](https://github.com/osu-cs340-ecampus/flask-starter-app)
 - The starter app repo references this repo sometimes: [CS340_starter_app](https://github.com/mlapresta/cs340_starter_app)
 - The templating language docs: [Jinja Documentation](https://jinja.palletsprojects.com/en/2.11.x/templates/)
+
 ## How to set up application
 **1.** SSH to your flipX server of choice
 
@@ -71,9 +73,9 @@ source golf_tracker_DDL.sql
 gunicorn -b 0.0.0.0:15432 -D app:app
 ```
         
-        - To kill the instance of Gunicorn, run:
-        ```
-        pkill -u onid gunicorn
-        ```
+    - To kill the instance of Gunicorn, run:
+```
+pkill -u onid gunicorn
+```
 
 **13.** Navigate to web app address at ```http://flipX.engr.oregonstate.edu:15432/``` changing the X to your preferred flip server.
