@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
-CREATE OR REPLACE TABLE courses 
+CREATE TABLE courses 
 (
     course_id int NOT NULL AUTO_INCREMENT,
     course_name varchar(50) NOT NULL,
@@ -9,7 +9,7 @@ CREATE OR REPLACE TABLE courses
     PRIMARY KEY (course_id)
 );
 
-CREATE OR REPLACE TABLE players
+CREATE TABLE players
 (
     player_id int NOT NULL AUTO_INCREMENT,
     player_name varchar(50) NOT NULL,
@@ -18,7 +18,7 @@ CREATE OR REPLACE TABLE players
     PRIMARY KEY (player_id)
 );
 
-CREATE OR REPLACE TABLE holes
+CREATE TABLE holes
 (
     hole_id int NOT NULL AUTO_INCREMENT,
     course_id int NOT NULL,
@@ -28,7 +28,7 @@ CREATE OR REPLACE TABLE holes
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
 
-CREATE OR REPLACE TABLE rounds
+CREATE TABLE rounds
 (
     round_id int NOT NULL AUTO_INCREMENT,
     course_id int NOT NULL,
@@ -40,7 +40,7 @@ CREATE OR REPLACE TABLE rounds
     FOREIGN KEY (player_id) REFERENCES players(player_id)
 );
 
-CREATE OR REPLACE TABLE clubs
+CREATE TABLE clubs
 (
     club_id int NOT NULL AUTO_INCREMENT,
     brand varchar(50) NOT NULL,
@@ -49,7 +49,7 @@ CREATE OR REPLACE TABLE clubs
     PRIMARY KEY (club_id)
 );
 
-CREATE OR REPLACE TABLE player_clubs
+CREATE TABLE player_clubs
 (
     player_id int NOT NULL,
     club_id int NOT NULL,
@@ -57,7 +57,7 @@ CREATE OR REPLACE TABLE player_clubs
     FOREIGN KEY (club_id) REFERENCES clubs(club_id)
 );
 
-CREATE OR REPLACE TABLE swings
+CREATE TABLE swings
 (
     swing_id int NOT NULL AUTO_INCREMENT,
     hole_id int NOT NULL,
