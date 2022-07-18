@@ -24,7 +24,7 @@ CREATE TABLE holes
     course_id int NOT NULL,
     par_swing_count int NOT NULL,
     distance int NOT NULL,
-    PRIMARY KEY (hole_id),
+    CONSTRAINT PK_holes PRIMARY KEY (hole_id, course_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
 
