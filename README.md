@@ -21,10 +21,10 @@ python3 -m venv ./venv
 ```
 source ./venv/bin/activate
 ```
-- If you want to confirm the virtual environment is active, run the following commad:
+    - If you want to confirm the virtual environment is active, run the following commad:
 ```
 which python3
 # should return <path_to_your_repo_folder>/venv/bin/python3
 ```
-- To leave the virtual environment just run ```deactivate```
+    - To leave the virtual environment just run ```deactivate```
 6. Install requirements.txt
