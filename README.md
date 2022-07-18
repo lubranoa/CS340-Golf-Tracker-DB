@@ -41,4 +41,39 @@ which python3
 pip3 install -r requirements.txt
 ```
 
-**7.** Log into your OSU database
+**7.** Create .env file in root directory and add the following lines to it, changing the bottom three values to your own stuff. Ensure that the .env file is in the .gitignore file.
+```
+340DBHOST = 'classmysql.engr.oregonstate.edu'
+340DBUSER = '<your_osu_db_user_name>'  # cs340_onid
+340DBPW = '<your_osu_db_password>'     # 4-digit pw to log into db
+340DB = '<your_osu_db_name>'           # cs340_onid
+```
+
+**8.** (Optional) cd into the database directory and create a backup of your current database:
+```
+mysqldump -u cs340_onid -h classmysql.engr.oregonstate.edu -p cs340_onid > backup.sql
+```
+
+**9.** If not already in database directory, cd into it, then log in to your database, by running:
+```
+mysql -u cs340_onid -h classmysql.engr.oregonstate.edu -p cs340_onid
+```
+
+**10.** (Optional?) Drop old tables from your osu database using ```DROP TABLES your_table1, your_table2;```
+
+**11.** Load ```golf_tracker_DDL.sql``` into your database, entering:
+```
+source golf_tracker_DDL.sql
+```
+
+**12.** Run the app using Gunicorn:
+```
+gunicorn -b 0.0.0.0:15432 -D app:app
+```
+        
+        - To kill the instance of Gunicorn, run:
+        ```
+        pkill -u onid gunicorn
+        ```
+
+**13.** Navigate to web app address at ```http://flipX.engr.oregonstate.edu:15432/``` changing the X to your preferred flip server.
