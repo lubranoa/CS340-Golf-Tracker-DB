@@ -73,9 +73,9 @@ source golf_tracker_DDL.sql
 gunicorn -b 0.0.0.0:15432 -D app:app
 ```
         
-    - To kill the instance of Gunicorn, run:
+   - To kill the instance of Gunicorn, run:
 ```
 pkill -u onid gunicorn
 ```
 
-**13.** Navigate to web app address at ```http://flipX.engr.oregonstate.edu:15432/``` changing the X to your preferred flip server.
+**13.** Navigate to web app address at (http://flipX.engr.oregonstate.edu:15432/) changing the X to your preferred flip server.
