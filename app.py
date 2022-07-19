@@ -22,7 +22,7 @@ def players():
     results = cursor.fetchall()
     return render_template("players.j2", gt_players=results)
 
-@app.route('/player_clubs/')
+@app.route('/player_clubs')
 def player_clubs():
     '''Route to a player's clubs'''
 
@@ -64,14 +64,14 @@ def player_club_swings():
     query = "SELECT * FROM swings;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("player_round_swings.j2", gt_player_round_swings=results)\
+    return render_template("player_club_swings.j2", gt_player_club_swings=results)\
 
 @app.route('/player_round_swings')
 def player_round_swings():
     query = "SELECT * FROM swings;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("player_club_swings.j2", gt_player_club_swings=results)
+    return render_template("player_round_swings.j2", gt_player_round_swings=results)
 
 @app.route('/courses')
 def courses():
