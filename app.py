@@ -22,14 +22,16 @@ def players():
     results = cursor.fetchall()
     return render_template("players.j2", gt_players=results)
 
-@app.route('/player_clubs')
+@app.route('/player_clubs/')
 def player_clubs():
     '''Route to a player's clubs'''
 
     # TODO: change query to only select clubs owned by one player using
     # the intersection tables
 
-    query = "SELECT * FROM clubs;"
+    query = "SELECT * FROM clubs \
+            INNER JOIN player_clubs ON player_clubs.club_id = clubs.club_id \
+            WHERE player_clubs.player_id = 3;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("player_clubs.j2", gt_player_clubs=results)
