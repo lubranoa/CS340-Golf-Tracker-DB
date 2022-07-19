@@ -81,4 +81,4 @@ def player_round_swings():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 15432))
-    app.run(host="flip3.engr.oregonstate.edu", port=port, debug=True)
+    app.run(port=port, debug=True)
