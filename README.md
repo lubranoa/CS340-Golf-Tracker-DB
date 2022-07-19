@@ -77,7 +77,7 @@ source golf_tracker_DDL.sql
 
 **12.** Run the app using Gunicorn:
 ```
-gunicorn -b 0.0.0.0:15432 -D app:app
+gunicorn --bind 0.0.0.0:15432 wsgi:app -D
 ```
         
    - To kill all your instances of Gunicorn, run:
