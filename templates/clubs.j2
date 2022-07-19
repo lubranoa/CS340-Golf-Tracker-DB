@@ -9,7 +9,7 @@
     <thead>
     <tr>
         <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_player_clubs[0].keys() %}
+        {% for key in gt_clubs[0].keys() %}
 
         <!-- Create a <th> tag with the key inside of it, this will be our header row -->
         <th>{{ key }}</th>
@@ -20,7 +20,7 @@
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for club in gt_player_clubs %}
+    {% for club in gt_clubs %}
     <tr>
         <!-- Then iterate through every key in the current person dictionary -->
         {% for key in club.keys() %}
