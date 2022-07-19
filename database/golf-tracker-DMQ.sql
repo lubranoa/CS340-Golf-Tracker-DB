@@ -57,7 +57,7 @@ INSERT INTO rounds (course_id, player_id, round_date, round_score)
 VALUES (:course_id, :player_id, :round_date, :round_score);
 
 --  Insert a new swing for a player on a hole, during a around with a club
-INSERT INTO swings (swing_id, hole_id, round_id, player_id, club_id, dist_traveled_yd)
+INSERT INTO swings (hole_id, round_id, player_id, club_id, dist_traveled_yd)
 VALUES (:hole_id, :round_id, :player_id, :club_id, :dist_traveled_yd);
 
 -- Insert a new club to the database  (debatable on if user can do this)
@@ -66,7 +66,23 @@ VALUES (:brand, :club_name, :club_type);
 
 -- Insert a new player
 INSERT INTO players (player_name, player_city, player_state)
-VALUES (:player_name, :player_city, :player_state)
+VALUES (:player_name, :player_city, :player_state);
+
+-- Insert a new course
+INSERT INTO courses (course_name, course_state)
+VALUES (:course_name, :course_state);
+
+-- Insert a new hole
+INSERT INTO holes (course_id, par_swing_count, distance)
+VALUES (:course_id, :par_swing_count, :distance);
+
+-- Insert a new player club relationship
+INSERT INTO player_clubs (player_id, club_id)
+VALUES (:player_id, :club_id);
+
+-- DELETES a swing
+DELETE FROM player_clubs
+WHERE player_id = :player_id AND club_id = :club_id;
 
 -- DELETES a swing
 DELETE FROM swings
@@ -76,7 +92,7 @@ WHERE swing_id = :swing_id;
 DELETE FROM clubs
 WHERE club_id = :club_id;
 
--- Deletes a club (REVIEW - deleting round will delete associated swings)
+-- Deletes a round
 DELETE rounds, swings
 FROM rounds
 INNER JOIN swings on rounds.round_id = swings.round_id
