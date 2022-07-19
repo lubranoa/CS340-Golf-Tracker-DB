@@ -41,7 +41,7 @@ def courses():
     results = cursor.fetchall()
     return render_template("courses.j2", gt_courses=results)
 
-@app.route('/player_clubs/')
+@app.route('/player-clubs')
 def player_clubs():
     '''Route to player_clubs intersection table'''
     db_connection = db.connect_to_database()
