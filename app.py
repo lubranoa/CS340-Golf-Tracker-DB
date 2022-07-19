@@ -17,6 +17,7 @@ def root():
 @app.route('/clubs')
 def clubs():
     '''Route to clubs table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -25,6 +26,7 @@ def clubs():
 @app.route('/holes')
 def holes():
     '''Route to holes table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM holes;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -33,6 +35,7 @@ def holes():
 @app.route('/courses')
 def courses():
     '''Route to courses table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM courses;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -41,6 +44,7 @@ def courses():
 @app.route('/player_clubs/')
 def player_clubs():
     '''Route to player_clubs intersection table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM player_clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -49,6 +53,7 @@ def player_clubs():
 @app.route('/players')
 def players():
     '''Route to players table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM players;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -57,6 +62,7 @@ def players():
 @app.route('/rounds')
 def rounds():
     '''Route to rounds table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM rounds;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -65,6 +71,7 @@ def rounds():
 @app.route('/swings')
 def player_round_swings():
     '''Route to swings table'''
+    db_connection = db.connect_to_database()
     query = "SELECT * FROM swings;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
@@ -74,4 +81,4 @@ def player_round_swings():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 15432))
-    app.run(port=port, debug=True)
+    app.run(host="flip3.engr.oregonstate.edu", port=port, debug=True)
