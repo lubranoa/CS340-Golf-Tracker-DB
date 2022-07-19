@@ -4,12 +4,12 @@
     <title>Golf Tracker</title>
 </head>
 <body>
-    <h1>Players</h1>
+    <h1>Courses</h1>
     <table>
     <thead>
     <tr>
         <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_players[0].keys() %}
+        {% for key in gt_courses[0].keys() %}
 
         <!-- Create a <th> tag with the key inside of it, this will be our header row -->
         <th>{{ key }}</th>
@@ -20,13 +20,13 @@
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for player in gt_players %}
+    {% for course in gt_courses %}
     <tr>
         <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in player.keys() %}
+        {% for key in course.keys() %}
 
         <!-- Create a <td> element with the value of that key in it -->
-        <td>{{player[key]}}</td>
+        <td>{{course[key]}}</td>
         {% endfor %}
     </tr>
     {% endfor %}
