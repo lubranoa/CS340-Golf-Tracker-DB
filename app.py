@@ -14,78 +14,61 @@ def root():
     '''Route to home page'''
     return render_template("main.j2")
 
-@app.route('/players')
-def players():
-    '''Route to all players in the tracker'''
-    query = "SELECT * FROM players;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("players.j2", gt_players=results)
-
-@app.route('/player_clubs')
-def player_clubs():
-    '''Route to a player's clubs'''
-
-    # TODO: change query to only select clubs owned by one player using
-    # the intersection tables
-
-    query = "SELECT * FROM clubs \
-            INNER JOIN player_clubs ON player_clubs.club_id = clubs.club_id \
-            WHERE player_clubs.player_id = 3;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("player_clubs.j2", gt_player_clubs=results)
-
 @app.route('/clubs')
 def clubs():
-    '''Route to all clubs in the tracker'''
-    query = "SELECT * FROM clubs ORDER BY brand ASC;"
+    '''Route to clubs table'''
+    query = "SELECT * FROM clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("clubs.j2", gt_clubs=results)
 
-@app.route('/player_rounds')
-def player_rounds():
-    '''Route to a player's rounds'''
-
-    # TODO: change query to only select rounds played by one player 
-
-    query = "SELECT * FROM rounds;"
+@app.route('/holes')
+def holes():
+    '''Route to holes table'''
+    query = "SELECT * FROM holes;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("player_rounds.j2", gt_player_rounds=results)
-
-@app.route('/player_club_swings')
-def player_club_swings():
-    '''Route to a players swings by club'''
-
-    # TODO: change query to select correct data
-
-    query = "SELECT * FROM swings;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("player_club_swings.j2", gt_player_club_swings=results)\
-
-@app.route('/player_round_swings')
-def player_round_swings():
-    query = "SELECT * FROM swings;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("player_round_swings.j2", gt_player_round_swings=results)
+    return render_template("course_holes.j2", gt_holes=results)
 
 @app.route('/courses')
 def courses():
+    '''Route to courses table'''
     query = "SELECT * FROM courses;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("courses.j2", gt_courses=results)
 
-@app.route('/course_holes')
-def course_holes():
-    query = "SELECT * FROM holes;"
+@app.route('/player_clubs/')
+def player_clubs():
+    '''Route to player_clubs intersection table'''
+    query = "SELECT * FROM player_clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("course_holes.j2", gt_holes=results)
+    return render_template("player_clubs.j2", gt_player_clubs=results)
+
+@app.route('/players')
+def players():
+    '''Route to players table'''
+    query = "SELECT * FROM players;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("players.j2", gt_players=results)
+
+@app.route('/rounds')
+def rounds():
+    '''Route to rounds table'''
+    query = "SELECT * FROM rounds;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("player_rounds.j2", gt_rounds=results)
+
+@app.route('/swings')
+def player_round_swings():
+    '''Route to swings table'''
+    query = "SELECT * FROM swings;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("player_round_swings.j2", gt_player_round_swings=results)
 
 # Listener
 

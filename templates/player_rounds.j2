@@ -9,12 +9,12 @@
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
 </head>
 <body>
-    <h1>A Player's Rounds</h1>
+    <h1>The rounds Table</h1>
     <table class="mui-table mui-table--bordered">
     <thead>
     <tr>
         <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_player_rounds[0].keys() %}
+        {% for key in gt_rounds[0].keys() %}
 
         <!-- Create a <th> tag with the key inside of it, this will be our header row -->
         <th>{{ key }}</th>
@@ -25,7 +25,7 @@
     <tbody>
 
     <!-- Now, iterate through every person in bsg_people -->
-    {% for round in gt_player_rounds %}
+    {% for round in gt_rounds %}
     <tr>
         <!-- Then iterate through every key in the current person dictionary -->
         {% for key in round.keys() %}
@@ -90,5 +90,6 @@
             <button>Submit round Delete</button>
         </fieldset>
     </form>
+    <p><a href="/">Go Back to Homepage</a></p>
 </body>
 </html>
