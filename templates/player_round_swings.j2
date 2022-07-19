@@ -36,7 +36,31 @@
     </tr>
     {% endfor %}
     </table>
-    <!-- Update swing -->
+    <form>
+        <fieldset>
+            <legend> Insert swing</legend>
+            <label>hole: </label>
+                <select>
+                    <option>Relavent holes</option>
+                </select>
+            <label>round: </label>
+                <select>
+                    <option>Relavent rounds</option>
+                </select>
+            <label>player: </label>
+                <select>
+                    <option>Relavent players</option>
+                </select>
+            <label>club: </label>
+                <select>
+                    <option>Relavent clubs</option>
+                </select>
+            <label>distance traveled (yd): </label>
+                <input type="text">
+            <button>Submit swing Insert</button>
+        </fieldset>
+    </form>
+    <br>
     <form>
         <fieldset>
             <legend> Update Swing</legend>
@@ -59,6 +83,7 @@
             <button>Submit swing Update</button>
         </fieldset>
     </form>
+    <br>
     <form>
         <fieldset>
             <legend> Delete swing</legend>
@@ -67,6 +92,7 @@
             <button>Submit swing Delete</button>
         </fieldset>
     </form>
+    <br>
     <p><a href="/">Go Back to Homepage</a></p>
 </body>
 </html>
