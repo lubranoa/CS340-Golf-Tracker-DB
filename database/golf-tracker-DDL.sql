@@ -67,7 +67,7 @@ CREATE TABLE swings
     dist_traveled_yd int NOT NULL,
     PRIMARY KEY (swing_id),
     FOREIGN KEY (hole_id) REFERENCES holes(hole_id),
-    FOREIGN KEY (round_id) REFERENCES rounds(round_id),
+    FOREIGN KEY (round_id) REFERENCES rounds(round_id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES players(player_id),
     FOREIGN KEY (club_id) REFERENCES clubs(club_id)
 );
