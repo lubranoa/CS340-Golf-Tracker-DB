@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json
+from flask import Flask, render_template, json, request
 import os
 import database.db_connector as db
 
@@ -41,14 +41,42 @@ def courses():
     results = cursor.fetchall()
     return render_template("courses.j2", gt_courses=results)
 
-@app.route('/player-clubs')
+@app.route('/player-clubs', methods=["POST", "GET"])
 def player_clubs():
     '''Route to player_clubs intersection table'''
-    db_connection = db.connect_to_database()
-    query = "SELECT * FROM player_clubs;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("player_clubs.j2", gt_player_clubs=results)
+    if request.method == "GET":
+        db_connection = db.connect_to_database()
+        
+        pc_query = "SELECT * FROM player_clubs;"
+        cursor = db.execute_query(
+            db_connection=db_connection, 
+            query=pc_query
+        )
+        pc_res = cursor.fetchall()
+        
+        p_query = "SELECT player_name FROM players;"
+        cursor = db.execute_query(
+            db_connection=db_connection, 
+            query=p_query
+        )
+        p_res = cursor.fetchall()
+
+        c_query = "SELECT brand, club_name, club_type FROM clubs;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=c_query
+        )
+        c_res = cursor.fetchall()
+
+        return render_template(
+            "player_clubs.j2", 
+            gt_player_clubs=pc_res, 
+            gt_players=p_res,
+            gt_clubs=c_res
+        )
+
+    elif request.method == "POST":
+        pass
 
 @app.route('/players')
 def players():

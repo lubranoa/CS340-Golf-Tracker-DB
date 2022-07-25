@@ -27,14 +27,14 @@
     </tr>
     <tbody>
 
-    <!-- Now, iterate through every person in bsg_people -->
-    {% for club in gt_player_clubs %}
+    <!-- Now, iterate through every club in gt_player_clubs -->
+    {% for pl_club in gt_player_clubs %}
     <tr>
         <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in club.keys() %}
+        {% for key in pl_club.keys() %}
 
         <!-- Create a <td> element with the value of that key in it -->
-        <td>{{club[key]}}</td>
+        <td>{{pl_club[key]}}</td>
         {% endfor %}
     </tr>
     {% endfor %}
@@ -45,11 +45,19 @@
             <legend>Insert player club</legend>
             <label>player: </label>
             <select>
-                <option>Relevant players</option>
+                <option>-- Choose player --</option>
+                {% for player in gt_players %}
+                {% for key in player.keys() %}
+                <option>{{player[key]}}</option>
+                {% endfor %}
+                {% endfor %}
             </select>
             <label>club: </label>
             <select>
-                <option>Relevant club</option>
+                <option>-- Choose club --</option>
+                {% for club in gt_clubs %}
+                <option>{{club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"]}}</option>
+                {% endfor %}
             </select>
             <button>Submit player_club Insert</button>
         </fieldset>
