@@ -109,3 +109,9 @@ SET course_id = :course_id, player_id = :player_id, round_date = :round_date, ro
 -- Update Player
 UPDATE players
 SET player_name = :player_name, player_city = :player_city, player_state = :player_state;
+
+
+-- Search / Filter Player by name
+SELECT *
+FROM player
+WHERE player_name LIKE '%:player_name%';

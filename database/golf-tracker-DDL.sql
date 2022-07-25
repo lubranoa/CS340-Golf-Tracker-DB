@@ -36,8 +36,8 @@ CREATE TABLE rounds
     round_date datetime NOT NULL,
     round_score int NOT NULL,
     PRIMARY KEY (round_id),
-    FOREIGN KEY (course_id) REFERENCES courses(course_id),
-    FOREIGN KEY (player_id) REFERENCES players(player_id)
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
 
 CREATE TABLE clubs
@@ -53,8 +53,8 @@ CREATE TABLE player_clubs
 (
     player_id int NOT NULL,
     club_id int NOT NULL,
-    FOREIGN KEY (player_id) REFERENCES players(player_id),
-    FOREIGN KEY (club_id) REFERENCES clubs(club_id)
+    FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE,
+    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
 );
 
 CREATE TABLE swings
@@ -63,13 +63,13 @@ CREATE TABLE swings
     hole_id int NOT NULL,
     round_id int NOT NULL,
     player_id int NOT NULL, 
-    club_id int NOT NULL,
+    club_id int,
     dist_traveled_yd int NOT NULL,
     PRIMARY KEY (swing_id),
     FOREIGN KEY (hole_id) REFERENCES holes(hole_id),
     FOREIGN KEY (round_id) REFERENCES rounds(round_id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES players(player_id),
-    FOREIGN KEY (club_id) REFERENCES clubs(club_id)
+    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE SET NULL
 );
 
 INSERT INTO courses (course_id, course_name, course_state) 
