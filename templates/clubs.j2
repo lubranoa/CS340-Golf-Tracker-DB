@@ -40,25 +40,89 @@
     </tr>
     {% endfor %}
     </table>
+    <!-- Insert a club into the db -->
     <form>
         <fieldset>
-            <legend>Insert Club</legend>
-            <label>brand: </label>
+            <legend>Insert club</legend>
+            <label>Brand: </label>
                 <input type="text">
-            <label>Club Name: </label>
+            <label>club Name: </label>
                 <input type="text">
-            <label>Club Type: </label>
-                <input type="text">
-            <button>Submit Club Insert</button>
+            <label>club Type: </label>
+                <select>
+                    <option>--Choose club Type--</optionlue=>
+                    <option>Driver/1 Wood</option>
+                    <option>3 Wood</option>
+                    <option>5 Wood</option>
+                    <option>7 Wood</option>
+                    <option>3 Hybrid</option>
+                    <option>4 Hybrid</option>
+                    <option>5 Hybrid</option>
+                    <option>6 Hybrid</option>
+                    <option>7 Hybrid</option>
+                    <option>1 Iron</option>
+                    <option>2 Iron</option>
+                    <option>3 Iron</option>
+                    <option>4 Iron</option>
+                    <option>5 Iron</option>
+                    <option>6 Iron</option>
+                    <option>7 Iron</option>
+                    <option>8 Iron</option>
+                    <option>9 Iron</option>
+                    <option>Pitching Wedge</option>
+                    <option>Gap Wedge</option>
+                    <option>Sand Wedge</option>
+                    <option>Lob Wedge</option>
+                    <option>Putter</option>
+                </select>
+            <button>Submit club Insert</button>
         </fieldset>
     </form>
     <br>
+    <!-- Delete a club from the db-->
     <form>
         <fieldset>
-            <legend>Delete Club</legend>
-            <label>club ID: </label>
-                <input type="text">
-            <button>Submit club Delete</button>
+            <legend>Delete club</legend>
+            <label>club Brand: </label>
+                <select>
+                    <option>--Choose club Brand--</optionlue=>
+                    <option>Callaway</option>
+                    <option>Custom</option>
+                    <option>Mizuno</option>
+                    <option>Ping</option>
+                    <option>Taylormade</option>
+                    <option>Titleist</option>
+                </select>
+            <label>club Name: </label>
+                <select>
+                    <option>--Choose club Name--</optionlue=>
+                    <option>Bob Vokey</option>
+                    <option>G425</option>
+                    <option>Hockey</option>
+                    <option>Jaws</option>
+                    <option>JPX Hot Metal</option>
+                    <option>PLD</option>
+                    <option>Stealth</option>
+                </select>
+            <label>club Type: </label>
+                <select>
+                    <option>--Choose club Type--</optionlue=>
+                    <option>Driver/1 Wood</option>
+                    <option>3 Wood</option>
+                    <option>7 Wood</option>
+                    <option>4 Iron</option>
+                    <option>5 Iron</option>
+                    <option>6 Iron</option>
+                    <option>7 Iron</option>
+                    <option>8 Iron</option>
+                    <option>9 Iron</option>
+                    <option>Pitching Wedge</option>
+                    <option>Gap Wedge</option>
+                    <option>Sand Wedge</option>
+                    <option>Lob Wedge</option>
+                    <option>Putter</option>
+                </select>
+            <button>Submit club Delete/button>
         </fieldset>
     </form>
     <br>
