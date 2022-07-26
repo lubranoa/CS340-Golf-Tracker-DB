@@ -15,42 +15,34 @@
     <h1>The rounds Table</h1>
     <table class="mui-table mui-table--bordered">
     <thead>
-    <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_rounds[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-        {% endfor %}
-    </tr>
+        <tr>
+            <!-- Get key names and insert as table header column names -->
+            {% for key in gt_rounds[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
     <tbody>
-
-    <!-- Now, iterate through every person in bsg_people -->
-    {% for round in gt_rounds %}
-    <tr>
-        <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in round.keys() %}
-
-        <!-- Create a <td> element with the value of that key in it -->
-        <td>{{round[key]}}</td>
+        <!-- Get and display all rounds data in the table rows -->
+        {% for round in gt_rounds %}
+        <tr>
+            {% for key in round.keys() %}
+            <td>{{ round[key] }}</td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
     </table>
     <!-- Insert a round into the db -->
     <form>
         <fieldset>
-            <legend> Insert round</legend>
-            <label>course: </label>
-            <select>
-                <option>Relevant courses</option>
-            </select>
+            <legend>Insert round</legend>
+            <label>course:</label>
+                <select>
+                    <option>Relevant courses</option>
+                </select>
             <label>player: </label>
-            <select>
-                <option>Relevant players</option>
-            </select>
+                <select>
+                    <option>Relevant players</option>
+                </select>
             <label>player: </label>
                 <input type="date">
             <label>round score </label>
