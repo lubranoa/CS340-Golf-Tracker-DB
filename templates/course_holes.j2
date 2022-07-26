@@ -15,35 +15,27 @@
     <h1>The holes Table</h1>
     <table class="mui-table mui-table--bordered">
     <thead>
-    <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_holes[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-        {% endfor %}
-    </tr>
+        <tr>
+            <!-- Get key names and insert as table header column names -->
+            {% for key in gt_holes[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
     <tbody>
-
-    <!-- Now, iterate through every person in bsg_people -->
-    {% for hole in gt_holes %}
-    <tr>
-        <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in hole.keys() %}
-
-        <!-- Create a <td> element with the value of that key in it -->
-        <td>{{hole[key]}}</td>
+        <!-- Get and display all gt_holes data in the table rows -->
+        {% for hole in gt_holes %}
+        <tr>
+            {% for key in hole.keys() %}
+            <td>{{ hole[key] }}</td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
     </table>
     <!-- Insert a hole into the db -->
     <form>
         <fieldset>
             <legend>Insert hole</legend>
-            <label>hole Number: </label>
+            <label>hole Number:</label>
                 <select>
                     <option>--Choose hole number--</option>
                     <option>1</option>
@@ -65,7 +57,7 @@
                     <option>17</option>
                     <option>18</option>
                 </select>
-            <label>course: </label>
+            <label>course</label>
                 <select>
                     <option>--Choose course--</option>
                     <option>Augusta National Golf Club</option>
@@ -73,14 +65,14 @@
                     <option>Nanea Golf Club</option>
                     <option>Pebble Beach</option>
                 </select>
-            <label>hole Par: </label>
+            <label>hole Par:</label>
                 <select>
                     <option>--Choose par--</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option>
                 </select>
-            <label>Distance (yd): </label>
+            <label>hole Distance (yd):</label>
                 <input type="number">
             <button>Submit hole Insert</button>
         </fieldset>

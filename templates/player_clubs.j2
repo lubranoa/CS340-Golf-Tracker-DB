@@ -15,48 +15,43 @@
     <h1>The player_clubs Table</h1>
     <table class="mui-table mui-table--bordered">
     <thead>
-    <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_player_clubs[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-        {% endfor %}
-    </tr>
+        <tr>
+            <!-- Get key names and insert as table header column names -->
+            {% for key in gt_player_clubs[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
     <tbody>
-
-    <!-- Now, iterate through every club in gt_player_clubs -->
-    {% for pl_club in gt_player_clubs %}
-    <tr>
-        <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in pl_club.keys() %}
-
-        <!-- Create a <td> element with the value of that key in it -->
-        <td>{{pl_club[key]}}</td>
+        <!-- Get and display all player_clubs data in the table rows -->
+        {% for pl_club in gt_player_clubs %}
+        <tr>
+            {% for key in pl_club.keys() %}
+            <td>{{ pl_club[key] }}</td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
     </table>
     <!-- Insert a player_clubs relationship into the db -->
     <form>
         <fieldset>
             <legend>Insert player club</legend>
-            <label>player: </label>
+            <label>player:</label>
             <select>
-                <option>-- Choose player --</option>
+                <option>--Choose player--</option>
+                <!-- Get and place all players into dropdown options -->
                 {% for player in gt_players %}
                 {% for key in player.keys() %}
-                <option>{{player[key]}}</option>
+                <option>{{ player[key] }}</option>
                 {% endfor %}
                 {% endfor %}
             </select>
             <label>club: </label>
             <select>
-                <option>-- Choose club --</option>
+                <option>--Choose club--</option>
+                <!-- Iterate through all clubs in gt_clubs -->
                 {% for club in gt_clubs %}
-                <option>{{club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"]}}</option>
+                <!-- Concatenate club brand, name, and type to display as dropdown options -->
+                <option>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"] }}</option>
                 {% endfor %}
             </select>
             <button>Submit player_club Insert</button>

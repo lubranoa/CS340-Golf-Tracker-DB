@@ -16,42 +16,34 @@
     <h1>The clubs Table</h1>
     <table class="mui-table mui-table--bordered">
     <thead>
-    <tr>
-        <!-- Iterate through each key in the first entry to get the column name -->
-        {% for key in gt_clubs[0].keys() %}
-
-        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-        <th>{{ key }}</th>
-
-        <!-- End of this for loop -->
-        {% endfor %}
-    </tr>
+        <tr>
+            <!-- Get key names and insert as table header column names -->
+            {% for key in gt_clubs[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
     <tbody>
-
-    <!-- Now, iterate through every person in bsg_people -->
-    {% for club in gt_clubs %}
-    <tr>
-        <!-- Then iterate through every key in the current person dictionary -->
-        {% for key in club.keys() %}
-
-        <!-- Create a <td> element with the value of that key in it -->
-        <td>{{club[key]}}</td>
+        <!-- Get and display all gt_clubs data in the table rows -->
+        {% for club in gt_clubs %}
+        <tr>
+            {% for key in club.keys() %}
+            <td>{{ club[key] }}</td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
     </table>
     <!-- Insert a club into the db -->
     <form>
         <fieldset>
             <legend>Insert club</legend>
-            <label>Brand: </label>
+            <label>Brand:</label>
                 <input type="text">
-            <label>club Name: </label>
+            <label>club Name:</label>
                 <input type="text">
-            <label>club Type: </label>
+            <label>club Type:</label>
                 <select>
                     <option>--Choose club Type--</optionlue=>
-                    <option>Driver/1 Wood</option>
+                    <option>Driver</option>
                     <option>3 Wood</option>
                     <option>5 Wood</option>
                     <option>7 Wood</option>
@@ -83,7 +75,7 @@
     <form>
         <fieldset>
             <legend>Delete club</legend>
-            <label>club Brand: </label>
+            <label>club Brand:</label>
                 <select>
                     <option>--Choose club Brand--</optionlue=>
                     <option>Callaway</option>
@@ -93,7 +85,7 @@
                     <option>Taylormade</option>
                     <option>Titleist</option>
                 </select>
-            <label>club Name: </label>
+            <label>club Name:</label>
                 <select>
                     <option>--Choose club Name--</optionlue=>
                     <option>Bob Vokey</option>
@@ -104,10 +96,10 @@
                     <option>PLD</option>
                     <option>Stealth</option>
                 </select>
-            <label>club Type: </label>
+            <label>club Type:</label>
                 <select>
                     <option>--Choose club Type--</optionlue=>
-                    <option>Driver/1 Wood</option>
+                    <option>Driver</option>
                     <option>3 Wood</option>
                     <option>7 Wood</option>
                     <option>4 Iron</option>
