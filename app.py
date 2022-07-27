@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, request, redirect
 import os
 import database.db_connector as db
 
@@ -87,6 +87,19 @@ def players():
     results = cursor.fetchall()
     return render_template("players.j2", gt_players=results)
 
+@app.route("/update-player/<int:id>", methods=["POST", "GET"])
+def update_player(id):
+    db_connection = db.connect_to_database()
+    
+    if request.method == "GET":
+        read_query = "SELECT * FROM players WHERE player_id = '%s';" % (id)
+        cursor = db.execute_query(db_connection=db_connection, query=read_query)
+        results = cursor.fetchall()
+        return render_template("update_player.j2", gt_player=results)
+    
+    elif request.method == "POST":
+        return redirect("/players")
+
 @app.route('/rounds')
 def rounds():
     '''Route to rounds table'''
@@ -108,5 +121,5 @@ def player_round_swings():
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15432))
+    port = int(os.environ.get('PORT', 15433))
     app.run(port=port, debug=True)
