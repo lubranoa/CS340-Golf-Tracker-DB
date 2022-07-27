@@ -7,16 +7,23 @@ import database.db_connector as db
 app = Flask(__name__)
 db_connection = db.connect_to_database()
 
-# Routes
+# ----------------------------------------------------------------------------
+# READ ROUTES: Home Page and Display Entities Handlers
+# 
+# The following flask route functions handle getting the data for all entities
+# in the Golf Tracker MySQL database. Each route connects and communicates 
+# with the database and sends resultant data to the Jinja templates to be 
+# rendered as a web page displaying that data, except for the home page.
+# ----------------------------------------------------------------------------
 
 @app.route('/')
 def root():
-    '''Route to home page'''
+    """Route to home page"""
     return render_template("main.j2")
 
 @app.route('/clubs')
 def clubs():
-    '''Route to clubs table'''
+    """Route to clubs table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -25,7 +32,7 @@ def clubs():
 
 @app.route('/holes')
 def holes():
-    '''Route to holes table'''
+    """Route to holes table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM holes;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -34,61 +41,125 @@ def holes():
 
 @app.route('/courses')
 def courses():
-    '''Route to courses table'''
+    """Route to courses table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM courses;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("courses.j2", gt_courses=results)
 
-@app.route('/player-clubs', methods=["POST", "GET"])
+@app.route('/player-clubs')
 def player_clubs():
-    '''Route to player_clubs intersection table'''
-    if request.method == "GET":
-        db_connection = db.connect_to_database()
-        
-        pc_query = "SELECT * FROM player_clubs;"
-        cursor = db.execute_query(
-            db_connection=db_connection, 
-            query=pc_query
-        )
-        pc_res = cursor.fetchall()
-        
-        p_query = "SELECT player_name FROM players;"
-        cursor = db.execute_query(
-            db_connection=db_connection, 
-            query=p_query
-        )
-        p_res = cursor.fetchall()
+    """Route to player_clubs intersection table"""
+    db_connection = db.connect_to_database()    
+    query = "SELECT * FROM player_clubs;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("player_clubs.j2", gt_player_clubs=results)
 
-        c_query = "SELECT brand, club_name, club_type FROM clubs;"
-        cursor = db.execute_query(
-            db_connection=db_connection,
-            query=c_query
-        )
-        c_res = cursor.fetchall()
-
-        return render_template(
-            "player_clubs.j2", 
-            gt_player_clubs=pc_res, 
-            gt_players=p_res,
-            gt_clubs=c_res
-        )
-
-    elif request.method == "POST":
-        pass
 
 @app.route('/players')
 def players():
-    '''Route to players table'''
+    """Route to players table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM players;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("players.j2", gt_players=results)
 
+@app.route('/rounds')
+def rounds():
+    """Route to rounds table"""
+    db_connection = db.connect_to_database()
+    query = "SELECT * FROM rounds;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("player_rounds.j2", gt_rounds=results)
+
+@app.route('/swings')
+def player_round_swings():
+    """Route to swings table"""
+    db_connection = db.connect_to_database()
+    query = "SELECT * FROM swings;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("player_round_swings.j2", gt_player_round_swings=results)
+
+# ----------------------------------------------------------------------------
+# INSERT ROUTES: Update Entity Handlers
+#
+#
+# ----------------------------------------------------------------------------
+
+@app.route("/insert-club", methods=["POST", "GET"])
+def update_club():
+    """Route that handles inserting a club into the database"""
+    
+    #TODO: implement route
+
+    pass
+
+@app.route("/insert-course", methods=["POST", "GET"])
+def update_club():
+    """Route that handles inserting a course into the database"""
+    
+    #TODO: implement route
+    
+    pass
+
+@app.route("/insert-hole", methods=["POST", "GET"])
+def update_club():
+    """Route that handles inserting a hole into the database"""
+    
+    #TODO: implement route
+    
+    pass
+
+@app.route("/insert-player-club", methods=["POST", "GET"])
+def update_club():
+    """
+    Route that handles inserting a player_club intersection table entry into
+    the database.
+    """
+    
+    #TODO: implement route
+    
+    pass
+
+@app.route("/insert-player", methods=["POST", "GET"])
+def update_club():
+    """Route that handles inserting a player into the database"""
+    
+    #TODO: implement route
+    
+    pass
+
+@app.route("/insert-round", methods=["POST", "GET"])
+def update_club():
+    """Route that handles inserting a round into the database"""
+    
+    #TODO: implement route
+    
+    pass
+
+@app.route("/insert-swing", methods=["POST", "GET"])
+def update_club():
+    """Route that handles inserting a swing into the database"""
+    
+    #TODO: implement route
+    
+    pass
+
+# ----------------------------------------------------------------------------
+# UPDATE ROUTES: Update Entity Handlers
+#
+#
+# ----------------------------------------------------------------------------
+
 @app.route("/update-player/<int:id>", methods=["POST", "GET"])
 def update_player(id):
+    """Route that handles updating a player's data"""
+    
     db_connection = db.connect_to_database()
     
     if request.method == "GET":
@@ -98,25 +169,48 @@ def update_player(id):
         return render_template("update_player.j2", gt_player=results)
     
     elif request.method == "POST":
+        
+        #TODO: implement update operations
+
         return redirect("/players")
 
-@app.route('/rounds')
-def rounds():
-    '''Route to rounds table'''
-    db_connection = db.connect_to_database()
-    query = "SELECT * FROM rounds;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("player_rounds.j2", gt_rounds=results)
+# ----------------------------------------------------------------------------
+# DELETE ROUTES: Delete Entity Handlers
+#
+#
+# ----------------------------------------------------------------------------
 
-@app.route('/swings')
-def player_round_swings():
-    '''Route to swings table'''
-    db_connection = db.connect_to_database()
-    query = "SELECT * FROM swings;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("player_round_swings.j2", gt_player_round_swings=results)
+@app.route("/delete-club/<int:id>", methods=["POST", "GET"])
+def update_club(id):
+    """Route that handles deleting a club from the database"""
+    
+    #TODO: implement route
+
+    pass
+
+@app.route("/delete-player/<int:id>", methods=["POST", "GET"])
+def update_club(id):
+    """Route that handles deleting a player from the database"""
+    
+    #TODO: implement route
+
+    pass
+
+@app.route("/delete-round/<int:id>", methods=["POST", "GET"])
+def update_club(id):
+    """Route that handles deleting a round from the database"""
+    
+    #TODO: implement route
+
+    pass
+
+@app.route("/delete-swing/<int:id>", methods=["POST", "GET"])
+def update_club(id):
+    """Route that handles deleting a swing from the database"""
+    
+    #TODO: implement route
+
+    pass
 
 # Listener
 
