@@ -18,6 +18,7 @@
     <link href="./../static/css/all-templates.css" rel="stylesheet" />
 </head>
 <body>
+<div class="app">
     <h1>The players Table</h1>
     {#  
         Citation for the table style
@@ -45,7 +46,7 @@
         {% for player in gt_players %}
         <tr>
             {% for key in player.keys() %}
-            <td>{{ player[key] }}</td>
+            <td class="table-data">{{ player[key] }}</td>
             {% endfor %}
             <td>
                 <a href="/update-player/{{ player["player_id"] }}">
@@ -62,13 +63,10 @@
         </tr>
         {% endfor %}
         <tr>
-            <td></td>
-            <td></td>
-            <td><div><button class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</button></div></td>
-            <td></td>
-            <td></td>
+            <td colspan="5"><div><button class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</button></div></td>
         </tr>
     </table>
     <p><a href="/">Go Back to Homepage</a></p>
+</div>
 </body>
 </html>

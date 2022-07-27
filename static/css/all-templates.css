@@ -1,9 +1,35 @@
+.app {
+    text-align: center;
+}
+
 body { 
-    margin:20px; 
-    background-color:#c3f0b4;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #c3f0b4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: calc(8px + 2vmin);
 }
 
 h1 {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin:20px 0px 20px 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+th {
+    text-align: center!important;
+}
+
+.table-data {
+    text-align: left!important;
+}
+
+.material-symbols-outlined {
+    padding-top: 4px;
+}
+
+.mui-btn.mui-btn--small.mui-btn--raised.mui-btn--primary {
+    margin-right: 10px;
 }

@@ -16,7 +16,8 @@
     <link href="./../static/css/all-templates.css" rel="stylesheet" />
 </head>
 <body>
-    <h1 style="margin:20px 0px 20px 0px;">Update player Entry</h1>
+<div class="app">
+    <h1>Update player Entry</h1>
     {#  
         Citation for the table style
         Date: 07/27/2022
@@ -36,7 +37,7 @@
         {% for player in gt_player %}
         <tr>
             {% for key in player.keys() %}
-            <td>{{ player[key] }}</td>
+            <td class="table-data">{{ player[key] }}</td>
             {% endfor %}
         </tr>
         {% endfor %}
@@ -121,5 +122,6 @@
         >update player</button>
     </form>
     <p><a href="/">Go Back to Homepage</a></p>
+</div>
 </body>
 </html>
