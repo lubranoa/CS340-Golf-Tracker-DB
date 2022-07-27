@@ -92,7 +92,7 @@ def player_round_swings():
 # ----------------------------------------------------------------------------
 
 @app.route("/insert-club", methods=["POST", "GET"])
-def update_club():
+def insert_club():
     """Route that handles inserting a club into the database"""
     
     #TODO: implement route
@@ -100,7 +100,7 @@ def update_club():
     pass
 
 @app.route("/insert-course", methods=["POST", "GET"])
-def update_club():
+def insert_course():
     """Route that handles inserting a course into the database"""
     
     #TODO: implement route
@@ -108,7 +108,7 @@ def update_club():
     pass
 
 @app.route("/insert-hole", methods=["POST", "GET"])
-def update_club():
+def insert_hole():
     """Route that handles inserting a hole into the database"""
     
     #TODO: implement route
@@ -116,7 +116,7 @@ def update_club():
     pass
 
 @app.route("/insert-player-club", methods=["POST", "GET"])
-def update_club():
+def insert_player_club():
     """
     Route that handles inserting a player_club intersection table entry into
     the database.
@@ -127,7 +127,7 @@ def update_club():
     pass
 
 @app.route("/insert-player", methods=["POST", "GET"])
-def update_club():
+def insert_player():
     """Route that handles inserting a player into the database"""
     
     #TODO: implement route
@@ -135,7 +135,7 @@ def update_club():
     pass
 
 @app.route("/insert-round", methods=["POST", "GET"])
-def update_club():
+def insert_round():
     """Route that handles inserting a round into the database"""
     
     #TODO: implement route
@@ -143,7 +143,7 @@ def update_club():
     pass
 
 @app.route("/insert-swing", methods=["POST", "GET"])
-def update_club():
+def insert_swing():
     """Route that handles inserting a swing into the database"""
     
     #TODO: implement route
@@ -181,7 +181,7 @@ def update_player(id):
 # ----------------------------------------------------------------------------
 
 @app.route("/delete-club/<int:id>", methods=["POST", "GET"])
-def update_club(id):
+def delete_club(id):
     """Route that handles deleting a club from the database"""
     
     #TODO: implement route
@@ -189,7 +189,7 @@ def update_club(id):
     pass
 
 @app.route("/delete-player/<int:id>", methods=["POST", "GET"])
-def update_club(id):
+def delete_player(id):
     """Route that handles deleting a player from the database"""
     
     #TODO: implement route
@@ -197,7 +197,7 @@ def update_club(id):
     pass
 
 @app.route("/delete-round/<int:id>", methods=["POST", "GET"])
-def update_club(id):
+def delete_round(id):
     """Route that handles deleting a round from the database"""
     
     #TODO: implement route
@@ -205,7 +205,7 @@ def update_club(id):
     pass
 
 @app.route("/delete-swing/<int:id>", methods=["POST", "GET"])
-def update_club(id):
+def delete_swing(id):
     """Route that handles deleting a swing from the database"""
     
     #TODO: implement route
