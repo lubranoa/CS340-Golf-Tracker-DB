@@ -135,11 +135,16 @@ def insert_player():
     
     elif request.method == "POST":
         
-        #TODO: implement update operations
+        player_name = request.form["name"]
+        player_city = request.form["city"]
+        player_state = request.form["state"]
+
+        #TODO: Validate user input to not be NULL
+
+        insert_query = "INSERT INTO players (player_name, player_city, player_state) VALUES (%s, %s, %s);"
+        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(player_name, player_city, player_state))
 
         return redirect("/players")
-    
-    pass
 
 @app.route("/insert-round", methods=["POST", "GET"])
 def insert_round():
@@ -177,8 +182,15 @@ def update_player(id):
     
     elif request.method == "POST":
         
-        #TODO: implement update operations
+        player_id = id
+        player_name = request.form["name"]
+        player_city = request.form["city"]
+        player_state = request.form["state"]
 
+        #TODO: Validate user input to not be NULL
+
+        update_query = "UPDATE players SET players.player_name = %s, players.player_city =%s, players.player_state = %s WHERE players.player_id = %s;"
+        db.execute_query(db_connection=db_connection, query=update_query, query_params=(player_name, player_city, player_state, player_id))
         return redirect("/players")
 
 # ----------------------------------------------------------------------------

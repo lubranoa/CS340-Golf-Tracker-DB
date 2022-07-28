@@ -18,6 +18,17 @@
     <link href="./../static/css/all-templates.css" rel="stylesheet" />
 </head>
 <body>
+<div class="mui-appbar">
+    <ul class="mui-list--inline">
+        <li><a href="/clubs">View clubs</a></li>
+        <li><a href="/holes">View holes</a></li>
+        <li><a href="/courses">View courses table</a></li>
+        <li><a href="/player-clubs">View player_clubs</a></li>
+        <li><a href="/players">View players</a></li>
+        <li><a href="/rounds">View rounds</a></li>
+        <li><a href="/swings">View swings</a></li>
+    </ul>
+</div>
 <div class="app">
     <h1>The players Table</h1>
     {#  
@@ -72,7 +83,7 @@
             </td>
         </tr>
     </table>
-    <p><a href="/">Go Back to Homepage</a></p>
+    <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>
 </body>
 </html>

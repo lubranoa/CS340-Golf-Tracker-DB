@@ -21,12 +21,12 @@ body {
 }
 
 .mui-appbar ul {
-    display: table!important;
+    display: table !important;
     width: 100%;
 }
 
 .mui-appbar li {
-    display: table-cell!important;
+    display: table-cell !important;
 }
 
 .mui-appbar a {
@@ -48,11 +48,11 @@ h1 {
 }
 
 th {
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .table-data {
-    text-align: left!important;
+    text-align: left !important;
 }
 
 .material-symbols-outlined {
@@ -61,4 +61,8 @@ th {
 
 .mui-btn.mui-btn--small.mui-btn--raised.mui-btn--primary {
     margin-right: 10px;
+}
+
+.home-link {
+    margin-top: 50px;
 }

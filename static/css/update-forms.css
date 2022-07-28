@@ -1,0 +1,11 @@
+.mui-textfield.mui-textfield--float-label {
+    margin: 0px 20px 20px 0px;
+}
+
+.mui-select {
+    margin: 0px 20px 20px 0px !important;
+}
+
+.mui-btn.mui-btn--raised.mui-btn--primary {
+    margin: 20px 0px 20px 0px;
+}
