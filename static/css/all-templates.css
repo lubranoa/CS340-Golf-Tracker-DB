@@ -19,15 +19,19 @@ body {
     top: 0;
     width: 100%;
     z-index: 9999;
+    min-height: 0px !important;
 }
 
 .mui-appbar ul {
     display: table !important;
     width: 100%;
+    height: 100% !important;
+    margin-bottom: 0px !important;
 }
 
 .mui-appbar li {
     display: table-cell !important;
+    height: 100% !important;
 }
 
 .mui-appbar a {

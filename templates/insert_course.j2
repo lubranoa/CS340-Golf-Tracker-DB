@@ -29,7 +29,7 @@
     </ul>
 </div>
 <div class="app">
-    <h1>Insert player Entry</h1>
+    <h1>Insert course Entry</h1>
     {#  
         Citation for the form, input, select, and button styles
         Date: 07/27/2022
@@ -38,15 +38,11 @@
     #}
     <form class="mui-form--inline" action="/insert-player" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="name">
-            <label>player_name</label>
-        </div>
-        <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="city">
-            <label>player_city</label>
+            <input type="text" name="course_name">
+            <label>course_name</label>
         </div>
         <div class="mui-select">
-            <select name="state">
+            <select name="course_state">
                 <option value=""></option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
@@ -100,10 +96,10 @@
                 <option value="Wisconsin">Wisconsin</option>
                 <option value="Wyoming">Wyoming</option>
             </select>
-            <label>player_state</label>
+            <label>course_state</label>
         </div>
         <br>
-        <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update player</button>
+        <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert course</button>
     </form>
     <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>

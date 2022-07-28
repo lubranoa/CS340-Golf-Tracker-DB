@@ -123,7 +123,12 @@ def insert_hole():
     
     #TODO: implement route
     
-    pass
+    if request.method == "GET":
+        return render_template("insert_hole.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/holes")
 
 @app.route("/insert-player-club", methods=["POST", "GET"])
 def insert_player_club():
@@ -135,8 +140,24 @@ def insert_player_club():
     #TODO: implement route
 
     if request.method == "GET":
-        return render_template("insert_player_club.j2")
-    
+        db_connection = db.connect_to_database()
+        
+        p_query = "SELECT player_name FROM players;"
+        cursor = db.execute_query(
+            db_connection=db_connection, 
+            query=p_query
+        )
+        p_res = cursor.fetchall()
+
+        c_query = "SELECT brand, club_name, club_type FROM clubs;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=c_query
+        )
+        c_res = cursor.fetchall()
+        
+        return render_template("insert_player_club.j2", gt_players=p_res, gt_clubs=c_res)
+            
     elif request.method == "POST":
     
         return redirect("/player-clubs")
@@ -151,11 +172,9 @@ def insert_player():
     
     elif request.method == "POST":
         
-        player_name = request.form["name"]
-        player_city = request.form["city"]
-        player_state = request.form["state"]
-
-        #TODO: Validate user input to not be NULL
+        player_name = request.form["player_name"]
+        player_city = request.form["player_city"]
+        player_state = request.form["player_state"]
 
         insert_query = "INSERT INTO players (player_name, player_city, player_state) VALUES (%s, %s, %s);"
         db.execute_query(db_connection=db_connection, query=insert_query, query_params=(player_name, player_city, player_state))
@@ -239,7 +258,24 @@ def delete_player(id):
     
     #TODO: implement route
 
-    pass
+    if request.method == "GET":
+        read_query = "SELECT * FROM players WHERE player_id = '%s';" % (id)
+        cursor = db.execute_query(db_connection=db_connection, query=read_query)
+        results = cursor.fetchall()
+        return render_template("delete_player.j2", gt_player=results)
+    
+    elif request.method == "POST":
+        
+        player_id = id
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            print("yes")
+
+        #TODO: Validate user input to not be NULL
+
+        return redirect("/players")
+
 
 @app.route("/delete-round/<int:id>", methods=["POST", "GET"])
 def delete_round(id):
@@ -260,5 +296,5 @@ def delete_swing(id):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15433))
+    port = int(os.environ.get('PORT', 15434))
     app.run(port=port, debug=True)

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+{#  
+    Citation for boilerplate HTML
+    Date: 07/18/2022
+    Copied from: MUI CSS/JS
+    Source URL: https://www.muicss.com/docs/v1/css-js/boilerplate-html 
+#}
+<head>
+    <title>Golf Tracker</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+    <link href="./../static/css/all-templates.css" rel="stylesheet" />
+</head>
+<body>
+<div class="app">
+    <h1>Are you sure you want to delete this entry?</h1>
+    {#  
+        Citation for the table style
+        Date: 07/18/2022
+        Copied from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js/buttons 
+    #}
+    <table class="mui-table mui-table--bordered">
+    <thead>
+        <tr>
+            {# Get key names and insert as table header column names #}
+            {% for key in gt_player[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
+    <tbody>
+        {# Get and display all players data in the table rows #}
+        {% for player in gt_player %}
+        <tr>
+            {% for key in player.keys() %}
+            <td class="table-data">{{ player[key] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {#  
+        Citation for the form, input, radio, and button styles
+        Date: 07/27/2022
+        Adapted from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js
+    #}
+    <form class="mui-form--inline" action="/delete-player/{{ gt_player[0].player_id }}" method="post">
+        <div class="mui-radio">
+            <label>
+            <input type="radio" name="delete" value="no" checked>
+            No
+            </label>
+        </div>
+        <div class="mui-radio">
+            <label>
+            <input type="radio" name="delete" value="yes">
+            Yes
+            </label>
+        </div>
+        <br>
+        <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger">submit</button>
+    </form>
+</div>
+</body>
+</html>

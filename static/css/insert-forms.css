@@ -4,6 +4,7 @@
 
 .mui-select {
     margin: 0px 20px 20px 0px !important;
+    min-width: 120px !important;
 }
 
 .mui-btn.mui-btn--raised.mui-btn--primary {
