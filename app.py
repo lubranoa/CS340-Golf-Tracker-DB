@@ -22,68 +22,68 @@ def root():
     return render_template("main.j2")
 
 @app.route('/clubs')
-def clubs():
+def read_clubs():
     """Route to clubs table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("clubs.j2", gt_clubs=results)
+    return render_template("read_clubs.j2", gt_clubs=results)
 
 @app.route('/holes')
-def holes():
+def read_holes():
     """Route to holes table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM holes;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("course_holes.j2", gt_holes=results)
+    return render_template("read_holes.j2", gt_holes=results)
 
 @app.route('/courses')
-def courses():
+def read_courses():
     """Route to courses table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM courses;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("courses.j2", gt_courses=results)
+    return render_template("read_courses.j2", gt_courses=results)
 
 @app.route('/player-clubs')
-def player_clubs():
+def read_player_clubs():
     """Route to player_clubs intersection table"""
     db_connection = db.connect_to_database()    
     query = "SELECT * FROM player_clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("player_clubs.j2", gt_player_clubs=results)
+    return render_template("read_player_clubs.j2", gt_player_clubs=results)
 
 
 @app.route('/players')
-def players():
+def read_players():
     """Route to players table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM players;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("players.j2", gt_players=results)
+    return render_template("read_players.j2", gt_players=results)
 
 @app.route('/rounds')
-def rounds():
+def read_rounds():
     """Route to rounds table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM rounds;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("player_rounds.j2", gt_rounds=results)
+    return render_template("read_rounds.j2", gt_rounds=results)
 
 @app.route('/swings')
-def player_round_swings():
+def read_swings():
     """Route to swings table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM swings;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    return render_template("player_round_swings.j2", gt_player_round_swings=results)
+    return render_template("read_swings.j2", gt_player_round_swings=results)
 
 # ----------------------------------------------------------------------------
 # INSERT ROUTES: Update Entity Handlers
