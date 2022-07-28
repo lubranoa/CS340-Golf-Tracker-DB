@@ -41,14 +41,6 @@ body {
     background: #c3f0b4;
 }
 
-.home-links {
-    list-style: none;
-}
-
-.home-links li {
-    margin-top: 20px;
-}
-
 h1 {
     margin-bottom: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
