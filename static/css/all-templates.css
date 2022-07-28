@@ -13,6 +13,42 @@ body {
     font-size: calc(8px + 1.5vmin);
 }
 
+.mui-appbar {
+    background-color: #84cc6d;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.mui-appbar ul {
+    display: table!important;
+    width: 100%;
+}
+
+.mui-appbar li {
+    display: table-cell!important;
+}
+
+.mui-appbar a {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.mui-appbar a:hover {
+    background: #c3f0b4;
+}
+
+.home-links {
+    list-style: none;
+}
+
+.home-links li {
+    margin-top: 20px;
+}
+
 h1 {
     margin-bottom: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
