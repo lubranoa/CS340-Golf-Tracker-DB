@@ -130,7 +130,14 @@ def insert_player_club():
 def insert_player():
     """Route that handles inserting a player into the database"""
     
-    #TODO: implement route
+    if request.method == "GET":
+        return render_template("insert_player.j2")
+    
+    elif request.method == "POST":
+        
+        #TODO: implement update operations
+
+        return redirect("/players")
     
     pass
 
