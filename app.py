@@ -97,15 +97,25 @@ def insert_club():
     
     #TODO: implement route
 
-    pass
+    if request.method == "GET":
+        return render_template("insert_club.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/clubs")
 
 @app.route("/insert-course", methods=["POST", "GET"])
 def insert_course():
     """Route that handles inserting a course into the database"""
     
     #TODO: implement route
+
+    if request.method == "GET":
+        return render_template("insert_course.j2")
     
-    pass
+    elif request.method == "POST":
+    
+        return redirect("/courses")
 
 @app.route("/insert-hole", methods=["POST", "GET"])
 def insert_hole():
@@ -123,8 +133,14 @@ def insert_player_club():
     """
     
     #TODO: implement route
+
+    if request.method == "GET":
+        return render_template("insert_player_club.j2")
     
-    pass
+    elif request.method == "POST":
+    
+        return redirect("/player-clubs")
+
 
 @app.route("/insert-player", methods=["POST", "GET"])
 def insert_player():
@@ -152,7 +168,12 @@ def insert_round():
     
     #TODO: implement route
     
-    pass
+    if request.method == "GET":
+        return render_template("insert_round.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/rounds")
 
 @app.route("/insert-swing", methods=["POST", "GET"])
 def insert_swing():
@@ -160,7 +181,12 @@ def insert_swing():
     
     #TODO: implement route
     
-    pass
+    if request.method == "GET":
+        return render_template("insert_swing.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/swings")
 
 # ----------------------------------------------------------------------------
 # UPDATE ROUTES: Update Entity Handlers
