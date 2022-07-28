@@ -8,21 +8,21 @@
 #}
 <head>
     <title>Golf Tracker</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
     <link href="./../static/css/all-templates.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 <div class="mui-appbar">
     <ul class="mui-list--inline">
         <li><a href="/clubs">View clubs</a></li>
+        <li><a href="/courses">View courses</a></li>
         <li><a href="/holes">View holes</a></li>
-        <li><a href="/courses">View courses table</a></li>
         <li><a href="/player-clubs">View player_clubs</a></li>
         <li><a href="/players">View players</a></li>
         <li><a href="/rounds">View rounds</a></li>
@@ -33,7 +33,7 @@
     <h1>The players Table</h1>
     {#  
         Citation for the table style
-        Date: 07/27/2022
+        Date: 07/18/2022
         Copied from: MUI CSS/JS
         Source URL: https://www.muicss.com/docs/v1/css-js/buttons 
     #}
@@ -74,7 +74,7 @@
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="5">
+            <td colspan="10">
             <div>
                 <a href="/insert-player">
                     <button class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</button>

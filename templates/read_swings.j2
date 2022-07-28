@@ -1,39 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+{#  
+    Citation for boilerplate HTML
+    Date: 07/18/2022
+    Copied from: MUI CSS/JS
+    Source URL: https://www.muicss.com/docs/v1/css-js/boilerplate-html 
+#}
 <head>
     <title>Golf Tracker</title>
-    <!-- Citation for the following 5 lines -->
-    <!-- Date: 07/18/2022 -->
-    <!-- Copied from: -->
-    <!-- Source URL: https://www.muicss.com/docs/v1/css-js/boilerplate-html -->    <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
     <link href="./../static/css/all-templates.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
+<div class="mui-appbar">
+    <ul class="mui-list--inline">
+        <li><a href="/clubs">View clubs</a></li>
+        <li><a href="/courses">View courses</a></li>
+        <li><a href="/holes">View holes</a></li>
+        <li><a href="/player-clubs">View player_clubs</a></li>
+        <li><a href="/players">View players</a></li>
+        <li><a href="/rounds">View rounds</a></li>
+        <li><a href="/swings">View swings</a></li>
+    </ul>
+</div>
 <div class="app">
     <h1>The swings Table</h1>
+    {#  
+        Citation for the table style
+        Date: 07/18/2022
+        Copied from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js/buttons 
+    #}
     <table class="mui-table mui-table--bordered">
     <thead>
         <tr>
-            <!-- Get key names and insert as table header column names -->
+            {# Get key names and insert as table header column names #}
             {% for key in gt_player_round_swings[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
+            <th>Update / Delete</th>
         </tr>
     <tbody>
-        <!-- Get and display all player_round_swings data in the table rows -->
+        {#  
+            Citation for the button styles
+            Date: 07/27/2022
+            Adapted from: MUI CSS/JS
+            Source URL: https://www.muicss.com/docs/v1/css-js/buttons 
+        #}
+        {# Get and display all swings data in the table rows #}
         {% for swing in gt_player_round_swings %}
         <tr>
             {% for key in swing.keys() %}
-            <td>{{ swing[key] }}</td>
+            <td class="table-data">{{ swing[key] }}</td>
             {% endfor %}
+            <td>
+                <a href="/update-swing/{{ swing["swing_id"] }}">
+                    <button class="mui-btn mui-btn--small mui-btn--raised mui-btn--primary">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                </a>
+                <a href="/delete-swing/{{ swing["swing_id"] }}">
+                    <button class="mui-btn mui-btn--small mui-btn--raised mui-btn--danger">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </a>
+            </td>
         </tr>
         {% endfor %}
+        <tr>
+            <td colspan="10">
+            <div>
+                <a href="/insert-swing">
+                    <button class="mui-btn mui-btn--small mui-btn--primary mui-btn--fab">+</button>
+                </a>
+            </div>
+            </td>
+        </tr>
     </table>
-    <!-- Insert a swing into the db -->
+    {# <!-- Insert a swing into the db -->
     <form>
         <fieldset>
             <legend>Insert swing</legend>
@@ -97,8 +147,8 @@
             <button>Submit swing Delete</button>
         </fieldset>
     </form>
-    <br>
-    <p><a href="/">Go Back to Homepage</a></p>
+    <br> #}
+    <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>
 </body>
 </html>
