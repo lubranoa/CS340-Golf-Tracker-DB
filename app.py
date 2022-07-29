@@ -243,6 +243,29 @@ def update_player(id):
         db.execute_query(db_connection=db_connection, query=update_query, query_params=(player_name, player_city, player_state, player_id))
         return redirect("/players")
 
+
+@app.route("/update-round/<int:id>", methods=["POST", "GET"])
+def update_round(id):
+    """Route that handles updating a rounds's data"""
+
+    if request.method == "GET":
+        return render_template("update_round.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/rounds")
+
+@app.route("/update-swing/<int:id>", methods=["POST", "GET"])
+def update_swing(id):
+    """Route that handles updating a swing's data"""
+
+    if request.method == "GET":
+        return render_template("update_swing.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/swings")
+
 # ----------------------------------------------------------------------------
 # DELETE ROUTES: Delete Entity Handlers
 #
@@ -255,7 +278,12 @@ def delete_club(id):
     
     #TODO: implement route
 
-    pass
+    if request.method == "GET":
+        return render_template("delete_club.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/clubs")
 
 @app.route("/delete-player/<int:id>", methods=["POST", "GET"])
 def delete_player(id):
@@ -287,7 +315,12 @@ def delete_round(id):
     
     #TODO: implement route
 
-    pass
+    if request.method == "GET":
+        return render_template("delete_round.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/rounds")
 
 @app.route("/delete-swing/<int:id>", methods=["POST", "GET"])
 def delete_swing(id):
@@ -295,7 +328,12 @@ def delete_swing(id):
     
     #TODO: implement route
 
-    pass
+    if request.method == "GET":
+        return render_template("delete_swing.j2")
+    
+    elif request.method == "POST":
+    
+        return redirect("/swings")
 
 # Listener
 
