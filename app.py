@@ -140,14 +140,14 @@ def insert_player_club():
     if request.method == "GET":
         db_connection = db.connect_to_database()
         
-        p_query = "SELECT player_name FROM players;"
+        p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(
             db_connection=db_connection, 
             query=p_query
         )
         p_res = cursor.fetchall()
 
-        c_query = "SELECT brand, club_name, club_type FROM clubs;"
+        c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
         cursor = db.execute_query(
             db_connection=db_connection,
             query=c_query
@@ -158,6 +158,13 @@ def insert_player_club():
             
     elif request.method == "POST":
     
+        db_connection = db.connect_to_database()
+        player_id = request.form['player']
+        club_id = request.form['club']
+
+        query = f"INSERT INTO player_clubs (player_id, club_id) VALUES ({player_id}, {club_id});"
+        db.execute_query(db_connection=db_connection, query=query)
+
         return redirect("/player-clubs")
 
 
