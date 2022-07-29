@@ -14,10 +14,11 @@
     <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
     <link href="./../static/css/all-templates.css" rel="stylesheet" />
+    <link href="./../static/css/delete-forms.css" rel="stylesheet" />
 </head>
 <body>
 <div class="app">
-    <h1>Are you sure you want to delete this entry?</h1>
+    <h1>Are you sure you want to delete this player?</h1>
     {#  
         Citation for the table style
         Date: 07/18/2022
@@ -51,19 +52,21 @@
     <form class="mui-form--inline" action="/delete-player/{{ gt_player[0].player_id }}" method="post">
         <div class="mui-radio">
             <label>
-            <input type="radio" name="delete" value="no" checked>
-            No
+            <input type="radio" name="delete" value="yes">
+            Yes. Delete player
             </label>
         </div>
         <div class="mui-radio">
             <label>
-            <input type="radio" name="delete" value="yes">
-            Yes
+            <input type="radio" name="delete" value="no" checked>
+            No. Do not delete club
             </label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--danger">submit</button>
     </form>
+    <br>
+    <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>
 </body>
 </html>
