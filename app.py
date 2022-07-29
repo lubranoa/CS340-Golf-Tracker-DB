@@ -137,8 +137,6 @@ def insert_player_club():
     the database.
     """
     
-    #TODO: implement route
-
     if request.method == "GET":
         db_connection = db.connect_to_database()
         
@@ -228,9 +226,9 @@ def update_player(id):
     elif request.method == "POST":
         
         player_id = id
-        player_name = request.form["name"]
-        player_city = request.form["city"]
-        player_state = request.form["state"]
+        player_name = request.form["player_name"]
+        player_city = request.form["player_city"]
+        player_state = request.form["player_state"]
 
         #TODO: Validate user input to not be NULL
 
@@ -270,9 +268,8 @@ def delete_player(id):
         delete = request.form["delete"]
 
         if delete == "yes":
-            print("yes")
-
-        #TODO: Validate user input to not be NULL
+            delete_query = "DELETE FROM players WHERE player_id = '%s';"
+            db.execute_query(db_connection=db_connection, query=delete_query, query_params=(player_id,))
 
         return redirect("/players")
 
@@ -296,5 +293,5 @@ def delete_swing(id):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15434))
+    port = int(os.environ.get('PORT', 15432))
     app.run(port=port, debug=True)
