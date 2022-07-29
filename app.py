@@ -95,6 +95,8 @@ def read_swings():
 def insert_club():
     """Route that handles inserting a club into the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
 
     if request.method == "GET":
@@ -108,6 +110,8 @@ def insert_club():
 def insert_course():
     """Route that handles inserting a course into the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
 
     if request.method == "GET":
@@ -121,6 +125,8 @@ def insert_course():
 def insert_hole():
     """Route that handles inserting a hole into the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
     
     if request.method == "GET":
@@ -172,6 +178,8 @@ def insert_player_club():
 def insert_player():
     """Route that handles inserting a player into the database"""
     
+    db_connection = db.connect_to_database()
+
     if request.method == "GET":
         return render_template("insert_player.j2")
     
@@ -190,6 +198,8 @@ def insert_player():
 def insert_round():
     """Route that handles inserting a round into the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
     
     if request.method == "GET":
@@ -203,6 +213,8 @@ def insert_round():
 def insert_swing():
     """Route that handles inserting a swing into the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
     
     if request.method == "GET":
@@ -248,6 +260,8 @@ def update_player(id):
 def update_round(id):
     """Route that handles updating a rounds's data"""
 
+    db_connection = db.connect_to_database()
+
     if request.method == "GET":
         read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
@@ -261,6 +275,8 @@ def update_round(id):
 @app.route("/update-swing/<int:id>", methods=["POST", "GET"])
 def update_swing(id):
     """Route that handles updating a swing's data"""
+
+    db_connection = db.connect_to_database()
 
     if request.method == "GET":
         read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (id)
@@ -282,6 +298,8 @@ def update_swing(id):
 def delete_club(id):
     """Route that handles deleting a club from the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
 
     if request.method == "GET":
@@ -298,7 +316,9 @@ def delete_club(id):
 @app.route("/delete-player/<int:id>", methods=["POST", "GET"])
 def delete_player(id):
     """Route that handles deleting a player from the database"""
-    
+
+    db_connection = db.connect_to_database()
+
     if request.method == "GET":
         read_query = "SELECT * FROM players WHERE player_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
@@ -321,6 +341,8 @@ def delete_player(id):
 def delete_round(id):
     """Route that handles deleting a round from the database"""
     
+    db_connection = db.connect_to_database()
+
     #TODO: implement route
 
     if request.method == "GET":
@@ -338,6 +360,8 @@ def delete_round(id):
 def delete_swing(id):
     """Route that handles deleting a swing from the database"""
     
+    db_connection = db.connect_to_database()
+
     if request.method == "GET":
         read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
