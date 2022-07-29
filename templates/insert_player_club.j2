@@ -40,7 +40,7 @@
         <div class="mui-select">
             <label>player:</label>
             <select id="player" name="player" required>
-                <option>--Choose player--</option>
+                <option value="">--Choose player--</option>
                 {# Get and place all players into dropdown options #}
                 {% for player in gt_players %}
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
@@ -49,7 +49,7 @@
         </div>
         <div class="mui-select">
             <select id="club" name="club" required>
-                <option>--Choose club--</option>
+                <option value="">--Choose club--</option>
                 {# Get and place all clubs into dropdown options #}
                 {% for club in gt_clubs %}
                 {# Concatenate club brand, name, and type to display as dropdown options #}
