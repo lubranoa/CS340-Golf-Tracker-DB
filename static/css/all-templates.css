@@ -65,6 +65,10 @@ th {
     padding-top: 4px;
 }
 
+.mui-select {
+    z-index: 99999;
+}
+
 .mui-btn.mui-btn--small.mui-btn--raised.mui-btn--primary {
     margin-right: 10px;
 }

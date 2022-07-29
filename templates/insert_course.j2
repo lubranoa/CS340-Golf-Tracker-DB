@@ -36,13 +36,13 @@
         Adapted from: MUI CSS/JS
         Source URL: https://www.muicss.com/docs/v1/css-js
     #}
-    <form class="mui-form--inline" action="/insert-player" method="post">
+    <form class="mui-form--inline" action="/insert-course" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="course_name">
-            <label>course_name</label>
+            <input type="text" name="course_name" pattern="[A-Za-z0-9 ]{1,}" required>
+            <label>Course Name</label>
         </div>
         <div class="mui-select">
-            <select name="course_state">
+            <select name="course_state" required>
                 <option value=""></option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
@@ -96,7 +96,7 @@
                 <option value="Wisconsin">Wisconsin</option>
                 <option value="Wyoming">Wyoming</option>
             </select>
-            <label>course_state</label>
+            <label>Course State</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert course</button>

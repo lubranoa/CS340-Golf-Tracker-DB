@@ -39,11 +39,11 @@
     <form class="mui-form--inline" action="/insert-player" method="post">
         <div class="mui-textfield mui-textfield--float-label">
             <input type="text" name="player_name" pattern="[A-Za-z ]{1,}" required>
-            <label>player_name</label>
+            <label>Player Name</label>
         </div>
-        <div class="mui-textfield mui-textfield--float-label" pattern="[A-Za-z ]{1,}" required>
-            <input type="text" name="player_city">
-            <label>player_city</label>
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="player_city" pattern="[A-Za-z ]{1,}" required>
+            <label>Player City</label>
         </div>
         <div class="mui-select">
             <select name="player_state">
@@ -100,7 +100,7 @@
                 <option value="Wisconsin">Wisconsin</option>
                 <option value="Wyoming">Wyoming</option>
             </select>
-            <label>player_state</label>
+            <label>Player State</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert player</button>

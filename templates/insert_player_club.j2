@@ -38,7 +38,7 @@
     #}
     <form class="mui-form--inline" action="/insert-player-club" method="post">
         <div class="mui-select">
-            <select name="player_name">
+            <select name="player_name" required>
                 <option value=""></option>
                 {# Get and place all players into dropdown options #}
                 {% for player in gt_players %}
@@ -47,10 +47,10 @@
                 {% endfor %}
                 {% endfor %}
             </select>
-            <label>player_name</label>
+            <label>Player Name</label>
         </div>
         <div class="mui-select">
-            <select name="club">
+            <select name="club" required>
                 <option value=""></option>
                 {# Get and place all clubs into dropdown options #}
                 {% for club in gt_clubs %}
@@ -58,7 +58,7 @@
                 <option>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"] }}</option>
                 {% endfor %}
             </select>
-            <label>club</label>
+            <label>Club</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert player_club</button>

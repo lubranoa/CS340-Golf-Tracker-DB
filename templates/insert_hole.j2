@@ -38,7 +38,7 @@
     #}
     <form class="mui-form--inline" action="/insert-hole" method="post">
         <div class="mui-select">
-            <select name="hole_number">
+            <select name="hole_number" required>
                 <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -59,30 +59,30 @@
                 <option value="17">17</option>
                 <option value="18">18</option>
             </select>
-            <label>hole_number</label>
+            <label>Hole Number</label>
         </div>
         <div class="mui-select">
-            <select name="course_id">
+            <select name="course_id" required>
                 <option value=""></option>
                 <option>Augusta National Golf Club</option>
                 <option>Bluejack National Golf Club</option>
                 <option>Nanea Golf Club</option>
                 <option>Pebble Beach</option>
             </select>
-            <label>course_id</label>
+            <label>Course</label>
         </div>
         <div class="mui-select">
-            <select name="par_swing_count">
+            <select name="par_swing_count" required>
                 <option value=""></option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <label>par_swing_count</label>
+            <label>Par for the Hole</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="distance">
-            <label>distance</label>
+            <input type="text" name="distance" pattern="[0-9]{1,}" required>
+            <label>Distance in Yards</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert hole</button>

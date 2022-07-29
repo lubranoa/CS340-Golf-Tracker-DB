@@ -38,32 +38,32 @@
     #}
     <form class="mui-form--inline" action="/insert-round" method="post">
         <div class="mui-select">
-            <select name="course_name">
+            <select name="course_name" required>
                 <option value=""></option>
                 <option>Augusta National Golf Club</option>
                 <option>Bluejack National Golf Club</option>
                 <option>Nanea Golf Club</option>
                 <option>Pebble Beach</option>
             </select>
-            <label>course_name</label>
+            <label>Course Name</label>
         </div>
         <div class="mui-select">
-            <select name="player_name">
+            <select name="player_name" required>
                 <option value=""></option>
                 <option>Jane Deer</option>
                 <option>John Doe</option>
                 <option>Happy Gilmore</option>
                 <option>Shooter McGavin</option>
             </select>
-            <label>player_name</label>
+            <label>Player Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="datetime-local" name="round_date" value="2022-01-01T08:00">
-            <label>round_date</label>
+            <input type="datetime-local" name="round_date" value="2022-01-01T00:00" required>
+            <label>Date and Time of Round</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="round_score">
-            <label>round_score</label>
+            <input type="text" name="round_score" pattern="[0-9]{1,}" required>
+            <label>Round Score</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert round</button>

@@ -38,36 +38,39 @@
     #}
     <form class="mui-form--inline" action="/insert-swing" method="post">
         <div class="mui-select">
-            <select name="player_id">
+            <select name="player_id" required>
                 <option value=""></option>
                 <option>Jane Deer</option>
                 <option>John Doe</option>
                 <option>Happy Gilmore</option>
                 <option>Shooter McGavin</option>
             </select>
-            <label>player_name</label>
+            <label>Player Name</label>
         </div>
         <div class="mui-select">
-            <select name="round_id">
-                <option value="">Will show player's rounds</option>
+            <select name="round_id" required>
+                <option value=""></option>
+                <option value="round">Will show player's rounds</option>
             </select>
-            <label>round_id</label>
+            <label>Round</label>
         </div>
-        <div class="mui-select">
+        <div class="mui-select" required>
             <select name="hole_id">
-                <option value="">Will show course's holes</option>
+                <option value=""></option>
+                <option value="hole">Will show course's holes</option>
             </select>
-            <label>hole_id</label>
+            <label>Hole</label>
         </div>
         <div class="mui-select">
             <select name="club_id">
-                <option value="">Will show player's clubs</option>
+                <option value=""></option>
+                <option value="club">Will show player's clubs</option>
             </select>
-            <label>hole_id</label>
+            <label>Club Used</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="dist_traveled_yd">
-            <label>dist_traveled_yd</label>
+            <input type="text" name="dist_traveled_yd" pattern="[0-9]{1,}" required>
+            <label>Swing Distance in Yards</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert swing</button>

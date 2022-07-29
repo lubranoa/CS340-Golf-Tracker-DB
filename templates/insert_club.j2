@@ -38,15 +38,15 @@
     #}
     <form class="mui-form--inline" action="/insert-club" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="brand">
-            <label>brand</label>
+            <input type="text" name="brand" pattern="[A-Za-z0-9 ]{1,}" required>
+            <label>Brand Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="name">
-            <label>club_name</label>
+            <input type="text" name="club_name" pattern="[A-Za-z0-9 ]{1,}" required>
+            <label>Model Name</label>
         </div>
         <div class="mui-select">
-            <select name="type">
+            <select name="type" required>
                 <option value=""></option>
                 <option value="Driver">Driver</option>
                 <option value="">3 Wood</option>
@@ -72,7 +72,7 @@
                 <option value="">Lob Wedge</option>
                 <option value="">Putter</option>
             </select>
-            <label>club_type</label>
+            <label>Club Type</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert club</button>
