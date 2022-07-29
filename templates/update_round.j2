@@ -29,30 +29,68 @@
     </ul>
 </div>
 <div class="app">
-    <h1>Under Construction</h1>
-        <!-- Update a round in the db -->
-        <form>
-            <fieldset>
-                <legend> Update round</legend>
-                <label>course: </label>
-                    <select>
-                        <option>Relevant courses</option>
-                    </select>
-                <label>player: </label>
-                    <select>
-                        <option>Relevant player</option>
-                    </select>
-                <label>player: </label>
-                    <select>
-                        <option>Relevant players</option>
-                    </select>
-                <label>round date: </label>
-                    <input type="text">
-                <label>round score: </label>
-                    <input type="text">
-                <button>Submit round Update</button>
-            </fieldset>
-        </form>
+    <h1>Update round Entry</h1>
+    {#  
+        Citation for the table style
+        Date: 07/18/2022
+        Copied from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js/buttons 
+    #}
+    <table class="mui-table mui-table--bordered">
+    <thead>
+        <tr>
+            {# Get key names and insert as table header column names #}
+            {% for key in gt_round[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
+    <tbody>
+        {# Get and display all players data in the table rows #}
+        {% for round in gt_round %}
+        <tr>
+            {% for key in round.keys() %}
+            <td class="table-data">{{ round[key] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {#  
+        Citation for the form, input, select, and button styles
+        Date: 07/27/2022
+        Adapted from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js
+    #}
+    <form class="mui-form--inline" action="/update-round/{{ gt_round[0].round_id }}" method="post">
+        <div class="mui-select">
+            <select name="player_name" required>
+                <option value=""></option>
+                <option>Jane Deer</option>
+                <option>John Doe</option>
+                <option>Happy Gilmore</option>
+                <option>Shooter McGavin</option>
+            </select>
+            <label>Player Name</label>
+        </div>
+        <div class="mui-select">
+            <select name="course_name" required>
+                <option value=""></option>
+                <option>Augusta National Golf Club</option>
+                <option>Bluejack National Golf Club</option>
+                <option>Nanea Golf Club</option>
+                <option>Pebble Beach</option>
+            </select>
+            <label>Course Name</label>
+        </div>
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="datetime-local" name="round_date" value="2022-01-01T00:00" required>
+            <label>Date and Time of Round</label>
+        </div>
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="round_score" pattern="[0-9]{1,}" required>
+            <label>Round Score</label>
+        </div>
+        <br>
+        <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update round</button>
     </form>
     <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>

@@ -29,30 +29,76 @@
     </ul>
 </div>
 <div class="app">
-    <h1>Under Construction</h1>
-        <!-- Update a swing in the db -->
-        <form>
-            <fieldset>
-                <legend>Update swing</legend>
-                <label>hole:</label>
-                    <select>
-                        <option>Relevant holes</option>
-                    </select>
-                <label>round:</label>
-                    <select>
-                        <option>Relevant rounds</option>
-                    </select>
-                <label>player:</label>
-                    <select>
-                        <option>Relevant players</option>
-                    </select>
-                <label>club:</label>
-                    <select>
-                        <option>Relevant clubs</option>
-                    </select>
-                <button>Submit swing Update</button>
-            </fieldset>
-        </form>
+    <h1>Update swing Entry</h1>
+    {#  
+        Citation for the table style
+        Date: 07/27/2022
+        Copied from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js/buttons 
+    #}
+    <table class="mui-table mui-table--bordered">
+    <thead>
+        <tr>
+            {# Get key names and insert as table header column names #}
+            {% for key in gt_swing[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+        </tr>
+    <tbody>
+        {# Get and display all players data in the table rows #}
+        {% for swing in gt_swing %}
+        <tr>
+            {% for key in swing.keys() %}
+            <td class="table-data">{{ swing[key] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {#  
+        Citation for the form, input, select, and button styles
+        Date: 07/27/2022
+        Adapted from: MUI CSS/JS
+        Source URL: https://www.muicss.com/docs/v1/css-js
+    #}
+    <form class="mui-form--inline" action="/update-swing/{{ gt_swing[0].swing_id }}" method="post">
+        <div class="mui-select">
+            <select name="player_id" required>
+                <option value=""></option>
+                <option>Jane Deer</option>
+                <option>John Doe</option>
+                <option>Happy Gilmore</option>
+                <option>Shooter McGavin</option>
+            </select>
+            <label>Player Name</label>
+        </div>
+        <div class="mui-select" required>
+            <select name="round_id" required>
+                <option value=""></option>
+                <option value="round">Will show player's rounds</option>
+            </select>
+            <label>Round</label>
+        </div>
+        <div class="mui-select" required>
+            <select name="hole_id">
+                <option value=""></option>
+                <option value="hole">Will show course's holes</option>
+            </select>
+            <label>Hole</label>
+        </div>
+        <div class="mui-select">
+            <select name="club_id">
+                <option value=""></option>
+                <option value="club">Will show player's clubs</option>
+            </select>
+            <label>Club Used</label>
+        </div>
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="dist_traveled_yd" pattern="[0-9]{1,}" required>
+            <label>Swing Distance in Yards</label>
+        </div>
+        <br>
+        <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update swing</button>
+    </form>
     <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>
 </body>
