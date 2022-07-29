@@ -1,6 +1,8 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+DROP TABLE IF EXISTS player_clubs, swings, rounds, holes, clubs, players, courses;
+
 CREATE TABLE courses 
 (
     course_id int NOT NULL AUTO_INCREMENT,
