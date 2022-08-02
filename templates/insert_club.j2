@@ -38,11 +38,23 @@
     #}
     <form class="mui-form--inline" action="/insert-club" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="brand" pattern="[A-Za-z0-9 ']{1,}" required>
+            <input 
+                type="text" 
+                name="brand" 
+                pattern="[A-Za-z0-9 ']{1,}" 
+                maxlength="50"
+                required
+            >
             <label>Brand Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="club_name" pattern="[A-Za-z0-9 ']{1,}" required>
+            <input 
+                type="text" 
+                name="club_name" 
+                pattern="[A-Za-z0-9 ']{1,}" 
+                maxlength="50"
+                required 
+            >
             <label>Model Name</label>
         </div>
         <div class="mui-select">

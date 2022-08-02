@@ -10,10 +10,11 @@ db_connection = db.connect_to_database()
 # ----------------------------------------------------------------------------
 # READ ROUTES: Home Page and Display Entities Handlers
 # 
-# The following flask route functions handle getting the data for all entities
-# in the Golf Tracker MySQL database. Each route connects and communicates 
-# with the database and sends resultant data to the Jinja templates to be 
-# rendered as a web page displaying that data, except for the home page.
+# The following flask route functions handle reading the data for all entities
+# in the Golf Tracker MySQL database. Each route connects to the database, 
+# gets necessary data from it, and renders a read_entity Jinja template that 
+# displays the sent information. All read templates have buttons to insert new
+# entity instances, while only select ones have update and delete buttons. 
 # ----------------------------------------------------------------------------
 
 @app.route('/')
@@ -88,7 +89,10 @@ def read_swings():
 # ----------------------------------------------------------------------------
 # INSERT ROUTES: Update Entity Handlers
 #
-#
+# The following flask route functions handle inserting new entity instances 
+# into the Golf Tracker MySQL Database. Each route connects to the database,
+# renders an insert_entity Jinja template, getting any entity data necessary
+# for insertion, and inserts the new entity into the database.
 # ----------------------------------------------------------------------------
 
 @app.route("/insert-club", methods=["POST", "GET"])
@@ -100,8 +104,7 @@ def insert_club():
     if request.method == "GET":
         return render_template("insert_club.j2")
     
-    elif request.method == "POST":
-    
+    elif request.method == "POST":    
         brand = request.form["brand"]
         club_name = request.form["club_name"]
         club_type = request.form["club_type"]
@@ -123,7 +126,12 @@ def insert_course():
         return render_template("insert_course.j2")
     
     elif request.method == "POST":
-    
+        course_name = request.form["course_name"]
+        course_state = request.form["course_state"]
+
+        insert_query = "INSERT INTO courses (course_name, course_state) VALUES (%s, %s);"
+        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(course_name, course_state))
+
         return redirect("/courses")
 
 @app.route("/insert-hole", methods=["POST", "GET"])
