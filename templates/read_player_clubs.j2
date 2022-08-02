@@ -42,6 +42,7 @@
             {% for key in gt_player_clubs[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
+            <th>Update / Delete</th>
         </tr>
     <tbody>
         {# Get and display all player_clubs data in the table rows #}
@@ -50,6 +51,18 @@
             {% for key in pl_club.keys() %}
             <td class="table-data">{{ pl_club[key] }}</td>
             {% endfor %}
+            <td>
+                <a href="/update-player-club/{{ pl_club["player_id"] }}/{{ pl_club["club_id"] }}">
+                    <button class="mui-btn mui-btn--small mui-btn--raised mui-btn--primary">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                </a>
+                <a href="/delete-player-club/{{ pl_club["player_id"] }}/{{ pl_club["club_id"] }}">
+                    <button class="mui-btn mui-btn--small mui-btn--raised mui-btn--danger">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </a>
+            </td>
         </tr>
         {% endfor %}
         <tr>

@@ -373,6 +373,27 @@ def delete_swing(id):
         # TODO: finish delete query
         return redirect("/swings")
 
+@app.route("/delete-player-club/<int:player_id>/<int:club_id>/", methods=["POST", "GET"])
+def delete_player_club(player_id, club_id):
+    """Route that handles deleting a player_club relationship from the database"""
+    
+    db_connection = db.connect_to_database()
+
+    if request.method == "GET":
+        read_query = "SELECT * FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
+        cursor = db.execute_query(db_connection=db_connection, query=read_query)
+        results = cursor.fetchall()
+        return render_template("delete_player_club.j2", gt_clubs=results)
+    
+    elif request.method == "POST":
+        
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            delete_query = "DELETE FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
+            cursor = db.execute_query(db_connection=db_connection, query=delete_query)
+            return redirect("/player-clubs")
+
 # Listener
 
 if __name__ == "__main__":
