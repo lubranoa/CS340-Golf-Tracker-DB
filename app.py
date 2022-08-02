@@ -19,39 +19,43 @@ db_connection = db.connect_to_database()
 
 @app.route('/')
 def root():
-    """Route to home page"""
+    """Route that displays home page"""
     return render_template("main.j2")
+
 
 @app.route('/clubs')
 def read_clubs():
-    """Route to clubs table"""
+    """Route that handles displaying clubs table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_clubs.j2", gt_clubs=results)
 
+
 @app.route('/holes')
 def read_holes():
-    """Route to holes table"""
+    """Route that handles displayin holes table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM holes;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_holes.j2", gt_holes=results)
 
+
 @app.route('/courses')
 def read_courses():
-    """Route to courses table"""
+    """Route that handles displaying courses table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM courses;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_courses.j2", gt_courses=results)
 
+
 @app.route('/player-clubs')
 def read_player_clubs():
-    """Route to player_clubs intersection table"""
+    """Route that handles displaying player_clubs intersection table"""
     db_connection = db.connect_to_database()    
     query = "SELECT * FROM player_clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -59,32 +63,36 @@ def read_player_clubs():
     return render_template("read_player_clubs.j2", gt_player_clubs=results)
 
 
+
 @app.route('/players')
 def read_players():
-    """Route to players table"""
+    """Route that handles displaying players table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM players;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_players.j2", gt_players=results)
 
+
 @app.route('/rounds')
 def read_rounds():
-    """Route to rounds table"""
+    """Route that handles displaying rounds table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM rounds;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_rounds.j2", gt_rounds=results)
 
+
 @app.route('/swings')
 def read_swings():
-    """Route to swings table"""
+    """Route that handles displaying swings table"""
     db_connection = db.connect_to_database()
     query = "SELECT * FROM swings;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_swings.j2", gt_player_round_swings=results)
+
 
 # ----------------------------------------------------------------------------
 # INSERT ROUTES: Update Entity Handlers
@@ -98,29 +106,29 @@ def read_swings():
 @app.route("/insert-club", methods=["POST", "GET"])
 def insert_club():
     """Route that handles inserting a club into the database"""
-    
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
         return render_template("insert_club.j2")
     
-    elif request.method == "POST":    
+    elif request.method == "POST":
         brand = request.form["brand"]
         club_name = request.form["club_name"]
         club_type = request.form["club_type"]
 
         insert_query = "INSERT INTO clubs (brand, club_name, club_type) VALUES (%s, %s, %s);"
-        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(brand, club_name, club_type))
-
+        db.execute_query(
+            db_connection=db_connection, 
+            query=insert_query, 
+            query_params=(brand, club_name, club_type)
+        )
         return redirect("/clubs")
+
 
 @app.route("/insert-course", methods=["POST", "GET"])
 def insert_course():
     """Route that handles inserting a course into the database"""
-    
     db_connection = db.connect_to_database()
-
-    #TODO: implement route
 
     if request.method == "GET":
         return render_template("insert_course.j2")
@@ -130,14 +138,17 @@ def insert_course():
         course_state = request.form["course_state"]
 
         insert_query = "INSERT INTO courses (course_name, course_state) VALUES (%s, %s);"
-        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(course_name, course_state))
-
+        db.execute_query(
+            db_connection=db_connection, 
+            query=insert_query, 
+            query_params=(course_name, course_state)
+        )
         return redirect("/courses")
+
 
 @app.route("/insert-hole", methods=["POST", "GET"])
 def insert_hole():
     """Route that handles inserting a hole into the database"""
-    
     db_connection = db.connect_to_database()
     
     if request.method == "GET":
@@ -155,9 +166,13 @@ def insert_hole():
         distance = request.form["distance"]
 
         insert_query = "INSERT INTO holes (course_id, par_swing_count, distance) VALUES (%s, %s, %s);"
-        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(course_id, par_swing_count, distance))
-
+        db.execute_query(
+            db_connection=db_connection, 
+            query=insert_query, 
+            query_params=(course_id, par_swing_count, distance)
+        )
         return redirect("/holes")
+
 
 @app.route("/insert-player-club", methods=["POST", "GET"])
 def insert_player_club():
@@ -185,8 +200,7 @@ def insert_player_club():
         
         return render_template("insert_player_club.j2", gt_players=p_res, gt_clubs=c_res)
             
-    elif request.method == "POST":
-    
+    elif request.method == "POST":    
         db_connection = db.connect_to_database()
         player_id = request.form['player']
         club_id = request.form['club']
@@ -200,32 +214,31 @@ def insert_player_club():
 @app.route("/insert-player", methods=["POST", "GET"])
 def insert_player():
     """Route that handles inserting a player into the database"""
-    
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
         return render_template("insert_player.j2")
     
-    elif request.method == "POST":
-        
+    elif request.method == "POST":        
         player_name = request.form["player_name"]
         player_city = request.form["player_city"]
         player_state = request.form["player_state"]
 
         insert_query = "INSERT INTO players (player_name, player_city, player_state) VALUES (%s, %s, %s);"
-        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(player_name, player_city, player_state))
-
+        db.execute_query(
+            db_connection=db_connection, 
+            query=insert_query, 
+            query_params=(player_name, player_city, player_state)
+        )
         return redirect("/players")
+
 
 @app.route("/insert-round", methods=["POST", "GET"])
 def insert_round():
     """Route that handles inserting a round into the database"""
-    
     db_connection = db.connect_to_database()
-
-    #TODO: implement route
     
-    if request.method == "GET":        
+    if request.method == "GET":
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(
             db_connection=db_connection, 
@@ -248,12 +261,17 @@ def insert_round():
         unformatted_date = request.form["round_date"]
         round_score = request.form["round_score"]
 
+        # Reformat date to SQL datetime format ("YYYY-MM-DDT00:00" ==> "YYYY-MM-DD 00:00:00")
         round_date = unformatted_date.replace("T", " ") + ":00"
 
         insert_query = "INSERT INTO rounds (course_id, player_id, round_date, round_score) VALUES (%s, %s, %s, %s);"
-        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(course_id, player_id, round_date, round_score))
-    
+        db.execute_query(
+            db_connection=db_connection, 
+            query=insert_query, 
+            query_params=(course_id, player_id, round_date, round_score)
+        )    
         return redirect("/rounds")
+
 
 @app.route("/insert-swing", methods=["POST", "GET"])
 def insert_swing():
@@ -269,6 +287,7 @@ def insert_swing():
     elif request.method == "POST":
     
         return redirect("/swings")
+
 
 # ----------------------------------------------------------------------------
 # UPDATE ROUTES: Update Entity Handlers
@@ -289,16 +308,17 @@ def update_player(id):
         return render_template("update_player.j2", gt_player=results)
     
     elif request.method == "POST":
-        
         player_id = id
         player_name = request.form["player_name"]
         player_city = request.form["player_city"]
         player_state = request.form["player_state"]
 
-        #TODO: Validate user input to not be NULL
-
         update_query = "UPDATE players SET players.player_name = %s, players.player_city =%s, players.player_state = %s WHERE players.player_id = %s;"
-        db.execute_query(db_connection=db_connection, query=update_query, query_params=(player_name, player_city, player_state, player_id))
+        db.execute_query(
+            db_connection=db_connection, 
+            query=update_query, 
+            query_params=(player_name, player_city, player_state, player_id)
+        )
         return redirect("/players")
 
 
@@ -315,8 +335,11 @@ def update_round(id):
         return render_template("update_round.j2", gt_round=results)
     
     elif request.method == "POST":
+
+        #TODO: implement update query
     
         return redirect("/rounds")
+
 
 @app.route("/update-swing/<int:id>", methods=["POST", "GET"])
 def update_swing(id):
@@ -331,8 +354,11 @@ def update_swing(id):
         return render_template("update_swing.j2", gt_swing=results)
     
     elif request.method == "POST":
-    
+
+        #TODO: implement update query
+
         return redirect("/swings")
+
 
 # ----------------------------------------------------------------------------
 # DELETE ROUTES: Delete Entity Handlers
@@ -356,8 +382,10 @@ def delete_club(id):
     
     elif request.method == "POST":
     
-        # TODO: finish delete query
+        # TODO: implement delete query
+
         return redirect("/clubs")
+
 
 @app.route("/delete-player/<int:id>", methods=["POST", "GET"])
 def delete_player(id):
@@ -372,13 +400,16 @@ def delete_player(id):
         return render_template("delete_player.j2", gt_player=results)
     
     elif request.method == "POST":
-        
         player_id = id
         delete = request.form["delete"]
 
         if delete == "yes":
             delete_query = "DELETE FROM players WHERE player_id = '%s';"
-            db.execute_query(db_connection=db_connection, query=delete_query, query_params=(player_id,))
+            db.execute_query(
+                db_connection=db_connection, 
+                query=delete_query, 
+                query_params=(player_id,)
+            )
 
         return redirect("/players")
 
@@ -399,8 +430,10 @@ def delete_round(id):
     
     elif request.method == "POST":
     
-        # TODO: finish delete query
+        # TODO: implement delete query
+        
         return redirect("/rounds")
+
 
 @app.route("/delete-swing/<int:id>", methods=["POST", "GET"])
 def delete_swing(id):
@@ -416,11 +449,13 @@ def delete_swing(id):
     
     elif request.method == "POST":
         
-        # TODO: finish delete query
+        # TODO: implement delete query
+
         return redirect("/swings")
+
 
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15434))
+    port = int(os.environ.get('PORT', 15432))
     app.run(port=port, debug=True)
