@@ -68,33 +68,6 @@
             </td>
         </tr>
     </table>
-    {# <!-- Insert a player_clubs relationship into the db -->
-    <form>
-        <fieldset>
-            <legend>Insert player club</legend>
-            <label>player:</label>
-            <select>
-                <option>--Choose player--</option>
-                <!-- Get and place all players into dropdown options -->
-                {% for player in gt_players %}
-                {% for key in player.keys() %}
-                <option>{{ player[key] }}</option>
-                {% endfor %}
-                {% endfor %}
-            </select>
-            <label>club:</label>
-            <select>
-                <option>--Choose club--</option>
-                <!-- Iterate through all clubs in gt_clubs -->
-                {% for club in gt_clubs %}
-                <!-- Concatenate club brand, name, and type to display as dropdown options -->
-                <option>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"] }}</option>
-                {% endfor %}
-            </select>
-            <button>Submit player_club Insert</button>
-        </fieldset>
-    </form>
-    <br> #}
     <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>
 </body>
