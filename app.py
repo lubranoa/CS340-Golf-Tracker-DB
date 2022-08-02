@@ -97,13 +97,18 @@ def insert_club():
     
     db_connection = db.connect_to_database()
 
-    #TODO: implement route
-
     if request.method == "GET":
         return render_template("insert_club.j2")
     
     elif request.method == "POST":
     
+        brand = request.form["brand"]
+        club_name = request.form["club_name"]
+        club_type = request.form["club_type"]
+
+        insert_query = "INSERT INTO clubs (brand, club_name, club_type) VALUES (%s, %s, %s);"
+        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(brand, club_name, club_type))
+
         return redirect("/clubs")
 
 @app.route("/insert-course", methods=["POST", "GET"])
@@ -376,5 +381,5 @@ def delete_swing(id):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15432))
+    port = int(os.environ.get('PORT', 15434))
     app.run(port=port, debug=True)
