@@ -139,14 +139,24 @@ def insert_hole():
     """Route that handles inserting a hole into the database"""
     
     db_connection = db.connect_to_database()
-
-    #TODO: implement route
     
     if request.method == "GET":
-        return render_template("insert_hole.j2")
+        courses_query = "SELECT * FROM courses;"
+        cursor = db.execute_query(
+            db_connection=db_connection, 
+            query=courses_query
+        )
+        courses_res = cursor.fetchall()
+        return render_template("insert_hole.j2", gt_courses=courses_res)
     
     elif request.method == "POST":
-    
+        course_id = request.form["course_id"]
+        par_swing_count = request.form["par_swing_count"]
+        distance = request.form["distance"]
+
+        insert_query = "INSERT INTO holes (course_id, par_swing_count, distance) VALUES (%s, %s, %s);"
+        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(course_id, par_swing_count, distance))
+
         return redirect("/holes")
 
 @app.route("/insert-player-club", methods=["POST", "GET"])
@@ -215,10 +225,33 @@ def insert_round():
 
     #TODO: implement route
     
-    if request.method == "GET":
-        return render_template("insert_round.j2")
+    if request.method == "GET":        
+        p_query = "SELECT player_id, player_name FROM players;"
+        cursor = db.execute_query(
+            db_connection=db_connection, 
+            query=p_query
+        )
+        p_res = cursor.fetchall()
+
+        c_query = "SELECT course_id, course_name FROM courses;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=c_query
+        )
+        c_res = cursor.fetchall()
+        
+        return render_template("insert_round.j2", gt_players=p_res, gt_courses=c_res)
     
     elif request.method == "POST":
+        course_id = request.form["course_id"]
+        player_id = request.form["player_id"]
+        unformatted_date = request.form["round_date"]
+        round_score = request.form["round_score"]
+
+        round_date = unformatted_date.replace("T", " ") + ":00"
+
+        insert_query = "INSERT INTO rounds (course_id, player_id, round_date, round_score) VALUES (%s, %s, %s, %s);"
+        db.execute_query(db_connection=db_connection, query=insert_query, query_params=(course_id, player_id, round_date, round_score))
     
         return redirect("/rounds")
 
