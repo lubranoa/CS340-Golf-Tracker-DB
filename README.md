@@ -42,19 +42,19 @@ git clone https://github.com/lubranoa/CS340-Golf-Tracker-DB.git
 ├── requirements.txt
 ├── venv
 ├── static
-│    └ css               <= Contains all project.css files
+│    └ css                    <= Contains all project.css files
 │        ├ all-templates.css
 │        └ # etc.
 ├── database
 │    ├ db_connector.py
 │    ├ golf-tracker-DDQ.sql
 │    └ golf-tracker-DMQ.sql
-└── templates               <= Contains all project.j2 files
+└── templates                 <= Contains all project.j2 files
      ├ main.j2
      └ # etc.
 ```
 
-**6.** Next, `cd` into the root of the project directory (if not already in it) and set up a Python virtual environment by running these three lines separately in the command line:
+**5.** Next, `cd` into the root of the project directory (if not already in it) and set up a Python virtual environment by running these three lines separately in the command line:
 ```bash
 cd project-dir/
 
@@ -106,25 +106,52 @@ source golf_tracker_DDQ.sql
 
 **13.** Ensure there were no issues importing, then exit the OSU database by entering `exit;`
 
-**14.** Finally, `cd` into the root directory and run the app by running the app.py file or for persistence using the gunicorn command:
+**14.** To run the web app, there are two options to choose from, running on localhost or persistently using gunicorn. If you want to run via gunicorn, skip to **Step 16**, otherwise continue to **Step 15**.
+
+**15.** To run via localhost, `cd` into the root directory if not in it already. Run the following command. There is no need to change the port in `test_app.py` unless you are already using port 15434 for something else:
 ```bash
-python3 app.py
+python3 test_app.py
+```
+You will see some lines of initialization output in the terminal window confirming that the website is running. Then go to Firefox or Chrome, and go to `localhost:15434/` to access the site. You will also see any GET or POST requests output to the terminal as well. Skip to **Step 18**
 
-# OR
+**16.** To run persistently via gunicorn, you must first change the port number at the top of `app.py` to your desired port number within the range 1024 < PORT < 65535. Our application is running on port 15432, so if it is not altered, you will get an error message about the port already being in use.
+```python
+# Configuration
 
-gunicorn --bind 0.0.0.0:15432 wsgi:app -D
+PORT = 15432  # <== Change to your desired port number
 ```
 
-   - To kill all your instances of Gunicorn, run:
+**17** Next, `cd` into the root directory if not already there and run the gunicorn command with your own port number to start web app:
+```bash
+gunicorn --bind 0.0.0.0:<your-port-number> wsgi:app -D
+
+# Our startup command looks like:
+gunicorn --bind 0.0.0.0:15432 wsgi:app -D
+```
+There will be no confirmation that the app has started but you can confirm that your gunicorn instance is running by entering the following:
+```bash
+ps ufx | grep gunicorn
+```
+This should output something like the following:
+```bash
+lubranoa@flip3  ~/CS340/CS340-Golf-Tracker-DB 
+$ps ufx | grep gunicorn
+lubranoa  3661  0.0  0.0 218300 16672 ?        S    08:52   0:00 /nfs/stak/users/lubranoa/CS340/CS340-Golf-Tracker-DB/venv/bin/python3 /nfs/stak/users/lubranoa/CS340/CS340-Golf-Tracker-DB/venv/bin/gunicorn --bind 0.0.0.0:15432 wsgi:app -D
+lubranoa  3670  0.0  0.0 268264 28788 ?        S    08:52   0:00  \_ /nfs/stak/users/lubranoa/CS340/CS340-Golf-Tracker-DB/venv/bin/python3 /nfs/stak/users/lubranoa/CS340/CS340-Golf-Tracker-DB/venv/bin/gunicorn --bind 0.0.0.0:15432 wsgi:app -D
+lubranoa 22537  0.0  0.0 112812   984 pts/5    S+   09:23   0:00      |       \_ grep --color=auto gunicorn
+```
+Access the gunicorn instance by opening Firefox or Chrome and entering the address (http://flipX.engr.oregonstate.edu:XXXX/) changing the X in flipX to your preferred flip server number and the XXXX at the end to your port number. Ours is (http://flip3.engr.oregonstate.edu:15432/)
+
+
+**18** To stop running the web apps, enter either of the following depending on how the web app is running:
+   - To kill a localhost webapp, go to the terminal window where the outputs are being output and press `Ctrl+c`
+   - To kill all of your gunicorn instances, run:
 ```bash
 pkill -u onid gunicorn
 ```
 
-   - For more information check the [bottom](https://github.com/osu-cs340-ecampus/flask-starter-app#deploying-the-migrated-project-on-osus-flip-server) of the 340 Flask Starter App repo
+For more information check the [bottom](https://github.com/osu-cs340-ecampus/flask-starter-app#deploying-the-migrated-project-on-osus-flip-server) of the 340 Flask Starter App repo.
 
-**15.** Navigate to web app address at (http://flipX.engr.oregonstate.edu:15432/) changing the X to your preferred flip server.
-
-At this point, it should work!
 
 ## Directory Structure
 
