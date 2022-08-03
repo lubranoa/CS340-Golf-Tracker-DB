@@ -3,4 +3,3 @@
 /.env
 /__pycache__
 /database/__pycache__
-/test_app.py
