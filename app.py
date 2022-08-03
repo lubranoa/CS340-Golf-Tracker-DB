@@ -63,7 +63,6 @@ def read_player_clubs():
     return render_template("read_player_clubs.j2", gt_player_clubs=results)
 
 
-
 @app.route('/players')
 def read_players():
     """Route that handles displaying players table"""
@@ -429,8 +428,6 @@ def delete_round(id):
     
     db_connection = db.connect_to_database()
 
-    #TODO: implement route
-
     if request.method == "GET":
         read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
@@ -439,7 +436,16 @@ def delete_round(id):
     
     elif request.method == "POST":
     
-        # TODO: implement delete query
+        round_id = id
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            delete_query = "DELETE FROM rounds WHERE round_id = '%s';"
+            db.execute_query(
+                db_connection=db_connection, 
+                query=delete_query, 
+                query_params=(round_id,)
+            )
         
         return redirect("/rounds")
 
