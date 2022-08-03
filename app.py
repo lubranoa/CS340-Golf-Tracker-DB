@@ -368,13 +368,41 @@ def update_round(id):
         read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
-        return render_template("update_round.j2", gt_round=results)
+
+        reformat_date = results[0]["round_date"].replace(" ", "T")
+        results[0]["round_date"] = reformat_date[:-3]
+
+        p_query = "SELECT player_id, player_name FROM players;"
+        cursor = db.execute_query(db_connection=db_connection, query=p_query)
+        p_res = cursor.fetchall()
+
+        c_query = "SELECT course_id, course_name FROM courses;"
+        cursor = db.execute_query(db_connection=db_connection, query=c_query)
+        c_res = cursor.fetchall()
+
+        return render_template("update_round.j2", gt_round=results, gt_players=p_res, gt_courses=c_res)
     
     elif request.method == "POST":
 
         #TODO: implement update query
     
         return redirect("/rounds")
+
+@app.route("/test")
+def test_route():
+    db_connection = db.connect_to_database()
+    read_query = "SELECT * FROM rounds WHERE round_id = '1';"
+    cursor = db.execute_query(db_connection=db_connection, query=read_query)
+    res = cursor.fetchall()
+    print(res)
+    date = res[0]["round_date"]
+    formatted = date.strftime("%Y-%m-%dT%H:%M")
+    print(formatted)
+    results = json.dumps(res)
+
+    # reformat_date = results[0]["round_date"].replace(" ", "T")
+    # results[0]["round_date"] = reformat_date[:-3]
+    return results
 
 
 @app.route("/update-swing/<int:id>", methods=["POST", "GET"])
