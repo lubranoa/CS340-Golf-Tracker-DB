@@ -282,7 +282,44 @@ def insert_swing():
     #TODO: implement route
     
     if request.method == "GET":
-        return render_template("insert_swing.j2")
+
+        p_query = "SELECT player_id, player_name FROM players;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=p_query
+        )
+        p_res = cursor.fetchall()
+
+        r_query = """
+            SELECT courses.course_name, rounds.round_date 
+            FROM rounds 
+            INNER JOIN courses 
+            ON courses.course_id = rounds.course_id;"""
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=r_query
+        )
+        r_res = cursor.fetchall()
+
+        c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=c_query
+        )
+        c_res = cursor.fetchall()
+
+        h_query = """
+            SELECT course_name, hole_id
+            FROM holes
+            INNER JOIN courses
+            ON courses.course_id = holes.course_id;"""
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=h_query
+        )
+        h_res = cursor.fetchall()
+
+        return render_template("insert_swing.j2", gt_players=p_res, gt_rounds=r_res, gt_clubs=c_res, gt_holes=h_res)
     
     elif request.method == "POST":
     
@@ -372,8 +409,6 @@ def delete_club(id):
     
     db_connection = db.connect_to_database()
 
-    #TODO: implement route
-
     if request.method == "GET":
         read_query = "SELECT * FROM clubs WHERE club_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
@@ -381,8 +416,16 @@ def delete_club(id):
         return render_template("delete_club.j2", gt_club=results)
     
     elif request.method == "POST":
-    
-        # TODO: implement delete query
+        club_id = id
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            delete_query = "DELETE FROM clubs WHERE club_id = '%s';"
+            db.execute_query(
+                db_connection=db_connection, 
+                query=delete_query, 
+                query_params=(club_id,)
+            )
 
         return redirect("/clubs")
 
@@ -453,9 +496,29 @@ def delete_swing(id):
 
         return redirect("/swings")
 
+@app.route("/delete-player-club/<int:player_id>/<int:club_id>/", methods=["POST", "GET"])
+def delete_player_club(player_id, club_id):
+    """Route that handles deleting a player_club relationship from the database"""
+    
+    db_connection = db.connect_to_database()
+
+    if request.method == "GET":
+        read_query = "SELECT * FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
+        cursor = db.execute_query(db_connection=db_connection, query=read_query)
+        results = cursor.fetchall()
+        return render_template("delete_player_club.j2", gt_clubs=results)
+    
+    elif request.method == "POST":
+        
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            delete_query = "DELETE FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
+            cursor = db.execute_query(db_connection=db_connection, query=delete_query)
+            return redirect("/player-clubs")
 
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15432))
+    port = int(os.environ.get('PORT', 15433))
     app.run(port=port, debug=True)
