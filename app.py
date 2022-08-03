@@ -382,7 +382,16 @@ def delete_club(id):
     
     elif request.method == "POST":
     
-        # TODO: implement delete query
+        club_id = id
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            delete_query = "DELETE FROM clubs WHERE club_id = '%s';"
+            db.execute_query(
+                db_connection=db_connection, 
+                query=delete_query, 
+                query_params=(club_id,)
+            )
 
         return redirect("/clubs")
 
