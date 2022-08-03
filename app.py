@@ -4,8 +4,6 @@ import database.db_connector as db
 
 # Configuration
 
-PORT_NUM = 15432    # Only change if running own gunicorn instance
-
 app = Flask(__name__)
 db_connection = db.connect_to_database()
 
@@ -530,5 +528,5 @@ def delete_player_club(player_id, club_id):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', PORT_NUM))
+    port = int(os.environ.get('PORT', 15432))
     app.run(port=port, debug=True)
