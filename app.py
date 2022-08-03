@@ -372,8 +372,6 @@ def delete_club(id):
     
     db_connection = db.connect_to_database()
 
-    #TODO: implement route
-
     if request.method == "GET":
         read_query = "SELECT * FROM clubs WHERE club_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
@@ -381,8 +379,16 @@ def delete_club(id):
         return render_template("delete_club.j2", gt_club=results)
     
     elif request.method == "POST":
-    
-        # TODO: implement delete query
+        club_id = id
+        delete = request.form["delete"]
+
+        if delete == "yes":
+            delete_query = "DELETE FROM clubs WHERE club_id = '%s';"
+            db.execute_query(
+                db_connection=db_connection, 
+                query=delete_query, 
+                query_params=(club_id,)
+            )
 
         return redirect("/clubs")
 
