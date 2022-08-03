@@ -502,6 +502,7 @@ def delete_swing(id):
 
         return redirect("/swings")
 
+
 @app.route("/delete-player-club/<int:player_id>/<int:club_id>/", methods=["POST", "GET"])
 def delete_player_club(player_id, club_id):
     """Route that handles deleting a player_club relationship from the database"""
@@ -523,8 +524,9 @@ def delete_player_club(player_id, club_id):
             cursor = db.execute_query(db_connection=db_connection, query=delete_query)
             return redirect("/player-clubs")
 
+
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15433))
+    port = int(os.environ.get('PORT', 15432))
     app.run(port=port, debug=True)
