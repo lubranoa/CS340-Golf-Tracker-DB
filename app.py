@@ -282,7 +282,44 @@ def insert_swing():
     #TODO: implement route
     
     if request.method == "GET":
-        return render_template("insert_swing.j2")
+
+        p_query = "SELECT player_id, player_name FROM players;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=p_query
+        )
+        p_res = cursor.fetchall()
+
+        r_query = """
+            SELECT courses.course_name, rounds.round_date 
+            FROM rounds 
+            INNER JOIN courses 
+            ON courses.course_id = rounds.course_id;"""
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=r_query
+        )
+        r_res = cursor.fetchall()
+
+        c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=c_query
+        )
+        c_res = cursor.fetchall()
+
+        h_query = """
+            SELECT course_name, hole_id
+            FROM holes
+            INNER JOIN courses
+            ON courses.course_id = holes.course_id;"""
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=h_query
+        )
+        h_res = cursor.fetchall()
+
+        return render_template("insert_swing.j2", gt_players=p_res, gt_rounds=r_res, gt_clubs=c_res, gt_holes=h_res)
     
     elif request.method == "POST":
     
@@ -483,5 +520,5 @@ def delete_player_club(player_id, club_id):
 # Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 15432))
+    port = int(os.environ.get('PORT', 15433))
     app.run(port=port, debug=True)
