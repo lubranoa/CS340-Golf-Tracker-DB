@@ -114,15 +114,15 @@ VALUES
 
 INSERT INTO rounds (round_id, course_id, player_id, round_date, round_score) 
 VALUES
-(1, 1, 1, '2022-03-02 08:15:22', 98),
-(2, 2, 1, '2022-03-10 09:30:14', 91),
-(3, 3, 3, '2022-03-23 08:00:39', 70),
-(4, 3, 4, '2022-03-23 08:00:39', 102)
+(1, 1, 1, '2022-03-02 08:15:00', 98),
+(2, 2, 1, '2022-03-10 09:30:00', 91),
+(3, 3, 3, '2022-03-23 08:00:00', 70),
+(4, 3, 4, '2022-03-23 08:00:00', 102)
 ;
 
 INSERT INTO clubs (club_id, brand, club_name, club_type) 
 VALUES
-(1, 'Taylormade', 'Stealth', 'Driver/1 Wood'),
+(1, 'Taylormade', 'Stealth', 'Driver'),
 (2, 'Taylormade', 'Stealth', '3 Wood'),
 (3, 'Ping', 'G425', '7 Wood'),
 (4, 'Mizuno', 'JPX Hot Metal', '4 Iron'),

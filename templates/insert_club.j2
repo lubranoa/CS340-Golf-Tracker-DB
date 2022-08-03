@@ -38,39 +38,51 @@
     #}
     <form class="mui-form--inline" action="/insert-club" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="brand" pattern="[A-Za-z0-9 ]{1,}" required>
+            <input 
+                type="text" 
+                name="brand" 
+                pattern="[A-Za-z0-9 ']{1,}" 
+                maxlength="50"
+                required
+            >
             <label>Brand Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="club_name" pattern="[A-Za-z0-9 ]{1,}" required>
+            <input 
+                type="text" 
+                name="club_name" 
+                pattern="[A-Za-z0-9 ']{1,}" 
+                maxlength="50"
+                required 
+            >
             <label>Model Name</label>
         </div>
         <div class="mui-select">
-            <select name="type" required>
+            <select name="club_type" required>
                 <option value=""></option>
                 <option value="Driver">Driver</option>
-                <option value="">3 Wood</option>
-                <option value="">5 Wood</option>
-                <option value="">7 Wood</option>
-                <option value="">3 Hybrid</option>
-                <option value="">4 Hybrid</option>
-                <option value="">5 Hybrid</option>
-                <option value="">6 Hybrid</option>
-                <option value="">7 Hybrid</option>
-                <option value="">1 Iron</option>
-                <option value="">2 Iron</option>
-                <option value="">3 Iron</option>
-                <option value="">4 Iron</option>
-                <option value="">5 Iron</option>
-                <option value="">6 Iron</option>
-                <option value="">7 Iron</option>
-                <option value="">8 Iron</option>
-                <option value="">9 Iron</option>
-                <option value="">Pitching Wedge</option>
-                <option value="">Gap Wedge</option>
-                <option value="">Sand Wedge</option>
-                <option value="">Lob Wedge</option>
-                <option value="">Putter</option>
+                <option value="3 Wood">3 Wood</option>
+                <option value="5 Wood">5 Wood</option>
+                <option value="7 Wood">7 Wood</option>
+                <option value="3 Hybrid">3 Hybrid</option>
+                <option value="4 Hybrid">4 Hybrid</option>
+                <option value="5 Hybrid">5 Hybrid</option>
+                <option value="6 Hybrid">6 Hybrid</option>
+                <option value="7 Hybrid">7 Hybrid</option>
+                <option value="1 Iron">1 Iron</option>
+                <option value="2 Iron">2 Iron</option>
+                <option value="3 Iron">3 Iron</option>
+                <option value="4 Iron">4 Iron</option>
+                <option value="5 Iron">5 Iron</option>
+                <option value="6 Iron">6 Iron</option>
+                <option value="7 Iron">7 Iron</option>
+                <option value="8 Iron">8 Iron</option>
+                <option value="9 Iron">9 Iron</option>
+                <option value="Pitching Wedge">Pitching Wedge</option>
+                <option value="Gap Wedge">Gap Wedge</option>
+                <option value="Sand Wedge">Sand Wedge</option>
+                <option value="Lob Wedge">Lob Wedge</option>
+                <option value="Putter">Putter</option>
             </select>
             <label>Club Type</label>
         </div>

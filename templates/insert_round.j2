@@ -38,22 +38,20 @@
     #}
     <form class="mui-form--inline" action="/insert-round" method="post">
         <div class="mui-select">
-            <select name="course_name" required>
+            <select name="course_id" required>
                 <option value=""></option>
-                <option>Augusta National Golf Club</option>
-                <option>Bluejack National Golf Club</option>
-                <option>Nanea Golf Club</option>
-                <option>Pebble Beach</option>
+                {% for course in gt_courses %}
+                <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
+                {% endfor %}
             </select>
             <label>Course Name</label>
         </div>
         <div class="mui-select">
-            <select name="player_name" required>
+            <select name="player_id" required>
                 <option value=""></option>
-                <option>Jane Deer</option>
-                <option>John Doe</option>
-                <option>Happy Gilmore</option>
-                <option>Shooter McGavin</option>
+                {% for player in gt_players %}
+                <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
+                {% endfor %}
             </select>
             <label>Player Name</label>
         </div>
