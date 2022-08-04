@@ -77,7 +77,17 @@ def read_players():
 def read_rounds():
     """Route that handles displaying rounds table"""
     db_connection = db.connect_to_database()
-    query = "SELECT * FROM rounds;"
+    query = "SELECT " \
+            "    rounds.round_id, " \
+            "    rounds.course_id, " \
+            "    courses.course_name, " \
+            "    rounds.player_id, " \
+            "    players.player_name, " \
+            "    rounds.round_date, " \
+            "    rounds.round_score " \
+            "FROM rounds " \
+            "    INNER JOIN courses ON rounds.course_id = courses.course_id " \
+            "    INNER JOIN players ON rounds.player_id = players.player_id;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_rounds.j2", gt_rounds=results)
@@ -399,8 +409,11 @@ def update_round(id):
         round_id = id
         course_id = request.form["course_id"]
         player_id = request.form["player_id"]
-        round_date = request.form["round_date"]
+        unformatted_date = request.form["round_date"]
         round_score = request.form["round_score"]
+
+        # Reformat date to SQL datetime format ("YYYY-MM-DDT00:00" ==> "YYYY-MM-DD 00:00:00")
+        round_date = unformatted_date.replace("T", " ") + ":00"
 
         update_query = "UPDATE rounds SET " \
                        "    rounds.course_id = %s, " \
