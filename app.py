@@ -498,17 +498,21 @@ def delete_swing(id):
     """Route that handles deleting a swing from the database"""
     
     db_connection = db.connect_to_database()
+    swing_id = id
 
     if request.method == "GET":
-        read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (id)
+        read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (swing_id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_swing.j2", gt_swing=results)
     
     elif request.method == "POST":
         
-        # TODO: implement delete query
-
+        delete = request.form["delete"]
+        if delete == "yes":
+            delete_query = "DELETE FROM swings WHERE swing_id = %s;" % (swing_id)
+            cursor = db.execute_query(db_connection=db_connection, query=delete_query)
+        
         return redirect("/swings")
 
 
