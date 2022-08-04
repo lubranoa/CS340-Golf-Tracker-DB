@@ -365,12 +365,24 @@ def update_round(id):
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
-        read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
+        read_query = "SELECT " \
+                     "    rounds.round_id, " \
+                     "    rounds.course_id, " \
+                     "    courses.course_name, " \
+                     "    rounds.player_id, " \
+                     "    players.player_name, " \
+                     "    rounds.round_date, " \
+                     "    rounds.round_score " \
+                     "FROM rounds " \
+                     "    INNER JOIN courses ON rounds.course_id = courses.course_id " \
+                     "    INNER JOIN players ON rounds.player_id = players.player_id " \
+                     "WHERE round_id = '%s';" % (id)
+
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
 
-        reformat_date = results[0]["round_date"].replace(" ", "T")
-        results[0]["round_date"] = reformat_date[:-3]
+        reformat_date = results[0]["round_date"].strftime("%Y-%m-%dT%H:%M")
+        results[0]["form_date"] = reformat_date
 
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(db_connection=db_connection, query=p_query)
@@ -384,24 +396,44 @@ def update_round(id):
     
     elif request.method == "POST":
 
-        #TODO: implement update query
+        round_id = id
+        course_id = request.form["course_id"]
+        player_id = request.form["player_id"]
+        round_date = request.form["round_date"]
+        round_score = request.form["round_score"]
+
+        update_query = "UPDATE rounds SET " \
+                       "    rounds.course_id = %s, " \
+                       "    rounds.player_id =%s, " \
+                       "    rounds.round_date = %s, " \
+                       "    rounds.round_score = %s " \
+                       "WHERE rounds.round_id = %s;"
+        db.execute_query(
+            db_connection=db_connection, 
+            query=update_query, 
+            query_params=(course_id, player_id, round_date, round_score, round_id)
+        )
     
         return redirect("/rounds")
 
 @app.route("/test")
 def test_route():
     db_connection = db.connect_to_database()
-    read_query = "SELECT * FROM rounds WHERE round_id = '1';"
+    read_query = read_query = "SELECT " \
+                              "    rounds.round_id, " \
+                              "    rounds.course_id, " \
+                              "    courses.course_name, " \
+                              "    rounds.player_id, " \
+                              "    players.player_name, " \
+                              "    rounds.round_date, " \
+                              "    rounds.round_score " \
+                              "FROM rounds " \
+                              "    INNER JOIN courses ON rounds.course_id = courses.course_id " \
+                              "    INNER JOIN players ON rounds.player_id = players.player_id " \
+                              "WHERE round_id = 1;"
     cursor = db.execute_query(db_connection=db_connection, query=read_query)
     res = cursor.fetchall()
-    print(res)
-    date = res[0]["round_date"]
-    formatted = date.strftime("%Y-%m-%dT%H:%M")
-    print(formatted)
     results = json.dumps(res)
-
-    # reformat_date = results[0]["round_date"].replace(" ", "T")
-    # results[0]["round_date"] = reformat_date[:-3]
     return results
 
 
