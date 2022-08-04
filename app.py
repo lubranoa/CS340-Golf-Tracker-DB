@@ -77,17 +77,20 @@ def read_players():
 def read_rounds():
     """Route that handles displaying rounds table"""
     db_connection = db.connect_to_database()
-    query = "SELECT " \
-            "    rounds.round_id, " \
-            "    rounds.course_id, " \
-            "    courses.course_name, " \
-            "    rounds.player_id, " \
-            "    players.player_name, " \
-            "    rounds.round_date, " \
-            "    rounds.round_score " \
-            "FROM rounds " \
-            "    INNER JOIN courses ON rounds.course_id = courses.course_id " \
-            "    INNER JOIN players ON rounds.player_id = players.player_id;"
+    query = ('SELECT '
+             'rounds.round_id, '
+             'rounds.course_id, '
+             'courses.course_name, '
+             'rounds.player_id, '
+             'players.player_name, '
+             'rounds.round_date, '
+             'rounds.round_score '
+             'FROM rounds '
+             'INNER JOIN courses ON '
+             'rounds.course_id = courses.course_id '
+             'INNER JOIN players ON '
+             'rounds.player_id = players.player_id;'
+             )
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_rounds.j2", gt_rounds=results)
@@ -384,18 +387,19 @@ def update_round(id):
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
-        read_query = "SELECT " \
-                     "    rounds.round_id, " \
-                     "    rounds.course_id, " \
-                     "    courses.course_name, " \
-                     "    rounds.player_id, " \
-                     "    players.player_name, " \
-                     "    rounds.round_date, " \
-                     "    rounds.round_score " \
-                     "FROM rounds " \
-                     "    INNER JOIN courses ON rounds.course_id = courses.course_id " \
-                     "    INNER JOIN players ON rounds.player_id = players.player_id " \
+        read_query = ('SELECT '
+                     'rounds.round_id, '
+                     'rounds.course_id, '
+                     'courses.course_name, '
+                     'rounds.player_id, '
+                     'players.player_name, '
+                     'rounds.round_date, '
+                     'rounds.round_score '
+                     'FROM rounds '
+                     'INNER JOIN courses ON rounds.course_id = courses.course_id '
+                     'INNER JOIN players ON rounds.player_id = players.player_id '
                      "WHERE round_id = '%s';" % (id)
+                     )
 
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
@@ -424,12 +428,13 @@ def update_round(id):
         # Reformat date to SQL datetime format ("YYYY-MM-DDT00:00" ==> "YYYY-MM-DD 00:00:00")
         round_date = unformatted_date.replace("T", " ") + ":00"
 
-        update_query = "UPDATE rounds SET " \
-                       "    rounds.course_id = %s, " \
-                       "    rounds.player_id =%s, " \
-                       "    rounds.round_date = %s, " \
-                       "    rounds.round_score = %s " \
-                       "WHERE rounds.round_id = %s;"
+        update_query = ("UPDATE rounds SET "
+                        "rounds.course_id = %s, "
+                        "rounds.player_id = %s, "
+                        "rounds.round_date = %s, "
+                        "rounds.round_score = %s "
+                        "WHERE rounds.round_id = %s;"
+                        )
         db.execute_query(
             db_connection=db_connection, 
             query=update_query, 
@@ -441,18 +446,19 @@ def update_round(id):
 @app.route("/test")
 def test_route():
     db_connection = db.connect_to_database()
-    read_query = read_query = "SELECT " \
-                              "    rounds.round_id, " \
-                              "    rounds.course_id, " \
-                              "    courses.course_name, " \
-                              "    rounds.player_id, " \
-                              "    players.player_name, " \
-                              "    rounds.round_date, " \
-                              "    rounds.round_score " \
-                              "FROM rounds " \
-                              "    INNER JOIN courses ON rounds.course_id = courses.course_id " \
-                              "    INNER JOIN players ON rounds.player_id = players.player_id " \
-                              "WHERE round_id = 1;"
+    read_query = ('SELECT '
+                  'rounds.round_id, '
+                  'rounds.course_id, '
+                  'courses.course_name, '
+                  'rounds.player_id, '
+                  'players.player_name, '
+                  'rounds.round_date, '
+                  'rounds.round_score '
+                  'FROM rounds '
+                  'INNER JOIN courses ON rounds.course_id = courses.course_id '
+                  'INNER JOIN players ON rounds.player_id = players.player_id '
+                  "WHERE round_id = '2';"
+                  )
     cursor = db.execute_query(db_connection=db_connection, query=read_query)
     res = cursor.fetchall()
     results = json.dumps(res)
