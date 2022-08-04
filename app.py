@@ -589,7 +589,7 @@ def delete_swing(id):
         return redirect("/swings")
 
 
-@app.route("/delete-player-club/<int:player_id>/<int:club_id>/", methods=["POST", "GET"])
+@app.route("/delete-player-club/<int:player_id>/<int:club_id>", methods=["POST", "GET"])
 def delete_player_club(player_id, club_id):
     """Route that handles deleting a player_club relationship from the database"""
     
