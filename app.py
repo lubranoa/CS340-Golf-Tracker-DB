@@ -277,8 +277,6 @@ def insert_swing():
     """Route that handles inserting a swing into the database"""
     
     db_connection = db.connect_to_database()
-
-    #TODO: implement route
     
     if request.method == "GET":
 
@@ -290,7 +288,7 @@ def insert_swing():
         p_res = cursor.fetchall()
 
         r_query = """
-            SELECT courses.course_name, rounds.round_date 
+            SELECT rounds.round_id, courses.course_name, rounds.round_date 
             FROM rounds 
             INNER JOIN courses 
             ON courses.course_id = rounds.course_id;"""
@@ -321,7 +319,18 @@ def insert_swing():
         return render_template("insert_swing.j2", gt_players=p_res, gt_rounds=r_res, gt_clubs=c_res, gt_holes=h_res)
     
     elif request.method == "POST":
-    
+        swing_player = request.form["player_id"]
+        swing_round = request.form["round_id"]
+        swing_hole = request.form["hole_id"]
+        swing_club = request.form["club_id"]
+        swing_dist = request.form["dist_traveled_yd"]
+
+        insert_query = "INSERT INTO swings (player_id, round_id, hole_id, club_id, dist_traveled_yd) VALUES (%s, %s, %s, %s, %s);"
+        db.execute_query(
+            db_connection=db_connection, 
+            query=insert_query, 
+            query_params=(swing_player, swing_round, swing_hole, swing_club, swing_dist)
+        )
         return redirect("/swings")
 
 
