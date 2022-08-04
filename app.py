@@ -533,9 +533,10 @@ def delete_player_club(player_id, club_id):
         delete = request.form["delete"]
 
         if delete == "yes":
-            delete_query = "DELETE FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
-            cursor = db.execute_query(db_connection=db_connection, query=delete_query)
-            return redirect("/player-clubs")
+            delete_query = "DELETE FROM player_clubs WHERE player_id = %s and club_id = %s;"
+            cursor = db.execute_query(db_connection=db_connection, query=delete_query, query_params=(player_id, club_id))
+        
+        return redirect("/player-clubs")
 
 
 # Listener
