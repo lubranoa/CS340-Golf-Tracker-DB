@@ -82,7 +82,20 @@ def read_players():
 def read_rounds():
     """Route that handles displaying rounds table"""
     db_connection = db.connect_to_database()
-    query = "SELECT * FROM rounds;"
+    query = ('SELECT '
+             'rounds.round_id, '
+             'rounds.course_id, '
+             'courses.course_name, '
+             'rounds.player_id, '
+             'players.player_name, '
+             'rounds.round_date, '
+             'rounds.round_score '
+             'FROM rounds '
+             'INNER JOIN courses ON '
+             'rounds.course_id = courses.course_id '
+             'INNER JOIN players ON '
+             'rounds.player_id = players.player_id;'
+             )
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_rounds.j2", gt_rounds=results)
@@ -379,16 +392,82 @@ def update_round(id):
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
-        read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
+        read_query = ('SELECT '
+                     'rounds.round_id, '
+                     'rounds.course_id, '
+                     'courses.course_name, '
+                     'rounds.player_id, '
+                     'players.player_name, '
+                     'rounds.round_date, '
+                     'rounds.round_score '
+                     'FROM rounds '
+                     'INNER JOIN courses ON rounds.course_id = courses.course_id '
+                     'INNER JOIN players ON rounds.player_id = players.player_id '
+                     "WHERE round_id = '%s';" % (id)
+                     )
+
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
-        return render_template("update_round.j2", gt_round=results)
+
+        reformat_date = results[0]["round_date"].strftime("%Y-%m-%dT%H:%M")
+        results[0]["form_date"] = reformat_date
+
+        p_query = "SELECT player_id, player_name FROM players;"
+        cursor = db.execute_query(db_connection=db_connection, query=p_query)
+        p_res = cursor.fetchall()
+
+        c_query = "SELECT course_id, course_name FROM courses;"
+        cursor = db.execute_query(db_connection=db_connection, query=c_query)
+        c_res = cursor.fetchall()
+
+        return render_template("update_round.j2", gt_round=results, gt_players=p_res, gt_courses=c_res)
     
     elif request.method == "POST":
 
-        #TODO: implement update query
+        round_id = id
+        course_id = request.form["course_id"]
+        player_id = request.form["player_id"]
+        unformatted_date = request.form["round_date"]
+        round_score = request.form["round_score"]
+
+        # Reformat date to SQL datetime format ("YYYY-MM-DDT00:00" ==> "YYYY-MM-DD 00:00:00")
+        round_date = unformatted_date.replace("T", " ") + ":00"
+
+        update_query = ("UPDATE rounds SET "
+                        "rounds.course_id = %s, "
+                        "rounds.player_id = %s, "
+                        "rounds.round_date = %s, "
+                        "rounds.round_score = %s "
+                        "WHERE rounds.round_id = %s;"
+                        )
+        db.execute_query(
+            db_connection=db_connection, 
+            query=update_query, 
+            query_params=(course_id, player_id, round_date, round_score, round_id)
+        )
     
         return redirect("/rounds")
+
+@app.route("/test")
+def test_route():
+    db_connection = db.connect_to_database()
+    read_query = ('SELECT '
+                  'rounds.round_id, '
+                  'rounds.course_id, '
+                  'courses.course_name, '
+                  'rounds.player_id, '
+                  'players.player_name, '
+                  'rounds.round_date, '
+                  'rounds.round_score '
+                  'FROM rounds '
+                  'INNER JOIN courses ON rounds.course_id = courses.course_id '
+                  'INNER JOIN players ON rounds.player_id = players.player_id '
+                  "WHERE round_id = '2';"
+                  )
+    cursor = db.execute_query(db_connection=db_connection, query=read_query)
+    res = cursor.fetchall()
+    results = json.dumps(res)
+    return results
 
 
 @app.route("/update-swing/<int:id>", methods=["POST", "GET"])

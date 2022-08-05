@@ -40,7 +40,7 @@
     <thead>
         <tr>
             {# Get key names and insert as table header column names #}
-            {% for key in gt_round[0].keys() %}
+            {% for key in gt_round[0].keys() if key != "form_date" %}
             <th>{{ key }}</th>
             {% endfor %}
         </tr>
@@ -48,7 +48,7 @@
         {# Get and display all players data in the table rows #}
         {% for round in gt_round %}
         <tr>
-            {% for key in round.keys() %}
+            {% for key in round.keys() if key != "form_date" %}
             <td class="table-data">{{ round[key] }}</td>
             {% endfor %}
         </tr>
@@ -62,31 +62,29 @@
     #}
     <form class="mui-form--inline" action="/update-round/{{ gt_round[0].round_id }}" method="post">
         <div class="mui-select">
-            <select name="player_name" required>
-                <option value=""></option>
-                <option>Jane Deer</option>
-                <option>John Doe</option>
-                <option>Happy Gilmore</option>
-                <option>Shooter McGavin</option>
+            <select name="player_id" required>
+                <option value="{{ gt_round[0]["player_id"] }}">{{ gt_round[0]["player_name"] }}</option>
+                {% for player in gt_players if player["player_id"] != gt_round[0]["player_id"] %}
+                <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
+                {% endfor %}
             </select>
             <label>Player Name</label>
         </div>
         <div class="mui-select">
-            <select name="course_name" required>
-                <option value=""></option>
-                <option>Augusta National Golf Club</option>
-                <option>Bluejack National Golf Club</option>
-                <option>Nanea Golf Club</option>
-                <option>Pebble Beach</option>
+            <select name="course_id" required>
+                <option value="{{ gt_round[0]["course_id"] }}">{{ gt_round[0]["course_name"] }}</option>
+                {% for course in gt_courses if course["course_id"] != gt_round[0]["course_id"] %}
+                <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
+                {% endfor %}
             </select>
             <label>Course Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="datetime-local" name="round_date" value="2022-01-01T00:00" required>
+            <input type="datetime-local" name="round_date" value={{ gt_round[0]["form_date"] }} required>
             <label>Date and Time of Round</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="round_score" pattern="[0-9]{1,}" required>
+            <input type="text" name="round_score" pattern="[0-9]{1,}" required value={{ gt_round[0]["round_score"] }}>
             <label>Round Score</label>
         </div>
         <br>
