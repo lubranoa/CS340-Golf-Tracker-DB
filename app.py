@@ -56,8 +56,13 @@ def read_courses():
 @app.route('/player-clubs')
 def read_player_clubs():
     """Route that handles displaying player_clubs intersection table"""
-    db_connection = db.connect_to_database()    
-    query = "SELECT * FROM player_clubs;"
+    db_connection = db.connect_to_database()
+    query = """SELECT player_clubs.player_id, players.player_name, player_clubs.club_id, CONCAT(clubs.brand, ' ', clubs.club_name, ' ', clubs.club_type) AS club
+                FROM player_clubs
+                INNER JOIN players
+                ON player_clubs.player_id = players.player_id
+                INNER JOIN clubs
+                ON player_clubs.club_id = clubs.club_id;"""
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_player_clubs.j2", gt_player_clubs=results)
