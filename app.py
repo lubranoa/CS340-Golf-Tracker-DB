@@ -1,6 +1,26 @@
+# ----------------------------------------------------------------------------
+# Authors: Conner Marchell and Alexander Lubrano
+# Course: CS 340 - Introduction to Databases
+# File Name: app.py
+# Last Modified: 08/05/2022
+# Description: This Flask app allows a database administrator to interact with 
+#     our Golf Tracker database data using CRUD operations through a web app. 
+#     These CRUD operations are implemented in Flask route handler functions 
+#     that read data from the database, render it in Jinja2 html templates as 
+#     web pages that provide read functionality. Each read page has insert 
+#     buttons for each entity as well as update and delete buttons for 
+#     appropriate entities. These buttons link to separate insert, update, and
+#     delete pages that contain forms with inputs for submission. If one of 
+#     these forms are submitted, the route handlers detect a POST and perform
+#     the proper insert, update, or delete operation on the database.
+#  
+# ----------------------------------------------------------------------------
+
+
 from flask import Flask, render_template, json, request, redirect
 import os
 import database.db_connector as db
+
 
 # Configuration
 
