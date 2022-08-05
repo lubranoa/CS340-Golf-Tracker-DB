@@ -1,8 +1,23 @@
+------------------------------------------------------------------------------
+-- Authors: Conner Marchell and Alexander Lubrano
+-- Course: CS 340 - Introduction to Databases
+-- File Name: golf-tracker-DDQ.sql
+-- Last Modified: 08/04/2022
+-- Description: This SQL file contains the Data Definition Queries used to 
+--     create the tables necessary for our Golf Tracker application and 
+--     contains INSERT queries that enter sample data into the newly created
+--     tables.
+------------------------------------------------------------------------------
+
+-- Turn off foreign key checking and autocommit to minimize import errors
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+-- Drop all project tables from MySQL database if they already exist
 DROP TABLE IF EXISTS player_clubs, swings, rounds, holes, clubs, players, courses;
 
+-- Create courses table with id, name, and state attributes
+--     PK = course_id (courses are unique and their own ID)
 CREATE TABLE courses 
 (
     course_id int NOT NULL AUTO_INCREMENT,
@@ -11,6 +26,8 @@ CREATE TABLE courses
     PRIMARY KEY (course_id)
 );
 
+-- Create players table with id, name, city, and state attributes
+--     PK = player_id (players are unique and need their own ID)
 CREATE TABLE players
 (
     player_id int NOT NULL AUTO_INCREMENT,
@@ -20,6 +37,9 @@ CREATE TABLE players
     PRIMARY KEY (player_id)
 );
 
+-- Create holes table with id, course_id, par, and distance attributes
+--     PK = hole_id (holes are unique and need their own ID)
+--     FK = course_id (holes are a part of a course)
 CREATE TABLE holes
 (
     hole_id int NOT NULL AUTO_INCREMENT,
@@ -30,6 +50,11 @@ CREATE TABLE holes
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
 
+-- Create rounds table with an id, course_id, player_id, date and time, and score
+--     PK = round_id (rounds are unique and need their own ID)
+--     FK = course_id (rounds must be played on a course)
+--     FK = player_id (rounds must be played by a player)
+-- A round is deleted if a player or a course is deleted.
 CREATE TABLE rounds
 (
     round_id int NOT NULL AUTO_INCREMENT,
@@ -42,6 +67,8 @@ CREATE TABLE rounds
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
 
+-- Create clubs table with an id, brand, name, and type
+--     PK = club_id (clubs are unique and need their own ID)
 CREATE TABLE clubs
 (
     club_id int NOT NULL AUTO_INCREMENT,
@@ -51,6 +78,13 @@ CREATE TABLE clubs
     PRIMARY KEY (club_id)
 );
 
+-- Create player_clubs intersection table to facilitate the many to many 
+-- relationship of players to clubs, since one player can have one or more
+-- clubs and one club can have many or more players.
+--     NO PK necessary
+--     FK = player_id (a player can own a club)
+--     FK = club_id (a club can be owned by a player)
+-- A player_club relationship is deleted if a player or a club is deleted.
 CREATE TABLE player_clubs
 (
     player_id int NOT NULL,
@@ -59,6 +93,14 @@ CREATE TABLE player_clubs
     FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
 );
 
+-- Create swings table with an id, hole, round, player, club, and distance
+--     PK = swing_id (swings are unique and need their own ID)
+--     FK = player_id (swings must be done by a player)
+--     FK = hole_id (swings must be done on a hole)
+--     FK = round_id (swings must be part of a round)
+--     FK = club_id (swings must be done by a club, which does not have to be logged)
+-- A swing is deleted if its round is deleted. A swing's club_id is set to 
+-- NULL if it's associated club is deleted. 
 CREATE TABLE swings
 (
     swing_id int NOT NULL AUTO_INCREMENT,
@@ -74,6 +116,7 @@ CREATE TABLE swings
     FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE SET NULL
 );
 
+-- Insert sample data into courses table
 INSERT INTO courses (course_id, course_name, course_state) 
 VALUES
 (1, 'Augusta National Golf Club', 'Georgia'),
@@ -82,6 +125,7 @@ VALUES
 (4, 'Bluejack National Golf Club', 'Texas')
 ;
 
+-- Insert sample data into players table
 INSERT INTO players (player_id, player_name, player_city, player_state) 
 VALUES
 (1, 'John Doe', 'Houston', 'Texas'),
@@ -90,6 +134,8 @@ VALUES
 (4, 'Shooter McGavin', 'Dallas', 'Texas')
 ;
 
+-- Insert sample data into holes table, associating each hole with existing 
+-- courses
 INSERT INTO holes (hole_id, course_id, par_swing_count, distance) 
 VALUES      
 (1, 1, 4, 445),
@@ -112,6 +158,8 @@ VALUES
 (18, 1, 4, 465)
 ;
 
+-- Insert sample data into rounds table, associating each round with existing
+-- courses and players
 INSERT INTO rounds (round_id, course_id, player_id, round_date, round_score) 
 VALUES
 (1, 1, 1, '2022-03-02 08:15:00', 98),
@@ -120,6 +168,7 @@ VALUES
 (4, 3, 4, '2022-03-23 08:00:00', 102)
 ;
 
+-- Insert sample data into clubs table
 INSERT INTO clubs (club_id, brand, club_name, club_type) 
 VALUES
 (1, 'Taylormade', 'Stealth', 'Driver'),
@@ -139,6 +188,8 @@ VALUES
 (15, 'Custom', 'Hockey', 'Putter')
 ;
 
+-- Insert sample data into player_clubs intersection table, creating 
+-- relationships between existing players and clubs
 INSERT INTO player_clubs (player_id, club_id) 
 VALUES
 (1, 1),
@@ -159,6 +210,8 @@ VALUES
 (3, 15)
 ;
 
+-- Insert sample data into swings table, associating each swing with existing
+-- players, rounds, holes, and clubs
 INSERT INTO swings (swing_id, hole_id, round_id, player_id, club_id, dist_traveled_yd) 
 VALUES
 (1, 1, 1, 1, 1, 230),
@@ -175,5 +228,6 @@ VALUES
 (12, 3, 1, 1, 1, 233)
 ;
 
+-- Turn foreign key checking and autocommit back on
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

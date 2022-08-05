@@ -61,34 +61,39 @@
         Source URL: https://www.muicss.com/docs/v1/css-js
     #}
     <form class="mui-form--inline" action="/update-swing/{{ gt_swing[0].swing_id }}" method="post">
-        <div class="mui-select">
+<div class="mui-select">
             <select name="player_id" required>
-                <option value=""></option>
-                <option>Jane Deer</option>
-                <option>John Doe</option>
-                <option>Happy Gilmore</option>
-                <option>Shooter McGavin</option>
+                <option value="">--Choose player--</option>
+                {% for player in gt_players %}
+                <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
+                {% endfor %}
             </select>
             <label>Player Name</label>
         </div>
-        <div class="mui-select" required>
+        <div class="mui-select">
             <select name="round_id" required>
-                <option value=""></option>
-                <option value="round">Will show player's rounds</option>
+                <option value="">--Choose round--</option>
+                {% for round in gt_rounds %}
+                <option value={{ round["round_id"] }}>{{ round["course_name"] ~ " " ~ round["round_date"]}}</option>
+                {% endfor %}
             </select>
             <label>Round</label>
         </div>
         <div class="mui-select" required>
             <select name="hole_id">
-                <option value=""></option>
-                <option value="hole">Will show course's holes</option>
+                <option value="">--Choose hole--</option>
+                {% for hole in gt_holes %}
+                <option value={{ hole["hole_id"] }}>{{ hole["course_name"] ~ ", hole: " ~ hole["hole_id"]}}</option>
+                {% endfor %}
             </select>
             <label>Hole</label>
         </div>
         <div class="mui-select">
             <select name="club_id">
-                <option value=""></option>
-                <option value="club">Will show player's clubs</option>
+                <option value="">--Choose club--</option>
+                {% for club in gt_clubs %}
+                <option value={{ club["club_id"] }}>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"]}}</option>
+                {% endfor %}
             </select>
             <label>Club Used</label>
         </div>
