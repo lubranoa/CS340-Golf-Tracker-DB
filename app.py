@@ -10,7 +10,7 @@ db_connection = db.connect_to_database()
 # ----------------------------------------------------------------------------
 # READ ROUTES: Home Page and Display Entities Handlers
 # 
-# The following flask route functions handle reading the data for all entities
+# The following Flask route functions handle reading the data for all entities
 # in the Golf Tracker MySQL database. Each route connects to the database, 
 # gets necessary data from it, and renders a read_entity Jinja template that 
 # displays the sent information. All read templates have buttons to insert new
@@ -19,13 +19,20 @@ db_connection = db.connect_to_database()
 
 @app.route('/')
 def root():
-    """Route that displays home page"""
+    """Display Home Page
+
+    Route that renders the app's home page
+    """
     return render_template("main.j2")
 
 
 @app.route('/clubs')
 def read_clubs():
-    """Route that handles displaying clubs table"""
+    """Display clubs Page
+
+    Route that handles reading all clubs data from the database and rendering
+    the clubs table in a Jinja2 template with insert and delete buttons.
+    """
     db_connection = db.connect_to_database()
     query = "SELECT * FROM clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -33,19 +40,13 @@ def read_clubs():
     return render_template("read_clubs.j2", gt_clubs=results)
 
 
-@app.route('/holes')
-def read_holes():
-    """Route that handles displayin holes table"""
-    db_connection = db.connect_to_database()
-    query = "SELECT * FROM holes;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    return render_template("read_holes.j2", gt_holes=results)
-
-
 @app.route('/courses')
 def read_courses():
-    """Route that handles displaying courses table"""
+    """Display courses Page
+
+    Route that handles reading all courses data from the database and 
+    rendering the courses table in a Jinja2 template with an insert button.
+    """
     db_connection = db.connect_to_database()
     query = "SELECT * FROM courses;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -53,9 +54,28 @@ def read_courses():
     return render_template("read_courses.j2", gt_courses=results)
 
 
+@app.route('/holes')
+def read_holes():
+    """Display holes Page
+
+    Route that handles reading all holes data from the database and rendering
+    the holes table in a Jinja2 template with an insert button.
+    """
+    db_connection = db.connect_to_database()
+    query = "SELECT * FROM holes;"
+    cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("read_holes.j2", gt_holes=results)
+
+
 @app.route('/player-clubs')
 def read_player_clubs():
-    """Route that handles displaying player_clubs intersection table"""
+    """Display player_clubs Page
+
+    Route that handles reading all player_clubs data from the database and 
+    rendering the player_clubs intersection table in a Jinja2 template with 
+    insert and delete buttons.
+    """
     db_connection = db.connect_to_database()    
     query = "SELECT * FROM player_clubs;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -65,7 +85,12 @@ def read_player_clubs():
 
 @app.route('/players')
 def read_players():
-    """Route that handles displaying players table"""
+    """Display players Page
+
+    Route that handles reading all players data from the database and 
+    rendering the players table in a Jinja2 template with insert, update, and
+    delete buttons.
+    """
     db_connection = db.connect_to_database()
     query = "SELECT * FROM players;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -75,7 +100,12 @@ def read_players():
 
 @app.route('/rounds')
 def read_rounds():
-    """Route that handles displaying rounds table"""
+    """Display rounds Page
+
+    Route that handles reading all rounds data from the database and rendering
+    the rounds table in a Jinja2 template with insert, update, and delete 
+    buttons.
+    """
     db_connection = db.connect_to_database()
     query = ('SELECT '
              'rounds.round_id, '
@@ -98,7 +128,12 @@ def read_rounds():
 
 @app.route('/swings')
 def read_swings():
-    """Route that handles displaying swings table"""
+    """Display swings Page
+
+    Route that handles reading all swings data from the database and rendering
+    the swings table in a Jinja2 template with insert, update, and delete 
+    buttons.
+    """
     db_connection = db.connect_to_database()
     query = "SELECT * FROM swings;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
@@ -109,21 +144,31 @@ def read_swings():
 # ----------------------------------------------------------------------------
 # INSERT ROUTES: Update Entity Handlers
 #
-# The following flask route functions handle inserting new entity instances 
+# The following Flask route functions handle inserting new entity instances 
 # into the Golf Tracker MySQL Database. Each route connects to the database,
 # renders an insert_entity Jinja template, getting any entity data necessary
-# for insertion, and inserts the new entity into the database.
+# for insertion, and inserts the new entity into the database on submission.
 # ----------------------------------------------------------------------------
 
 @app.route("/insert-club", methods=["POST", "GET"])
 def insert_club():
-    """Route that handles inserting a club into the database"""
+    """Insert club Page
+
+    If request method is GET from the read_clubs page insert button, route
+    handles rendering an insert_club page with a form containing necessary 
+    club attribute inputs.
+
+    If request method is POST from an insert_club page submit, route handles 
+    getting the new club input, inserting it into the database, and
+    redirecting to the read_clubs page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
         return render_template("insert_club.j2")
     
     elif request.method == "POST":
+        # Get new club data from form submission
         brand = request.form["brand"]
         club_name = request.form["club_name"]
         club_type = request.form["club_type"]
@@ -139,13 +184,23 @@ def insert_club():
 
 @app.route("/insert-course", methods=["POST", "GET"])
 def insert_course():
-    """Route that handles inserting a course into the database"""
+    """Insert course Page
+
+    If request method is GET from the read_courses page insert button, route
+    handles rendering an insert_course page with a form containing necessary
+    course attribute inputs.
+
+    If request method is POST from an insert_course page submit, route handles
+    getting the new course input, inserting it into the database, and
+    redirecting to the read_courses page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
         return render_template("insert_course.j2")
     
     elif request.method == "POST":
+        # Get new course data from form submission
         course_name = request.form["course_name"]
         course_state = request.form["course_state"]
 
@@ -160,7 +215,16 @@ def insert_course():
 
 @app.route("/insert-hole", methods=["POST", "GET"])
 def insert_hole():
-    """Route that handles inserting a hole into the database"""
+    """Insert hole Page
+
+    If request method is GET from the read_holes page insert button, route
+    handles rendering an insert_hole page with a form containing necessary
+    hole attribute inputs.
+
+    If request method is POST from an insert_hole page submit, route handles
+    getting the new hole input, inserting it into the database, and
+    redirecting to the read_holes page.
+    """
     db_connection = db.connect_to_database()
     
     if request.method == "GET":
@@ -173,6 +237,7 @@ def insert_hole():
         return render_template("insert_hole.j2", gt_courses=courses_res)
     
     elif request.method == "POST":
+        # Get new hole data from form submission
         course_id = request.form["course_id"]
         par_swing_count = request.form["par_swing_count"]
         distance = request.form["distance"]
@@ -188,14 +253,21 @@ def insert_hole():
 
 @app.route("/insert-player-club", methods=["POST", "GET"])
 def insert_player_club():
-    """
-    Route that handles inserting a player_club intersection table entry into
-    the database.
+    """Insert player_clubs Page
+
+    If request method is GET from the read_player_clubs page insert button,
+    route handles rendering an insert_player_club page with a form containing
+    necessary player_club attribute inputs.
+
+    If request method is POST from an insert_player_club page submit, route
+    handles getting the new player_club input, inserting it into the database,
+    and redirecting to the read_player_clubs page.
     """
     
     if request.method == "GET":
         db_connection = db.connect_to_database()
         
+        # Get necessary player data for dropdown
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(
             db_connection=db_connection, 
@@ -203,6 +275,7 @@ def insert_player_club():
         )
         p_res = cursor.fetchall()
 
+        # Get necessary club data for dropdown
         c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
         cursor = db.execute_query(
             db_connection=db_connection,
@@ -214,6 +287,8 @@ def insert_player_club():
             
     elif request.method == "POST":    
         db_connection = db.connect_to_database()
+        
+        # Get new player_club data from form submission
         player_id = request.form['player']
         club_id = request.form['club']
 
@@ -225,13 +300,23 @@ def insert_player_club():
 
 @app.route("/insert-player", methods=["POST", "GET"])
 def insert_player():
-    """Route that handles inserting a player into the database"""
+    """Insert player Page
+
+    If request method is GET from the read_players page insert button, route
+    handles rendering an insert_player page with a form containing necessary
+    player attribute inputs.
+
+    If request method is POST from an insert_players page submit, route
+    handles getting the new player input, inserting it into the database, and
+    redirecting to the read_players page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
         return render_template("insert_player.j2")
     
-    elif request.method == "POST":        
+    elif request.method == "POST":
+        # Get new player data from form submission
         player_name = request.form["player_name"]
         player_city = request.form["player_city"]
         player_state = request.form["player_state"]
@@ -247,10 +332,20 @@ def insert_player():
 
 @app.route("/insert-round", methods=["POST", "GET"])
 def insert_round():
-    """Route that handles inserting a round into the database"""
+    """Insert round Page
+
+    If request method is GET from the read_rounds page insert button, route
+    handles rendering an insert_round page with a form containing necessary
+    round attribute inputs.
+
+    If request method is POST from an insert_round page submit, route handles
+    getting the new round input, inserting it into the database, and
+    redirecting to the read_rounds page.
+    """
     db_connection = db.connect_to_database()
     
     if request.method == "GET":
+        # Get necessary player data for dropdown
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(
             db_connection=db_connection, 
@@ -258,6 +353,7 @@ def insert_round():
         )
         p_res = cursor.fetchall()
 
+        # Get necessary course data for dropdown
         c_query = "SELECT course_id, course_name FROM courses;"
         cursor = db.execute_query(
             db_connection=db_connection,
@@ -268,6 +364,7 @@ def insert_round():
         return render_template("insert_round.j2", gt_players=p_res, gt_courses=c_res)
     
     elif request.method == "POST":
+        # Get new round data from form submission
         course_id = request.form["course_id"]
         player_id = request.form["player_id"]
         unformatted_date = request.form["round_date"]
@@ -287,12 +384,21 @@ def insert_round():
 
 @app.route("/insert-swing", methods=["POST", "GET"])
 def insert_swing():
-    """Route that handles inserting a swing into the database"""
+    """Insert swing Page
+
+    If request method is GET from the read_swings page insert button, route
+    handles rendering an insert_swing page with a form containing necessary
+    swing attribute inputs.
+
+    If request method is POST from an insert_swing page submit, route handles
+    getting the new swing input, inserting it into the database, and
+    redirecting to the read_swings page.
+    """
     
     db_connection = db.connect_to_database()
     
     if request.method == "GET":
-
+        # Get necessary player data for dropdown
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(
             db_connection=db_connection,
@@ -300,6 +406,7 @@ def insert_swing():
         )
         p_res = cursor.fetchall()
 
+        # Get necessary round data for dropdown
         r_query = """
             SELECT rounds.round_id, courses.course_name, rounds.round_date 
             FROM rounds 
@@ -311,6 +418,7 @@ def insert_swing():
         )
         r_res = cursor.fetchall()
 
+        # Get necessary club data for dropdown
         c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
         cursor = db.execute_query(
             db_connection=db_connection,
@@ -318,6 +426,7 @@ def insert_swing():
         )
         c_res = cursor.fetchall()
 
+        # Get necessary hole data for dropdown
         h_query = """
             SELECT course_name, hole_id
             FROM holes
@@ -332,6 +441,7 @@ def insert_swing():
         return render_template("insert_swing.j2", gt_players=p_res, gt_rounds=r_res, gt_clubs=c_res, gt_holes=h_res)
     
     elif request.method == "POST":
+        # Get new swing data from form submission
         swing_player = request.form["player_id"]
         swing_round = request.form["round_id"]
         swing_hole = request.form["hole_id"]
@@ -350,22 +460,38 @@ def insert_swing():
 # ----------------------------------------------------------------------------
 # UPDATE ROUTES: Update Entity Handlers
 #
-#
+# The following Flask route functions handle updating data already in the Golf
+# Tracker's MySQL Database. Each route connects to the database, collects 
+# necessary data from it, renders an update_entity Jinja template that 
+# displays the selected entity's current data and loads it into a form along 
+# with data from the database that could be used to update the entity, and 
+# insertion, and updates the entity in the database on submission.
 # ----------------------------------------------------------------------------
 
 @app.route("/update-player/<int:id>", methods=["POST", "GET"])
 def update_player(id):
-    """Route that handles updating a player's data"""
-    
+    """Update player Page
+
+    If request method is GET from any read_players page update buttons, route
+    handles rendering an update_player page with the data of the player being 
+    updated and a form containing necessary player attribute inputs prefilled 
+    with that player's data.
+
+    If request method is POST from an update_player page submit, route handles
+    getting the updated player input, inserting it into the database, and
+    redirecting to the read_players page.
+    """
     db_connection = db.connect_to_database()
     
     if request.method == "GET":
+        # Get necessary player data for display
         read_query = "SELECT * FROM players WHERE player_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("update_player.j2", gt_player=results)
     
     elif request.method == "POST":
+        # Get updated player data from form submission
         player_id = id
         player_name = request.form["player_name"]
         player_city = request.form["player_city"]
@@ -382,11 +508,21 @@ def update_player(id):
 
 @app.route("/update-round/<int:id>", methods=["POST", "GET"])
 def update_round(id):
-    """Route that handles updating a rounds's data"""
+    """Update round Page
 
+    If request method is GET from any read_rounds page update buttons, route
+    handles rendering an update_round page with the data of the round being 
+    updated and a form containing necessary round attribute inputs prefilled 
+    with that round's data and other necessary data to be chosen from.
+
+    If request method is POST from an update_round page submit, route handles
+    getting the updated round input, inserting it into the database, and
+    redirecting to the read_rounds page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
+        # Get necessary round data for display and update inputs
         read_query = ('SELECT '
                      'rounds.round_id, '
                      'rounds.course_id, '
@@ -407,10 +543,12 @@ def update_round(id):
         reformat_date = results[0]["round_date"].strftime("%Y-%m-%dT%H:%M")
         results[0]["form_date"] = reformat_date
 
+        # Get necessary player data for dropdown
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(db_connection=db_connection, query=p_query)
         p_res = cursor.fetchall()
 
+        # Get necessary course data for dropdown
         c_query = "SELECT course_id, course_name FROM courses;"
         cursor = db.execute_query(db_connection=db_connection, query=c_query)
         c_res = cursor.fetchall()
@@ -418,7 +556,7 @@ def update_round(id):
         return render_template("update_round.j2", gt_round=results, gt_players=p_res, gt_courses=c_res)
     
     elif request.method == "POST":
-
+        # Get updated round data from form submission
         round_id = id
         course_id = request.form["course_id"]
         player_id = request.form["player_id"]
@@ -467,15 +605,26 @@ def test_route():
 
 @app.route("/update-swing/<int:id>", methods=["POST", "GET"])
 def update_swing(id):
-    """Route that handles updating a swing's data"""
+    """Update swing Page
 
+    If request method is GET from any read_swings page update buttons, route
+    handles rendering an update_swing page with the data of the swing being 
+    updated and a form containing necessary swing attribute inputs prefilled 
+    with that swing's data and other necessary data to be chosen from.
+
+    If request method is POST from an update_swing page submit, route handles
+    getting the updated swing input, inserting it into the database, and
+    redirecting to the read_swings page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
+        # Get necessary swing data for display and update inputs
         read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
 
+        # Get necessary player data for dropdown
         p_query = "SELECT player_id, player_name FROM players;"
         cursor = db.execute_query(
             db_connection=db_connection,
@@ -483,6 +632,7 @@ def update_swing(id):
         )
         p_res = cursor.fetchall()
 
+        # Get necessary round data for dropdown
         r_query = """
             SELECT rounds.round_id, courses.course_name, rounds.round_date 
             FROM rounds 
@@ -494,6 +644,7 @@ def update_swing(id):
         )
         r_res = cursor.fetchall()
 
+        # Get necessary club data for dropdown
         c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
         cursor = db.execute_query(
             db_connection=db_connection,
@@ -501,6 +652,7 @@ def update_swing(id):
         )
         c_res = cursor.fetchall()
 
+        # Get necessary hole data for dropdown
         h_query = """
             SELECT course_name, hole_id
             FROM holes
@@ -514,7 +666,7 @@ def update_swing(id):
         return render_template("update_swing.j2", gt_swing=results, gt_players=p_res, gt_rounds=r_res, gt_clubs=c_res, gt_holes=h_res)
     
     elif request.method == "POST":
-
+        # Get updated swing data from form submission
         swing_id = id
         swing_player = int(request.form["player_id"])
         swing_round = int(request.form["round_id"])
@@ -535,22 +687,37 @@ def update_swing(id):
 # ----------------------------------------------------------------------------
 # DELETE ROUTES: Delete Entity Handlers
 #
-#
+# The following Flask route functions handle deleting data already in the Golf
+# Tracker's MySQL Database. Each route connects to the database, collects the 
+# selected entity's data from it, renders a delete_entity Jinja template that 
+# displays the selected entity's current data, asks the user if they want to 
+# delete the entity, and deletes the entity in the database on submission if 
+# the user chose "Yes". Otherwise, redirects back to the entity's read page.
 # ----------------------------------------------------------------------------
 
 @app.route("/delete-club/<int:id>", methods=["POST", "GET"])
 def delete_club(id):
-    """Route that handles deleting a club from the database"""
-    
+    """Delete club Page
+
+    If request method is GET from any read_clubs page delete buttons, route
+    handles rendering a delete_club page with the data of the club being 
+    deleted, an "are you sure" title, and a form with "Yes" or "No" options.
+
+    If request method is POST from a delete_club page submit, route handles
+    getting the yes or no input and club_id to delete, deleting the club from
+    the database, and redirecting to the read_clubs page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
+        # Get necessary club data for display
         read_query = "SELECT * FROM clubs WHERE club_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_club.j2", gt_club=results)
     
     elif request.method == "POST":
+        # Get user's delete decision data from form submission
         club_id = id
         delete = request.form["delete"]
 
@@ -567,17 +734,27 @@ def delete_club(id):
 
 @app.route("/delete-player/<int:id>", methods=["POST", "GET"])
 def delete_player(id):
-    """Route that handles deleting a player from the database"""
+    """Delete player Page
 
+    If request method is GET from any read_players page delete buttons, route
+    handles rendering a delete_player page with the data of the player being 
+    deleted, an "are you sure" title, and a form with "Yes" or "No" options.
+
+    If request method is POST from a delete_player page submit, route handles
+    getting the yes or no input and player_id to delete, deleting the player
+    from the database, and redirecting to the read_players page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
+        # Get necessary player data for display
         read_query = "SELECT * FROM players WHERE player_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_player.j2", gt_player=results)
     
     elif request.method == "POST":
+        # Get player data from form submission for deletion
         player_id = id
         delete = request.form["delete"]
 
@@ -594,18 +771,27 @@ def delete_player(id):
 
 @app.route("/delete-round/<int:id>", methods=["POST", "GET"])
 def delete_round(id):
-    """Route that handles deleting a round from the database"""
-    
+    """Delete round Page
+
+    If request method is GET from any read_rounds page delete buttons, route
+    handles rendering a delete_round page with the data of the round being 
+    deleted, an "are you sure" title, and a form with "Yes" or "No" options.
+
+    If request method is POST from a delete_round page submit, route handles
+    getting the yes or no input and round_id to delete, deleting the round
+    from the database, and redirecting to the read_rounds page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
+        # Get necessary round data for display
         read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_round.j2", gt_round=results)
     
     elif request.method == "POST":
-    
+        # Get round data from form submission for deletion
         round_id = id
         delete = request.form["delete"]
 
@@ -622,19 +808,29 @@ def delete_round(id):
 
 @app.route("/delete-swing/<int:id>", methods=["POST", "GET"])
 def delete_swing(id):
-    """Route that handles deleting a swing from the database"""
+    """Delete swing Page
+
+    If request method is GET from any read_swings page delete buttons, route
+    handles rendering a delete_swing page with the data of the swing being 
+    deleted, an "are you sure" title, and a form with "Yes" or "No" options.
+
+    If request method is POST from a delete_swing page submit, route handles
+    getting the yes or no input and swing_id to delete, deleting the swing
+    from the database, and redirecting to the read_swings page.
+    """
     
     db_connection = db.connect_to_database()
     swing_id = id
 
     if request.method == "GET":
+        # Get necessary swing data for display
         read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (swing_id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_swing.j2", gt_swing=results)
     
     elif request.method == "POST":
-        
+        # Get swing data from form submission for deletion
         delete = request.form["delete"]
         if delete == "yes":
             delete_query = "DELETE FROM swings WHERE swing_id = %s;" % (swing_id)
@@ -645,18 +841,29 @@ def delete_swing(id):
 
 @app.route("/delete-player-club/<int:player_id>/<int:club_id>", strict_slashes=False, methods=["POST", "GET"])
 def delete_player_club(player_id, club_id):
-    """Route that handles deleting a player_club relationship from the database"""
-    
+    """Delete player_club Page
+
+    If request method is GET from any read_player_clubs page delete buttons,
+    route handles rendering a delete_player_club page with the data of the
+    player_club being deleted, an "are you sure" title, and a form with "Yes"
+    or "No" options.
+
+    If request method is POST from a delete_player_club page submit, route
+    handles getting the yes or no input and id's necessary to delete the
+    player_club, deleting the player_club from the database, and redirecting
+    to the read_player_clubs page.
+    """
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
+        # Get necessary player_club data for display
         read_query = "SELECT * FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_player_club.j2", gt_clubs=results)
     
     elif request.method == "POST":
-        
+        # Get player_club data from form submission for deletion
         delete = request.form["delete"]
 
         if delete == "yes":
