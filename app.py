@@ -436,8 +436,20 @@ def update_swing(id):
     
     elif request.method == "POST":
 
-        #TODO: implement update query
+        swing_id = id
+        swing_player = int(request.form["player_id"])
+        swing_round = int(request.form["round_id"])
+        swing_hole = int(request.form["hole_id"])
+        swing_club = int(request.form["club_id"])
+        swing_dist = int(request.form["dist_traveled_yd"])
 
+        insert_query = f"UPDATE swings SET player_id = {swing_player}, round_id = {swing_round}, hole_id = {swing_hole}, club_id = {swing_club}, dist_traveled_yd = {swing_dist} WHERE swing_id = {swing_id};"
+
+        print(insert_query)
+        db.execute_query(
+            db_connection=db_connection,
+            query=insert_query
+        )
         return redirect("/swings")
 
 
