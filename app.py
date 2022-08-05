@@ -396,7 +396,43 @@ def update_swing(id):
         read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
-        return render_template("update_swing.j2", gt_swing=results)
+
+        p_query = "SELECT player_id, player_name FROM players;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=p_query
+        )
+        p_res = cursor.fetchall()
+
+        r_query = """
+            SELECT rounds.round_id, courses.course_name, rounds.round_date 
+            FROM rounds 
+            INNER JOIN courses 
+            ON courses.course_id = rounds.course_id;"""
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=r_query
+        )
+        r_res = cursor.fetchall()
+
+        c_query = "SELECT club_id, brand, club_name, club_type FROM clubs;"
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=c_query
+        )
+        c_res = cursor.fetchall()
+
+        h_query = """
+            SELECT course_name, hole_id
+            FROM holes
+            INNER JOIN courses
+            ON courses.course_id = holes.course_id;"""
+        cursor = db.execute_query(
+            db_connection=db_connection,
+            query=h_query
+        )
+        h_res = cursor.fetchall()
+        return render_template("update_swing.j2", gt_swing=results, gt_players=p_res, gt_rounds=r_res, gt_clubs=c_res, gt_holes=h_res)
     
     elif request.method == "POST":
 
