@@ -82,7 +82,17 @@ def read_holes():
     the holes table in a Jinja2 template with an insert button.
     """
     db_connection = db.connect_to_database()
-    query = "SELECT * FROM holes;"
+    query = ('SELECT '
+             'holes.hole_id, '
+             'holes.course_id, '
+             'courses.course_name, '
+             'holes.hole_number, '
+             'holes.par_swing_count, '
+             'holes.distance '
+             'FROM holes '
+             'INNER JOIN courses ON '
+             'holes.course_id = courses.course_id;'
+             )
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_holes.j2", gt_holes=results)
@@ -284,14 +294,15 @@ def insert_hole():
     elif request.method == "POST":
         # Get new hole data from form submission
         course_id = request.form["course_id"]
+        hole_number = request.form["hole_number"]
         par_swing_count = request.form["par_swing_count"]
         distance = request.form["distance"]
 
-        insert_query = "INSERT INTO holes (course_id, par_swing_count, distance) VALUES (%s, %s, %s);"
+        insert_query = "INSERT INTO holes (course_id, hole_number, par_swing_count, distance) VALUES (%s, %s, %s, %s);"
         db.execute_query(
             db_connection=db_connection, 
             query=insert_query, 
-            query_params=(course_id, par_swing_count, distance)
+            query_params=(course_id, hole_number, par_swing_count, distance)
         )
         return redirect("/holes")
 

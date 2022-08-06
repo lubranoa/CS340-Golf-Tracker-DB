@@ -28,6 +28,15 @@
     #}
     <form class="mui-form--inline" action="/insert-hole" method="post">
         <div class="mui-select">
+            <select name="course_id" required>
+                <option value=""></option>
+                {% for course in gt_courses %}
+                <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
+                {% endfor %}
+            </select>
+            <label>Course Name</label>
+        </div>
+        <div class="mui-select">
             <select name="hole_number" required>
                 <option value=""></option>
                 <option value="1">1</option>
@@ -50,15 +59,6 @@
                 <option value="18">18</option>
             </select>
             <label>Hole Number</label>
-        </div>
-        <div class="mui-select">
-            <select name="course_id" required>
-                <option value=""></option>
-                {% for course in gt_courses %}
-                <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
-                {% endfor %}
-            </select>
-            <label>Course Name</label>
         </div>
         <div class="mui-select">
             <select name="par_swing_count" required>
