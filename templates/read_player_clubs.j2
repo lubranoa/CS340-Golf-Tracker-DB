@@ -17,17 +17,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
-<div class="mui-appbar">
-    <ul class="mui-list--inline">
-        <li><a href="/clubs">View clubs</a></li>
-        <li><a href="/courses">View courses</a></li>
-        <li><a href="/holes">View holes</a></li>
-        <li><a href="/player-clubs">View player_clubs</a></li>
-        <li><a href="/players">View players</a></li>
-        <li><a href="/rounds">View rounds</a></li>
-        <li><a href="/swings">View swings</a></li>
-    </ul>
-</div>
+{% include './nav_bar.j2' %}
 <div class="app">
     <h1>The player_clubs Table</h1>
     {#  
