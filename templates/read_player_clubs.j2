@@ -77,6 +77,35 @@
             </td>
         </tr>
     </table>
+
+    {#  
+        Citation for the form style
+        Date: 08/05/2022
+        Adapted from: MUI CSS/JS Forms
+        Source URL: https://www.muicss.com/docs/v1/css-js/forms
+    #}
+    <table  class="mui-table mui-table--bordered">
+            <form action="/player-clubs/search" class="mui-form">
+                <tr>
+                <td>
+                    <label>Search by player name:  </label>
+                </td>
+                <td>
+                    <div class="mui-textfield">
+                        <input type="text" id="player_name" name="player_name" placeholder="Player Name" required>
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" class="mui-btn mui-btn--primary">Submit</button>
+                </td>
+                </form>
+                <td>
+                <form action="/player-clubs" class="mui-form">
+                    <button type="submit" class="mui-btn mui-btn--primary">Clear</button>
+                <form>
+                </td>
+            </tr>
+    </table>
     <div class="home-link"><a href="/">Go Back to Homepage</a></div>
 </div>
 </body>

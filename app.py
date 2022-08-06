@@ -96,9 +96,34 @@ def read_player_clubs():
     rendering the player_clubs intersection table in a Jinja2 template with 
     insert and delete buttons.
     """
-    db_connection = db.connect_to_database()    
-    query = "SELECT * FROM player_clubs;"
+    db_connection = db.connect_to_database()
+    query = """SELECT player_clubs.player_id, players.player_name, player_clubs.club_id, CONCAT(clubs.brand, ' ', clubs.club_name, ' ', clubs.club_type) AS club
+                FROM player_clubs
+                INNER JOIN players
+                ON player_clubs.player_id = players.player_id
+                INNER JOIN clubs
+                ON player_clubs.club_id = clubs.club_id;"""
     cursor = db.execute_query(db_connection=db_connection, query=query)
+    results = cursor.fetchall()
+    return render_template("read_player_clubs.j2", gt_player_clubs=results)
+
+
+@app.route('/player-clubs/search')
+def read_player_clubs_search():
+    """Route that handles displaying player_clubs intersection table"""
+
+    player_name = request.args.get("player_name")
+
+    db_connection = db.connect_to_database()
+    query = f"""SELECT player_clubs.player_id, players.player_name, player_clubs.club_id, CONCAT(clubs.brand, ' ', clubs.club_name, ' ', clubs.club_type) AS club
+                FROM player_clubs
+                INNER JOIN players
+                ON player_clubs.player_id = players.player_id
+                INNER JOIN clubs
+                ON player_clubs.club_id = clubs.club_id
+                WHERE players.player_name LIKE '%{player_name}%';"""
+
+    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=None)
     results = cursor.fetchall()
     return render_template("read_player_clubs.j2", gt_player_clubs=results)
 
