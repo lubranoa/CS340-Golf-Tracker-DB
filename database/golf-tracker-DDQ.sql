@@ -44,9 +44,10 @@ CREATE TABLE holes
 (
     hole_id int NOT NULL AUTO_INCREMENT,
     course_id int NOT NULL,
+    hole_number int NOT NULL,
     par_swing_count int NOT NULL,
     distance int NOT NULL,
-    PRIMARY KEY (hole_id, course_id),
+    PRIMARY KEY (hole_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
 
@@ -136,26 +137,26 @@ VALUES
 
 -- Insert sample data into holes table, associating each hole with existing 
 -- courses
-INSERT INTO holes (hole_id, course_id, par_swing_count, distance) 
+INSERT INTO holes (hole_id, course_id, hole_number, par_swing_count, distance) 
 VALUES      
-(1, 1, 4, 445),
-(2, 1, 5, 575),
-(3, 1, 4, 350),
-(4, 1, 3, 240),
-(5, 1, 4, 495),
-(6, 1, 3, 180),
-(7, 1, 4, 450),
-(8, 1, 5, 570),
-(9, 1, 4, 460),
-(10, 1, 4, 495),
-(11, 1, 4, 520),
-(12, 1, 3, 155),
-(13, 1, 5, 510),
-(14, 1, 4, 440),
-(15, 1, 5, 550),
-(16, 1, 3, 170),
-(17, 1, 4, 440),
-(18, 1, 4, 465)
+(1, 1, 1, 4, 445),
+(2, 1, 2, 5, 575),
+(3, 1, 3, 4, 350),
+(4, 1, 4, 3, 240),
+(5, 1, 5, 4, 495),
+(6, 1, 6, 3, 180),
+(7, 1, 7, 4, 450),
+(8, 1, 8, 5, 570),
+(9, 1, 9, 4, 460),
+(10, 1, 10, 4, 495),
+(11, 1, 11, 4, 520),
+(12, 1, 12, 3, 155),
+(13, 1, 13, 5, 510),
+(14, 1, 14, 4, 440),
+(15, 1, 15, 5, 550),
+(16, 1, 16, 3, 170),
+(17, 1, 17, 4, 440),
+(18, 1, 18, 4, 465)
 ;
 
 -- Insert sample data into rounds table, associating each round with existing
