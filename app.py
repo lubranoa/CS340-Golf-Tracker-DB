@@ -673,27 +673,6 @@ def update_round(id):
     
         return redirect("/rounds")
 
-@app.route("/test")
-def test_route():
-    db_connection = db.connect_to_database()
-    read_query = ('SELECT '
-                  'rounds.round_id, '
-                  'rounds.course_id, '
-                  'courses.course_name, '
-                  'rounds.player_id, '
-                  'players.player_name, '
-                  'rounds.round_date, '
-                  'rounds.round_score '
-                  'FROM rounds '
-                  'INNER JOIN courses ON rounds.course_id = courses.course_id '
-                  'INNER JOIN players ON rounds.player_id = players.player_id '
-                  "WHERE round_id = '2';"
-                  )
-    cursor = db.execute_query(db_connection=db_connection, query=read_query)
-    res = cursor.fetchall()
-    results = json.dumps(res)
-    return results
-
 
 @app.route("/update-swing/<int:id>", methods=["POST", "GET"])
 def update_swing(id):
