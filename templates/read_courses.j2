@@ -33,6 +33,9 @@
             {% for key in gt_courses[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
+            {% else %}
+            <p>This table is empty.</p>
+            <p> Please use button below to insert data.</p>
             {% endif %}
         </tr>
     <tbody>
