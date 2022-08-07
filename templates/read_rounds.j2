@@ -31,10 +31,12 @@
     <thead>
         <tr>
             {# Get key names and insert as table header column names #}
+            {% if gt_rounds[0]|length > 0 %}
             {% for key in gt_rounds[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
             <th>Update / Delete</th>
+            {% endif %}
         </tr>
     <tbody>
         {#  

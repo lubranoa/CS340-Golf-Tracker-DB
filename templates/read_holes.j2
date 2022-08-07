@@ -28,9 +28,11 @@
     <thead>
         <tr>
             {# Get key names and insert as table header column names #}
+            {% if gt_holes[0]|length > 0 %}
             {% for key in gt_holes[0].keys() %}
             <th>{{ key }}</th>
             {% endfor %}
+            {% endif %}
         </tr>
     <tbody>
         {# Get and display all holes data in the table rows #}
