@@ -228,12 +228,22 @@ def insert_club():
         club_name = request.form["club_name"]
         club_type = request.form["club_type"]
 
-        insert_query = "INSERT INTO clubs (brand, club_name, club_type) VALUES (%s, %s, %s);"
-        db.execute_query(
+        # Checks if row is already present
+        check_query = "SELECT brand, club_name, club_type FROM clubs WHERE brand = %s AND club_name =%s AND club_type= %s LIMIT 1;"
+        check_cursor = db.execute_query(
             db_connection=db_connection, 
-            query=insert_query, 
+            query=check_query, 
             query_params=(brand, club_name, club_type)
         )
+        club_present = check_cursor.fetchone()
+
+        if not club_present:
+            insert_query = "INSERT INTO clubs (brand, club_name, club_type) VALUES (%s, %s, %s);"
+            db.execute_query(
+                db_connection=db_connection, 
+                query=insert_query, 
+                query_params=(brand, club_name, club_type)
+            )
         return redirect("/clubs")
 
 

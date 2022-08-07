@@ -76,7 +76,8 @@ CREATE TABLE clubs
     brand varchar(50) NOT NULL,
     club_name varchar(50) NOT NULL,
     club_type varchar(50) NOT NULL,
-    PRIMARY KEY (club_id)
+    PRIMARY KEY (club_id),
+    CONSTRAINT UC_club UNIQUE (brand, club_name, club_type)
 );
 
 -- Create player_clubs intersection table to facilitate the many to many 
