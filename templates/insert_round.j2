@@ -46,11 +46,23 @@
             <label>Player Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="datetime-local" name="round_date" value="2022-01-01T00:00" required>
+            <input 
+                type="datetime-local" 
+                name="round_date" 
+                value="2022-01-01T00:00" 
+                required
+            >
             <label>Date and Time of Round</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="round_score" pattern="[0-9]{1,}" required>
+            <input 
+                type="text" 
+                name="round_score" 
+                title="Please fill out this field. &#013;Allowed: 0-9, 3-digit max"
+                pattern="^\d{1,3}$" 
+                maxlength="3" 
+                required
+            >
             <label>Round Score</label>
         </div>
         <br>

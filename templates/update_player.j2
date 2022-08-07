@@ -52,15 +52,31 @@
     #}
     <form class="mui-form--inline" action="/update-player/{{ gt_player[0].player_id }}" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="player_name">
-            <label>player_name</label>
+            <input 
+                type="text" 
+                name="player_name" 
+                title="Please fill out this field. &#013;Allowed: a-z, A-Z, and &quot;  ,.'-&quot;"
+                pattern="^[a-zA-Z ,.'-]{1,}$"
+                maxlength="50" 
+                required
+                value="{{ gt_player[0].player_name }}"
+            >
+            <label>Player Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="player_city">
-            <label>player_city</label>
+            <input 
+                type="text" 
+                name="player_city" 
+                title="Please fill out this field. &#013;Allowed: a-z, A-Z, and &quot;  ,.'-&quot;"
+                pattern="^[a-zA-Z ,.'-]{1,}$"
+                maxlength="50" 
+                required
+                value="{{ gt_player[0].player_city }}"
+            >
+            <label>Player City</label>
         </div>
         <div class="mui-select">
-            <select name="player_state">
+            <select name="player_state" required>
                 <option value="">--Choose state--</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
@@ -114,7 +130,7 @@
                 <option value="Wisconsin">Wisconsin</option>
                 <option value="Wyoming">Wyoming</option>
             </select>
-            <label>player_state</label>
+            <label>Player State</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update player</button>

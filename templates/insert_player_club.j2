@@ -28,13 +28,13 @@
     #}
     <form class="mui-form--inline" action="/insert-player-club" method="post">
         <div class="mui-select">
-            <label>player:</label>
             <select id="player" name="player" required>
                 <option value="">--Choose player--</option>
                 {# Get and place all players into dropdown options #}
                 {% for player in gt_players %}
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
                 {% endfor %}
+            <label>Player</label>
             </select>
         </div>
         <div class="mui-select">

@@ -28,15 +28,29 @@
     #}
     <form class="mui-form--inline" action="/insert-player" method="post">
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="player_name" pattern="[A-Za-z ]{1,}" required>
+            <input 
+                type="text" 
+                name="player_name" 
+                title="Please fill out this field. &#013;Allowed: a-z, A-Z, and &quot;  ,.'-&quot;"
+                pattern="^[a-zA-Z ,.'-]{1,}$"
+                maxlength="50" 
+                required
+            >
             <label>Player Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="player_city" pattern="[A-Za-z ]{1,}" required>
+            <input 
+                type="text" 
+                name="player_city" 
+                title="Please fill out this field. &#013;Allowed: a-z, A-Z, and &quot;  ,.'-&quot;"
+                pattern="^[a-zA-Z ,.'-]{1,}$"
+                maxlength="50" 
+                required
+            >
             <label>Player City</label>
         </div>
         <div class="mui-select">
-            <select name="player_state">
+            <select name="player_state" required>
                 <option value="">--Choose state--</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>

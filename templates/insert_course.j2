@@ -31,7 +31,8 @@
             <input 
                 type="text" 
                 name="course_name" 
-                pattern="[A-Za-z0-9 ]{1,}" 
+                title="Please fill out this field. &#013;Allowed: a-z, A-Z, 0-9, and &quot;  ,.'-&quot;"
+                pattern="^[a-zA-Z0-9 ,.'-]{1,}$"  
                 maxlength="50"
                 required
             >

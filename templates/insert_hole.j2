@@ -70,7 +70,14 @@
             <label>Par for the Hole</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
-            <input type="text" name="distance" pattern="[0-9]{1,}" required>
+            <input 
+                type="text" 
+                name="distance" 
+                title="Please fill out this field. &#013;Allowed: 0-9, 3-digit max"
+                pattern="^\d{1,3}$" 
+                maxlength="3"
+                required
+            >
             <label>Distance in Yards</label>
         </div>
         <br>
