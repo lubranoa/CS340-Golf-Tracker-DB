@@ -215,7 +215,8 @@ def insert_club():
 
     If request method is POST from an insert_club page submit, route handles 
     getting the new club input, inserting it into the database, and
-    redirecting to the read_clubs page.
+    redirecting to the read_clubs page. Performs check to see if input
+    already exists. Will not insert duplicate rows.
     """
     db_connection = db.connect_to_database()
 
@@ -327,7 +328,8 @@ def insert_player_club():
 
     If request method is POST from an insert_player_club page submit, route
     handles getting the new player_club input, inserting it into the database,
-    and redirecting to the read_player_clubs page.
+    and redirecting to the read_player_clubs page. Performs check to see if input
+    already exists. Will not insert duplicate rows.
     """
     
     if request.method == "GET":
