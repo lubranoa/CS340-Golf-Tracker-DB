@@ -1,117 +1,447 @@
 -- Golf Tracker Data Manipulation Query
--- :colons indicate variable that would be adjusted by other programming language
+-- {brackets} indicate variable that would be adjusted by other programming language
 
--- See courses
-SELECT course_name, course_state from courses;
-
--- See all holes for a particular course
-SELECT holes.course_id, hole_id, par_swing_count, distance
-FROM holes
-INNER JOIN courses
-ON holes.course_id = courses.course_id
-WHERE courses.course_id = :course_id;
-
--- See rounds played by a particular player
-SELECT players.player_name, courses.course_name, rounds.round_id, rounds.round_date, rounds.round_score
-FROM rounds
-INNER JOIN players ON rounds.player_id = players.player_id
-INNER JOIN courses ON rounds.course_id = courses.course_id
-WHERE players.player_id = :player_id; 
-
--- See clubs owned by a particular player
-SELECT brand, club_name, club_type
-FROM players
-INNER JOIN player_clubs on players.player_id = player_clubs.player_id
-INNER JOIN clubs on player_clubs.club_id = clubs.club_id
-WHERE players.player_id = :player_id;
-
--- See all clubs in app
-SELECT brand, club_name, club_type
+-----------------
+--- SELECTs
+-----------------
+-- Pulls all clubs from the clubs table - used for /clubs route
+SELECT *
 FROM clubs;
 
--- See all swings by a particular player
-SELECT swing_id, dist_traveled_yd, brand, club_name, club_type
-FROM swings
-INNER JOIN players on swings.player_id = players.player_id
-INNER JOIN clubs on swings.club_id = clubs.club_id
-where swings.player_id = :player_id;
-
--- See all swings by a particular player on a particular round
-SELECT swing_id, dist_traveled_yd, brand, club_name, club_type, round_date, swings.round_id
-FROM swings
-INNER JOIN players on swings.player_id = players.player_id
-INNER JOIN clubs on swings.club_id = clubs.club_id
-INNER JOIN rounds on swings.round_id = rounds.round_id
-where swings.player_id = :player_id AND swings.round_id = :round_id;
-
--- See all swings by a particular player with a particular club
-SELECT swing_id, dist_traveled_yd, brand, club_name, club_type, round_date, swings.round_id
-FROM swings
-INNER JOIN players on swings.player_id = players.player_id
-INNER JOIN clubs on swings.club_id = clubs.club_id
-INNER JOIN rounds on swings.round_id = rounds.round_id
-where swings.player_id = :player_id AND swings.club_id = :club_id;
-
--- Insert new round for a player on a course (each value would be drop downs)
-INSERT INTO rounds (course_id, player_id, round_date, round_score)
-VALUES (:course_id, :player_id, :round_date, :round_score);
-
---  Insert a new swing for a player on a hole, during a around with a club
-INSERT INTO swings (hole_id, round_id, player_id, club_id, dist_traveled_yd)
-VALUES (:hole_id, :round_id, :player_id, :club_id, :dist_traveled_yd);
-
--- Insert a new club to the database  (debatable on if user can do this)
-INSERT INTO clubs (brands, club_name, club_type)
-VALUES (:brand, :club_name, :club_type);
-
--- Insert a new player
-INSERT INTO players (player_name, player_city, player_state)
-VALUES (:player_name, :player_city, :player_state);
-
--- Insert a new course
-INSERT INTO courses (course_name, course_state)
-VALUES (:course_name, :course_state);
-
--- Insert a new hole
-INSERT INTO holes (course_id, par_swing_count, distance)
-VALUES (:course_id, :par_swing_count, :distance);
-
--- Insert a new player club relationship
-INSERT INTO player_clubs (player_id, club_id)
-VALUES (:player_id, :club_id);
-
--- DELETES a swing
-DELETE FROM player_clubs
-WHERE player_id = :player_id AND club_id = :club_id;
-
--- DELETES a swing
-DELETE FROM swings
-WHERE swing_id = :swing_id;
-
--- Deletes a club (debatable on if user can do this)
-DELETE FROM clubs
-WHERE club_id = :club_id;
-
--- Deletes a round
-DELETE rounds, swings
-FROM rounds
-INNER JOIN swings on rounds.round_id = swings.round_id
-WHERE rounds.round_id = :round_id;
-
--- Updates a swing
-UPDATE swings
-SET hole_id = :hole_id, round_id = :round_id, player_id = :player_id, club_id=:club_id;
-
--- Updates a round
-UPDATE rounds
-SET course_id = :course_id, player_id = :player_id, round_date = :round_date, round_score = :round_score;
-
--- Update Player
-UPDATE players
-SET player_name = :player_name, player_city = :player_city, player_state = :player_state;
-
-
--- Search / Filter Player by name
+-- Pulls all courses from the courses table- used for /courses route
 SELECT *
-FROM player
-WHERE player_name LIKE '%:player_name%';
+FROM courses;
+
+-- Pulls all holes from the holes table, adds information from related courses - for /holes route
+SELECT holes.hole_id
+	,holes.course_id
+	,courses.course_name
+	,holes.hole_number
+	,holes.par_swing_count
+	,holes.distance
+FROM holes
+INNER JOIN courses ON holes.course_id = courses.course_id;
+
+-- Pulls all player-to-club relationships in the player_clubs table - for /player-clubs route
+SELECT player_clubs.player_id
+	,players.player_name
+	,player_clubs.club_id
+	,CONCAT (
+		clubs.brand
+		,' '
+		,clubs.club_name
+		,' '
+		,clubs.club_type
+		) AS club
+FROM player_clubs
+INNER JOIN players ON player_clubs.player_id = players.player_id
+INNER JOIN clubs ON player_clubs.club_id = clubs.club_id;
+
+-- Pulls all holes from the holes table - for /players route
+SELECT *
+FROM players;
+
+-- Pulls all rounds from the rounds table, adds information from related tables (coureses, players) - for /rounds route
+SELECT rounds.round_id
+	,rounds.course_id
+	,courses.course_name
+	,rounds.player_id
+	,players.player_name
+	,rounds.round_date
+	,rounds.round_score
+FROM rounds
+INNER JOIN courses ON rounds.course_id = courses.course_id
+INNER JOIN players ON rounds.player_id = players.player_id;
+
+-- Pulls all swings from the swings table, adds information from related tables (holes, rounds, courses, players) - for /rounds route
+SELECT swings.swing_id
+	,swings.dist_traveled_yd
+	,swings.hole_id
+	,courses.course_name
+	,holes.hole_number
+	,swings.round_id
+	,rounds.round_date
+	,swings.player_id
+	,players.player_name
+	,swings.club_id
+	,CONCAT (
+		clubs.brand
+		," "
+		,clubs.club_name
+		," "
+		,clubs.club_type
+		) AS club
+FROM swings
+INNER JOIN holes ON swings.hole_id = holes.hole_id
+INNER JOIN rounds ON swings.round_id = rounds.round_id
+INNER JOIN courses ON rounds.course_id = courses.course_id
+INNER JOIN players ON swings.player_id = players.player_id
+LEFT JOIN clubs ON swings.club_id = clubs.club_id
+
+-- Pulls all players with name like the input - used for searching for player by name - for /player-clubs/search route
+SELECT player_clubs.player_id
+	,players.player_name
+	,player_clubs.club_id
+	,CONCAT (
+		clubs.brand
+		,' '
+		,clubs.club_name
+		,' '
+		,clubs.club_type
+		) AS club
+FROM player_clubs
+INNER JOIN players ON player_clubs.player_id = players.player_id
+INNER JOIN clubs ON player_clubs.club_id = clubs.club_id
+WHERE players.player_name LIKE '%{player_name}%'
+
+-- Select check used to prevent attempting to insert duplicate rows into clubs  - for /insert-club route (POST)
+SELECT brand
+	,club_name
+	,club_type
+FROM clubs
+WHERE brand = {brand}
+	AND club_name = {club_name}
+	AND club_type = {club_type} LIMIT 1;
+
+-- Pulls all course information for insert hole form - for /insert-hole route
+SELECT *
+FROM courses;
+
+-- Pulls specific columns from the players table to be used for inserting a new player-club relationship - for /insert-player-club route
+SELECT player_id
+	,player_name
+FROM players;
+
+-- Pulls specific columns from the clubs table to be used for inserting a new player-club relationship - for /insert-player-club route
+SELECT club_id
+	,brand
+	,club_name
+	,club_type
+FROM clubs;
+
+-- Select check used to prevent attempting to insert duplicate rows into the player_clubs table  - for /insert-player-club route
+SELECT player_id
+	,club_id
+FROM player_clubs
+WHERE player_id = {player_id}
+	AND club_id = {club_id} LIMIT 1;
+
+-- Pulls specific columns from the players table to be used for inserting a round into the rounds table - for /insert-round route
+SELECT player_id
+	,player_name
+FROM players;
+
+-- Pulls specific columns from the courses table to be used for inserting a round into the rounds table - for /insert-round route
+SELECT course_id
+	,course_name
+FROM courses;
+
+-- Pulls specific columns from the players table to be used for inserting a swing into the swings table - for /insert-swing route
+SELECT player_id
+	,player_name
+FROM players;
+
+-- Pulls specific columns from the rounds and coureses table to be used for inserting a swing into the swings table - for /insert-swing route
+SELECT rounds.round_id
+	,courses.course_name
+	,rounds.round_date
+FROM rounds
+INNER JOIN courses ON courses.course_id = rounds.course_id;
+
+-- Pulls specific columns from the clubs table to be used for inserting a swing into the swings table - for /insert-swing route
+SELECT club_id
+	,brand
+	,club_name
+	,club_type
+FROM clubs;
+
+-- Pulls specific columns from the holes and coureses table to be used for inserting a swing into the swings table - for /insert-swing route
+SELECT course_name
+	,hole_id
+FROM holes
+INNER JOIN courses ON courses.course_id = holes.course_id;
+
+-- Pulls data for specific player using player id to be used for updating players table- for /update-player route
+SELECT *
+FROM players
+WHERE player_id = {player_id};
+
+-- Pulls data from rounds, courses, and player for displaying in update form - for /update-round route
+SELECT rounds.round_id
+	,rounds.course_id
+	,courses.course_name
+	,rounds.player_id
+	,players.player_name
+	,rounds.round_date
+	,rounds.round_score
+FROM rounds
+INNER JOIN courses ON rounds.course_id = courses.course_id
+INNER JOIN players ON rounds.player_id = players.player_id
+WHERE round_id = {round_id};
+
+-- Pulls specific columns from players for players dropdown in update rounds form - for /update-round route
+SELECT player_id
+	,player_name
+FROM players;
+
+-- Pulls specific columns from courses for courses dropdown in update rounds form - for /update-round route
+SELECT course_id
+	,course_name
+FROM courses;
+
+-- Pulls relevant data for a specific swing - for displaying in update form - for /update-swing route
+SELECT swings.swing_id
+	,swings.dist_traveled_yd
+	,swings.hole_id
+	,courses.course_name
+	,holes.hole_number
+	,swings.round_id
+	,rounds.round_date
+	,swings.player_id
+	,players.player_name
+	,swings.club_id
+	,CONCAT (
+		clubs.brand
+		," "
+		,clubs.club_name
+		," "
+		,clubs.club_type
+		) AS club
+FROM swings
+INNER JOIN holes ON swings.hole_id = holes.hole_id
+INNER JOIN rounds ON swings.round_id = rounds.round_id
+INNER JOIN courses ON rounds.course_id = courses.course_id
+INNER JOIN players ON swings.player_id = players.player_id
+LEFT JOIN clubs ON swings.club_id = clubs.club_id
+WHERE swings.swing_id = {swing_id};
+
+-- Pulls specific columns from players for players dropdown in update swings form - for /update-swings route
+SELECT player_id
+	,player_name
+FROM players;
+
+-- Pulls specific columns from rounds and courses for dropdown in update swings form - for /update-swings route
+SELECT rounds.round_id
+	,courses.course_name
+	,rounds.round_date
+FROM rounds
+INNER JOIN courses ON courses.course_id = rounds.course_id;
+
+-- Pulls specific columns from courses and holes for dropdown in update swings form - for /update-swings route
+SELECT course_name
+	,hole_id
+FROM holes
+INNER JOIN courses ON courses.course_id = holes.course_id;
+
+-- Pulls a specific club to show which club might get deleted by delete form - for /delete-club route
+SELECT *
+FROM clubs
+WHERE club_id = {club_id}
+
+-- Pulls a specific player to show which player might get deleted by delete form - for /delete-player route
+SELECT *
+FROM players
+WHERE player_id = {player_id};
+
+-- Pulls a specific round and (related data from courses and player) that will be deleted by delete form - for /delete-round route
+SELECT rounds.round_id
+	,rounds.course_id
+	,courses.course_name
+	,rounds.player_id
+	,players.player_name
+	,rounds.round_date
+	,rounds.round_score
+FROM rounds
+INNER JOIN courses ON rounds.course_id = courses.course_id
+INNER JOIN players ON rounds.player_id = players.player_id
+WHERE round_id = {round_id};
+
+-- Pulls a specific swing and (related data from holes, rounds, coureses, players, and clubs) that will be deleted by delete form - for /delete-swing route
+SELECT swings.swing_id
+	,swings.dist_traveled_yd
+	,swings.hole_id
+	,courses.course_name
+	,holes.hole_number
+	,swings.round_id
+	,rounds.round_date
+	,swings.player_id
+	,players.player_name
+	,swings.club_id
+	,CONCAT (
+		clubs.brand
+		," "
+		,clubs.club_name
+		," "
+		,clubs.club_type
+		) AS club
+FROM swings
+INNER JOIN holes ON swings.hole_id = holes.hole_id
+INNER JOIN rounds ON swings.round_id = rounds.round_id
+INNER JOIN courses ON rounds.course_id = courses.course_id
+INNER JOIN players ON swings.player_id = players.player_id
+LEFT JOIN clubs ON swings.club_id = clubs.club_id
+WHERE swings.swing_id = {swing_id};
+
+-- Pulls a specific player_club relationship row and (related data from players and clubs) that will be deleted by delete form - for /delete-player-club route
+SELECT player_clubs.player_id
+	,players.player_name
+	,player_clubs.club_id
+	,CONCAT (
+		clubs.brand
+		,' '
+		,clubs.club_name
+		,' '
+		,clubs.club_type
+		) AS club
+FROM player_clubs
+INNER JOIN players ON player_clubs.player_id = players.player_id
+INNER JOIN clubs ON player_clubs.club_id = clubs.club_id
+WHERE players.player_id = {player_id}
+	AND clubs.club_id = {club_id};
+
+-----------------
+--- INSERTs
+-----------------
+-- Inserts new club into clubs table  - for /insert-club route (POST)
+INSERT INTO clubs (
+	brand
+	,club_name
+	,club_type
+	)
+VALUES (
+	{brand}
+	,{club_name}
+	,{club_type}
+	);
+
+-- Inserts new course into the courses table  - for /insert-course route (POST)
+INSERT INTO courses (
+	course_name
+	,course_state
+	)
+VALUES (
+	{course_name}
+	,{course_state}
+	);
+
+-- Inserts new hole into the holes table  - for /insert-hole route (POST)
+INSERT INTO holes (
+	course_id
+	,hole_number
+	,par_swing_count
+	,distance
+	)
+VALUES (
+	{course_id}
+	,{hole_number}
+	,{par_swing_count}
+	,{distance}
+	);
+
+-- Inserts new player-club relationship row into the player_clubs table  - for /insert-player-club route (POST)
+INSERT INTO player_clubs (
+	player_id
+	,club_id
+	)
+VALUES (
+	{player_id}
+	,{club_id}
+	);
+
+-- Inserts new player into the players table  - for /insert-player route (POST)
+INSERT INTO players (
+	player_name
+	,player_city
+	,player_state
+	)
+VALUES (
+	{player_name}
+	,{player_city}
+	,{player_state}
+	);
+
+-- Inserts new round into the rounds table  - for /insert-round route (POST)
+INSERT INTO rounds (
+	course_id
+	,player_id
+	,round_date
+	,round_score
+	)
+VALUES (
+	{course_id}
+	,{player_id}
+	,{round_date}
+	,{round_score}
+	);
+
+-- Inserts new swing into the swings table  - for /insert-swing route (POST)
+INSERT INTO swings (
+	player_id
+	,round_id
+	,hole_id
+	,club_id
+	,dist_traveled_yd
+	)
+VALUES (
+	{swing_player}
+	,{swing_round}
+	,{swing_hole}
+	,{swing_club}
+	,{swing_dist}
+	);
+
+-----------------
+--- UPDATES
+-----------------
+-- Updates specific player based on player id - for /update-players route (POST)
+UPDATE players
+SET players.player_name = {player_name}
+	,players.player_city = {player_city}
+	,players.player_state = {player_state}
+WHERE players.player_id = {player_id};
+
+-- Updates specific round based on round id - for /update-rounds route (POST)
+UPDATE rounds
+SET rounds.course_id = {course_id}
+	,rounds.player_id = {player_id}
+	,rounds.round_date = {round_date}
+	,rounds.round_score = {round_score}
+WHERE rounds.round_id = {round_id};
+
+-- Updates specific swing based on swing id - for /update-swing route (POST)
+UPDATE swings
+SET player_id = {swing_player}
+	,round_id = {swing_round}
+	,hole_id = {swing_hole}
+	,club_id = {swing_club}
+	,dist_traveled_yd = {swing_dist}
+WHERE swing_id = {swing_id};
+
+-----------------
+--- DELETES
+-----------------
+-- Deletes specific club from clubs using club_id - for /delete-club route (POST)
+DELETE
+FROM clubs
+WHERE club_id = {club_id}
+
+-- Deletes specific player from players using player_id - for /delete-player route (POST)
+DELETE
+FROM players
+WHERE player_id = {player_id};
+
+-- Deletes specific round from rounds using round_id - for /delete-round route (POST)
+DELETE
+FROM rounds
+WHERE round_id = {round_id}
+
+-- Deletes specific swing from swings using swing_id - for /delete-swing route (POST)
+DELETE
+FROM swings
+WHERE swing_id = {swing_id};
+
+-- Deletes specific player_club relationship row from player_clubs using player_id and club_id - for /delete-player-clubs route (POST)
+DELETE
+FROM player_clubs
+WHERE player_id = {player_id}
+	AND club_id = {club_id};
