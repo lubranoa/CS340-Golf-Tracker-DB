@@ -76,7 +76,8 @@ CREATE TABLE clubs
     brand varchar(50) NOT NULL,
     club_name varchar(50) NOT NULL,
     club_type varchar(50) NOT NULL,
-    PRIMARY KEY (club_id)
+    PRIMARY KEY (club_id),
+    CONSTRAINT UC_club UNIQUE (brand, club_name, club_type)
 );
 
 -- Create player_clubs intersection table to facilitate the many to many 
@@ -219,14 +220,15 @@ VALUES
 (2, 1, 1, 1, 4, 170),
 (3, 1, 1, 1, 11, 50),
 (4, 1, 1, 1, 14, 6),
-(5, 1, 1, 1, 14, 1),
+(5, 1, 1, 1, NULL, 1),
 (6, 2, 1, 1, 1, 235),
 (7, 2, 1, 1, 2, 215),
 (8, 2, 1, 1, 9, 120),
 (9, 2, 1, 1, 12, 1),
 (10, 2, 1, 1, 12, 10),
 (11, 2, 1, 1, 14, 3),
-(12, 3, 1, 1, 1, 233)
+(12, 3, 1, 1, 1, 233),
+(13, 3, 1, 1, NULL, 0)
 ;
 
 -- Turn foreign key checking and autocommit back on
