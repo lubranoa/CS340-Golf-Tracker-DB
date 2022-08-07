@@ -70,6 +70,7 @@ CREATE TABLE rounds
 
 -- Create clubs table with an id, brand, name, and type
 --     PK = club_id (clubs are unique and need their own ID)
+-- Rows are unique based on brand, name, and type
 CREATE TABLE clubs
 (
     club_id int NOT NULL AUTO_INCREMENT,
@@ -87,12 +88,14 @@ CREATE TABLE clubs
 --     FK = player_id (a player can own a club)
 --     FK = club_id (a club can be owned by a player)
 -- A player_club relationship is deleted if a player or a club is deleted.
+-- Rows are unique based on player_id and club_id
 CREATE TABLE player_clubs
 (
     player_id int NOT NULL,
     club_id int NOT NULL,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE,
-    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
+    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE,
+    CONSTRAINT UC_pc UNIQUE (player_id, club_id)
 );
 
 -- Create swings table with an id, hole, round, player, club, and distance
