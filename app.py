@@ -531,17 +531,19 @@ def insert_swing():
     
     elif request.method == "POST":
         # Get new swing data from form submission
-        swing_player = request.form["player_id"]
-        swing_round = request.form["round_id"]
-        swing_hole = request.form["hole_id"]
-        swing_club = request.form["club_id"]
-        swing_dist = request.form["dist_traveled_yd"]
+        swing_player = int(request.form["player_id"])
+        swing_round = int(request.form["round_id"])
+        swing_hole = int(request.form["hole_id"])
+        swing_club = int(request.form["club_id"])
+        swing_dist = int(request.form["dist_traveled_yd"])
 
-        insert_query = "INSERT INTO swings (player_id, round_id, hole_id, club_id, dist_traveled_yd) VALUES (%s, %s, %s, %s, %s);"
+        if swing_club == 0:
+            swing_club = "NULL"
+
+        insert_query = f"INSERT INTO swings (player_id, round_id, hole_id, club_id, dist_traveled_yd) VALUES ({swing_player}, {swing_round}, {swing_hole}, {swing_club}, {swing_dist});"
         db.execute_query(
             db_connection=db_connection, 
-            query=insert_query, 
-            query_params=(swing_player, swing_round, swing_hole, swing_club, swing_dist)
+            query=insert_query
         )
         return redirect("/swings")
 
@@ -775,6 +777,9 @@ def update_swing(id):
         swing_hole = int(request.form["hole_id"])
         swing_club = int(request.form["club_id"])
         swing_dist = int(request.form["dist_traveled_yd"])
+
+        if swing_club == 0:
+            swing_club = "NULL"
 
         insert_query = f"UPDATE swings SET player_id = {swing_player}, round_id = {swing_round}, hole_id = {swing_hole}, club_id = {swing_club}, dist_traveled_yd = {swing_dist} WHERE swing_id = {swing_id};"
 

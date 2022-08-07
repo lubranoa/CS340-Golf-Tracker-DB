@@ -57,6 +57,7 @@
         <div class="mui-select">
             <select name="club_id">
                 <option value="">--Choose club--</option>
+                <option value="0">None</option>
                 {% for club in gt_clubs %}
                 <option value={{ club["club_id"] }}>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"]}}</option>
                 {% endfor %}
