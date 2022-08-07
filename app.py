@@ -706,10 +706,23 @@ def update_swing(id):
     redirecting to the read_swings page.
     """
     db_connection = db.connect_to_database()
+    swing_id = id
+
 
     if request.method == "GET":
         # Get necessary swing data for display and update inputs
-        read_query = "SELECT * FROM swings WHERE swing_id = '%s';" % (id)
+        read_query = f"""SELECT swings.swing_id, swings.dist_traveled_yd, swings.hole_id, courses.course_name, holes.hole_number, swings.round_id, rounds.round_date, swings.player_id, players.player_name, swings.club_id, CONCAT(clubs.brand, " ", clubs.club_name, " ", clubs.club_type) AS club FROM swings
+        INNER JOIN holes
+        ON swings.hole_id = holes.hole_id
+        INNER JOIN rounds
+        ON swings.round_id = rounds.round_id
+        INNER JOIN courses
+        ON rounds.course_id = courses.course_id
+        INNER JOIN players
+        ON swings.player_id = players.player_id
+        LEFT JOIN clubs
+        ON swings.club_id = clubs.club_id
+        WHERE swings.swing_id = {swing_id};"""
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
 
