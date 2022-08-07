@@ -35,6 +35,9 @@
             <th>{{ key }}</th>
             {% endfor %}
             <th>Delete</th>
+            {% else %}
+            <p>This table is empty.</p>
+            <p> Please use button below to insert data.</p>
             {% endif %}
         </tr>
     <tbody>
