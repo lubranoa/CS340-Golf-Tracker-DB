@@ -358,8 +358,18 @@ def insert_player_club():
         player_id = request.form['player']
         club_id = request.form['club']
 
-        query = f"INSERT INTO player_clubs (player_id, club_id) VALUES ({player_id}, {club_id});"
-        db.execute_query(db_connection=db_connection, query=query)
+        # Checks if row is already present
+        check_query = "SELECT player_id, club_id FROM player_clubs WHERE player_id = %s AND club_id =%s LIMIT 1;"
+        check_cursor = db.execute_query(
+            db_connection=db_connection, 
+            query=check_query, 
+            query_params=(player_id, club_id)
+        )
+        player_club_present = check_cursor.fetchone()
+
+        if not player_club_present:
+            query = f"INSERT INTO player_clubs (player_id, club_id) VALUES ({player_id}, {club_id});"
+            db.execute_query(db_connection=db_connection, query=query)
 
         return redirect("/player-clubs")
 

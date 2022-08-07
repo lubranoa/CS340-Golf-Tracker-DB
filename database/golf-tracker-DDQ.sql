@@ -92,7 +92,8 @@ CREATE TABLE player_clubs
     player_id int NOT NULL,
     club_id int NOT NULL,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE,
-    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
+    FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE,
+    CONSTRAINT UC_pc UNIQUE (player_id, club_id)
 );
 
 -- Create swings table with an id, hole, round, player, club, and distance
