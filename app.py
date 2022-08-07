@@ -190,7 +190,18 @@ def read_swings():
     buttons.
     """
     db_connection = db.connect_to_database()
-    query = "SELECT * FROM swings;"
+    query = """
+        SELECT swings.swing_id, swings.dist_traveled_yd, swings.hole_id, courses.course_name, holes.hole_number, swings.round_id, rounds.round_date, swings.player_id, players.player_name, swings.club_id, CONCAT(clubs.brand, " ", clubs.club_name, " ", clubs.club_type) AS club FROM swings
+        INNER JOIN holes
+        ON swings.hole_id = holes.hole_id
+        INNER JOIN rounds
+        ON swings.round_id = rounds.round_id
+        INNER JOIN courses
+        ON rounds.course_id = courses.course_id
+        INNER JOIN players
+        ON swings.player_id = players.player_id
+        LEFT JOIN clubs
+        ON swings.club_id = clubs.club_id"""
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     return render_template("read_swings.j2", gt_player_round_swings=results)
