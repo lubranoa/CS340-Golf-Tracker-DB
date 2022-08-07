@@ -874,7 +874,19 @@ def delete_round(id):
 
     if request.method == "GET":
         # Get necessary round data for display
-        read_query = "SELECT * FROM rounds WHERE round_id = '%s';" % (id)
+        read_query = ('SELECT '
+                     'rounds.round_id, '
+                     'rounds.course_id, '
+                     'courses.course_name, '
+                     'rounds.player_id, '
+                     'players.player_name, '
+                     'rounds.round_date, '
+                     'rounds.round_score '
+                     'FROM rounds '
+                     'INNER JOIN courses ON rounds.course_id = courses.course_id '
+                     'INNER JOIN players ON rounds.player_id = players.player_id '
+                     "WHERE round_id = '%s';" % (id)
+                     )
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_round.j2", gt_round=results)
@@ -957,7 +969,13 @@ def delete_player_club(player_id, club_id):
 
     if request.method == "GET":
         # Get necessary player_club data for display
-        read_query = "SELECT * FROM player_clubs WHERE player_id = %s and club_id = %s;" % (player_id, club_id)
+        read_query = """SELECT player_clubs.player_id, players.player_name, player_clubs.club_id, CONCAT(clubs.brand, ' ', clubs.club_name, ' ', clubs.club_type) AS club
+                FROM player_clubs
+                INNER JOIN players
+                ON player_clubs.player_id = players.player_id
+                INNER JOIN clubs
+                ON player_clubs.club_id = clubs.club_id
+                WHERE players.player_id = %s and clubs.club_id = %s;""" % (player_id, club_id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
         return render_template("delete_player_club.j2", gt_clubs=results)

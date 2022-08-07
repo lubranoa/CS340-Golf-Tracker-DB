@@ -185,7 +185,7 @@ VALUES
 (7, 'Mizuno', 'JPX Hot Metal', '7 Iron'),
 (8, 'Mizuno', 'JPX Hot Metal', '8 Iron'),
 (9, 'Mizuno', 'JPX Hot Metal', '9 Iron'),
-(10, 'Mizuno', 'JPX Hot Metal', 'Pitching Wdge'),
+(10, 'Mizuno', 'JPX Hot Metal', 'Pitching Wedge'),
 (11, 'Callaway', 'Jaws', 'Gap Wedge'),
 (12, 'Mizuno', 'JPX Hot Metal', 'Sand Wedge'),
 (13, 'Titleist', 'Bob Vokey', 'Lob Wedge'),
