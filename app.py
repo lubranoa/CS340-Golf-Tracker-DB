@@ -20,6 +20,7 @@
 from flask import Flask, render_template, json, request, redirect
 import os
 import database.db_connector as db
+from app_states import states
 
 
 # Configuration
@@ -274,7 +275,7 @@ def insert_course():
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
-        return render_template("insert_course.j2")
+        return render_template("insert_course.j2", us_states=states)
     
     elif request.method == "POST":
         # Get new course data from form submission
@@ -402,7 +403,7 @@ def insert_player():
     db_connection = db.connect_to_database()
 
     if request.method == "GET":
-        return render_template("insert_player.j2")
+        return render_template("insert_player.j2", us_states=states)
     
     elif request.method == "POST":
         # Get new player data from form submission
@@ -579,7 +580,7 @@ def update_player(id):
         read_query = "SELECT * FROM players WHERE player_id = '%s';" % (id)
         cursor = db.execute_query(db_connection=db_connection, query=read_query)
         results = cursor.fetchall()
-        return render_template("update_player.j2", gt_player=results)
+        return render_template("update_player.j2", us_states=states, gt_player=results)
     
     elif request.method == "POST":
         # Get updated player data from form submission
