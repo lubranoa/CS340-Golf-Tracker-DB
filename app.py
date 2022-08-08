@@ -988,6 +988,37 @@ def delete_player_club(player_id, club_id):
         
         return redirect("/player-clubs")
 
+# ----------------------------------------------------------------------------
+# RESET Route: Resets entire database
+#
+# The following Flask route functions handle reseting the entire database.
+# The function will execute the golf-tracker-DMQ.sql setting the database back
+# to it's original state. 
+#
+# ----------------------------------------------------------------------------
+
+@app.route("/reset-db", methods=[ "GET"])
+def reset_db():
+    """Resets DB data
+
+    If a GET request is sent to this route the database will be reset to it's default state
+    All newly added data will be removed. All original data will be returned.
+    The user will be sent back to the homepage.
+
+    Reference for reading .sql file: https://stackoverflow.com/a/19473206
+
+    """
+    db_connection = db.connect_to_database()
+
+    if request.method == "GET":
+        file_path = r"database/golf-tracker-reset.sql"
+        file_data = open(file_path, 'r').read()
+        sql_commands = file_data.split(';')
+        
+        for command in sql_commands:
+            db.execute_query(db_connection=db_connection, query=command)
+    
+    return redirect("/")
 
 # Listener
 
