@@ -445,3 +445,11 @@ DELETE
 FROM player_clubs
 WHERE player_id = {player_id}
 	AND club_id = {club_id};
+
+
+-----------------
+--- RESET Button
+-----------------
+-- Code for the "reset all data" button is available at database/golf-tracker-reset.sql
+-- The SQL is very similar to the DDQ, except all comments were remove so that it could be parsed easily by the app.
+-- Truncates were added at the top of the reset file to clear out old data.
