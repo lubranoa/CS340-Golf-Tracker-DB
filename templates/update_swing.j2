@@ -53,8 +53,8 @@
     <form class="mui-form--inline" action="/update-swing/{{ gt_swing[0].swing_id }}" method="post">
 <div class="mui-select">
             <select name="player_id" required>
-                <option value="">--Choose player--</option>
-                {% for player in gt_players %}
+                <option value="{{ gt_swing[0]["player_id"] }}">{{ gt_players[0]["player_name"] }}</option>
+                {% for player in gt_players if player["player_id"] != gt_swing[0]["player_id"] %}
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
                 {% endfor %}
             </select>
@@ -62,8 +62,8 @@
         </div>
         <div class="mui-select">
             <select name="round_id" required>
-                <option value="">--Choose round--</option>
-                {% for round in gt_rounds %}
+                <option value="{{ gt_swing[0]["round_id"] }}">{{ gt_swing[0]["course_name"] ~ " " ~ gt_swing[0]["round_date"]}}</option>
+                {% for round in gt_rounds if round["round_id"] != gt_swing[0]["round_id"] %}
                 <option value={{ round["round_id"] }}>{{ round["course_name"] ~ " " ~ round["round_date"]}}</option>
                 {% endfor %}
             </select>
@@ -71,8 +71,8 @@
         </div>
         <div class="mui-select" required>
             <select name="hole_id">
-                <option value="">--Choose hole--</option>
-                {% for hole in gt_holes %}
+                <option value="{{ gt_swing[0]["hole_id"] }}">{{  gt_swing[0]["course_name"] ~ ", hole: " ~ gt_swing[0]["hole_id"]}}</option>
+                {% for hole in gt_holes if hole["hole_id"] != gt_swing[0]["hole_id"] %}
                 <option value={{ hole["hole_id"] }}>{{ hole["course_name"] ~ ", hole: " ~ hole["hole_id"]}}</option>
                 {% endfor %}
             </select>
@@ -80,9 +80,9 @@
         </div>
         <div class="mui-select">
             <select name="club_id">
-                <option value="">--Choose club--</option>
+                <option value="{{ gt_swing[0]["club_id"] }}">{{ gt_swing[0]["club"] }}</option>
                 <option value="0">None</option>
-                {% for club in gt_clubs %}
+                {% for club in gt_clubs if club["club_id"] != gt_swing[0]["club_id"] %}
                 <option value={{ club["club_id"] }}>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"]}}</option>
                 {% endfor %}
             </select>
@@ -96,6 +96,7 @@
                 pattern="^\d{1,3}$" 
                 maxlength="3" 
                 required
+                value={{ gt_swing[0]["dist_traveled_yd"] }}
             >
             <label>Swing Distance in Yards</label>
         </div>
