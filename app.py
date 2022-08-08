@@ -17,7 +17,7 @@
 # ----------------------------------------------------------------------------
 
 
-from flask import Flask, render_template, json, request, redirect
+from flask import Flask, render_template, request, redirect
 import os
 import database.db_connector as db
 from app_states import states
