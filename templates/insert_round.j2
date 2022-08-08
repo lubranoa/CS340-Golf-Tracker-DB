@@ -34,7 +34,7 @@
                 <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
                 {% endfor %}
             </select>
-            <label>Course Name</label>
+            <label tabindex="-1">Course Name</label>
         </div>
         <div class="mui-select">
             <select name="player_id" required>
@@ -43,7 +43,7 @@
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
                 {% endfor %}
             </select>
-            <label>Player Name</label>
+            <label tabindex="-1">Player Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -52,7 +52,7 @@
                 value="2022-01-01T00:00" 
                 required
             >
-            <label>Date and Time of Round</label>
+            <label tabindex="-1">Date and Time of Round</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -63,7 +63,7 @@
                 maxlength="3" 
                 required
             >
-            <label>Round Score</label>
+            <label tabindex="-1">Round Score</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert round</button>

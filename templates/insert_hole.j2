@@ -34,7 +34,7 @@
                 <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
                 {% endfor %}
             </select>
-            <label>Course Name</label>
+            <label tabindex="-1">Course Name</label>
         </div>
         <div class="mui-select">
             <select name="hole_number" required>
@@ -58,7 +58,7 @@
                 <option value="17">17</option>
                 <option value="18">18</option>
             </select>
-            <label>Hole Number</label>
+            <label tabindex="-1">Hole Number</label>
         </div>
         <div class="mui-select">
             <select name="par_swing_count" required>
@@ -67,7 +67,7 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <label>Par for the Hole</label>
+            <label tabindex="-1">Par for the Hole</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -78,7 +78,7 @@
                 maxlength="3"
                 required
             >
-            <label>Distance in Yards</label>
+            <label tabindex="-1">Distance in Yards</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert hole</button>

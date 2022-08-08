@@ -58,7 +58,7 @@
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
                 {% endfor %}
             </select>
-            <label>Player Name</label>
+            <label tabindex="-1">Player Name</label>
         </div>
         <div class="mui-select">
             <select name="round_id" required>
@@ -67,7 +67,7 @@
                 <option value={{ round["round_id"] }}>{{ round["course_name"] ~ " " ~ round["round_date"]}}</option>
                 {% endfor %}
             </select>
-            <label>Round</label>
+            <label tabindex="-1">Round</label>
         </div>
         <div class="mui-select" required>
             <select name="hole_id">
@@ -76,7 +76,7 @@
                 <option value={{ hole["hole_id"] }}>{{ hole["course_name"] ~ ", hole: " ~ hole["hole_id"]}}</option>
                 {% endfor %}
             </select>
-            <label>Hole</label>
+            <label tabindex="-1">Hole</label>
         </div>
         <div class="mui-select">
             <select name="club_id">
@@ -86,7 +86,7 @@
                 <option value={{ club["club_id"] }}>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"]}}</option>
                 {% endfor %}
             </select>
-            <label>Club Used</label>
+            <label tabindex="-1">Club Used</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -97,7 +97,7 @@
                 maxlength="3" 
                 required
             >
-            <label>Swing Distance in Yards</label>
+            <label tabindex="-1">Swing Distance in Yards</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update swing</button>

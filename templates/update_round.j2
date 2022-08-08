@@ -58,7 +58,7 @@
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
                 {% endfor %}
             </select>
-            <label>Player Name</label>
+            <label tabindex="-1">Player Name</label>
         </div>
         <div class="mui-select">
             <select name="course_id" required>
@@ -67,7 +67,7 @@
                 <option value={{ course["course_id"] }}>{{ course["course_name"] }}</option>
                 {% endfor %}
             </select>
-            <label>Course Name</label>
+            <label tabindex="-1">Course Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -76,7 +76,7 @@
                 value={{ gt_round[0]["form_date"] }} 
                 required
             >
-            <label>Date and Time of Round</label>
+            <label tabindex="-1">Date and Time of Round</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -88,7 +88,7 @@
                 required 
                 value={{ gt_round[0]["round_score"] }}
             >
-            <label>Round Score</label>
+            <label tabindex="-1">Round Score</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update round</button>

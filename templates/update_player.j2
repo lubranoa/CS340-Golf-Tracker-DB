@@ -61,7 +61,7 @@
                 required
                 value="{{ gt_player[0].player_name }}"
             >
-            <label>Player Name</label>
+            <label tabindex="-1">Player Name</label>
         </div>
         <div class="mui-textfield mui-textfield--float-label">
             <input 
@@ -73,7 +73,7 @@
                 required
                 value="{{ gt_player[0].player_city }}"
             >
-            <label>Player City</label>
+            <label tabindex="-1">Player City</label>
         </div>
         <div class="mui-select">
             <select name="player_state" required>
@@ -85,7 +85,7 @@
                 {% endif %}
                 {% endfor %}
             </select>
-            <label>Player State</label>
+            <label tabindex="-1">Player State</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">update player</button>

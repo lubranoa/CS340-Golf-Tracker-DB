@@ -34,7 +34,7 @@
                 {% for player in gt_players %}
                 <option value={{ player["player_id"] }}>{{ player["player_name"] }}</option>
                 {% endfor %}
-            <label>Player</label>
+            <label tabindex="-1">Player</label>
             </select>
         </div>
         <div class="mui-select">
@@ -46,7 +46,7 @@
                 <option  value={{ club["club_id"] }}>{{ club["brand"] ~ " " ~ club["club_name"] ~ " " ~ club["club_type"] }}</option>
                 {% endfor %}
             </select>
-            <label>Club</label>
+            <label tabindex="-1">Club</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert player_club</button>

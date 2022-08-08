@@ -36,7 +36,7 @@
                 maxlength="50"
                 required
             >
-            <label>Course Name</label>
+            <label tabindex="-1">Course Name</label>
         </div>
         <div class="mui-select">
             <select name="course_state" required>
@@ -45,7 +45,7 @@
                 <option value={{ state }}>{{ state }}</option>
                 {% endfor %}
             </select>
-            <label>Course State</label>
+            <label tabindex="-1">Course State</label>
         </div>
         <br>
         <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">insert course</button>
