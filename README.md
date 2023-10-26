@@ -1,3 +1,93 @@
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
+
+<!-- Centered title section with descriptive lines -->
+<div align="center">
+  <p>
+    <a href="www.linkedin.com/in/lubrano-alexander">
+      <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin" alt="linkedin link" />
+    </a>
+    <a href="https://lubranoa.github.io">
+      <img src="https://img.shields.io/badge/Personal_Site-47b51b?style=for-the-badge" alt="personal website link" />
+    </a>
+    <a href="https://github.com/lubranoa">
+      <img src="https://img.shields.io/badge/GitHub-8A2BE2?style=for-the-badge&logo=github" alt="github profile link" />
+    </a>
+  </p>
+  <!-- Titles and Subtitles -->
+  <h1 align="center">Golf Tracker Database</h1>
+  <p align="center">
+    <b>Subtitle that's a short description</b>
+  </p>
+  <p align="center">
+    Summer 2022 · <a href="https://ecampus.oregonstate.edu/soc/ecatalog/ecoursedetail.htm?subject=CS&coursenumber=340&termcode=ALL">CS 340 Introduction to Databases</a> · Oregon State University
+  </p>
+  <br />
+</div>
+
+<!-- Table of Contents -->
+<details>
+  <summary>Table of Contents</summary>
+    
+  - [Project Description](#project-description)
+  - [Technologies Used](#technologies-used)
+  - [Features](#features)
+  - [Usage](#usage)
+  - [Skills Used](#skills-used)
+    - [Skill 1](#skill-1)
+    - [Skill 2](#skill-2)
+  - [References](#references)
+
+</details>
+
+## Project Description
+This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL database of golf data. It is the culmination of an entire term's worth of effort using a development process involving multiple iterative steps of designing, developing, and implementing feedback from peer and staff reviews on our Entity Relationship Diagram (ERD), schema diagram, Data Definition Query (DDQ) and Data Manipulation Query (DMQ) files, and the frontend web-based UI/UX. **Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
+
+## Technologies Used
+  - Backend:
+    - [![Python][Python]][Python-url]
+    - [![flask][flask]][flask-url]
+    - [![mysql][mysql]][mysql-url]
+    - [![dotenv][dotenv]][dotenv-url]
+    - [![sql][sql]][sql-url]
+  - Frontend:
+    - [![jinja][jinja]][jinja-url]
+    - [![html][html]][html-url]
+    - [![css][css]][css-url]
+## Features
+   
+Short descriptions
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage
+
+Explain how to use or interact with your project
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Skills Used
+#### Skill 1:
+  - description
+#### Skill 2:
+  - description
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Author
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## References
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Markdown links -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[Python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=ffd343
+[Python-url]: https://www.python.org/
+
+
 # CS340-Golf-Tracker-DB
 
 #### Created by Conner Marchell and Alex Lubrano for CS 340 - Introduction to Databases
@@ -5,16 +95,6 @@
 ## Overview
 
 This README covers a brief description of our project and how to set it up using Oregon State's ENGR servers and our course's MySQL database. The setup guide is intended for a student, TA, or professor that has not initialized a repository or directory for this project. If you are not pulling the repository from GitHub and already have the files, take care to ensure the file structure remains the same as in the Directory Structure section below. The setup guide uses the CLI methods described in the explorations to set up the project.
-
-## Table of Contents
-- [Overview](#overview)
-- [Project Description](#project-description)
-- [Project Setup](#project-setup)
-- [Directory Structure](#directory-structure)
-- [Links](#links)
-
-## Project Description
-Description goes here.
 
 ## Project Setup
 **1.** SSH into your flipX server of choice.
@@ -148,30 +228,6 @@ Access the gunicorn instance by opening Firefox or Chrome and entering the addre
    - To kill all of your gunicorn instances, run:
 ```bash
 pkill -u onid gunicorn
-```
-
-## Directory Structure
-
-The files and directories can be in any order but need to be in this specific structure:
-```
-.
-├── .gitignore 
-├── README.md
-├── app.py
-├── wsgi.py
-├── requirements.txt
-├── venv
-├── static
-│    └ css               <= Contains all project.css files
-│       ├ all-templates.css
-│       └ # rest of files
-├── database
-│    ├ db_connector.py
-│    ├ golf-tracker-DDQ.sql
-│    └ golf-tracker-DMQ.sql
-└── templates               <= Contains all project.j2 files
-     ├ main.j2 
-     └ # rest of files
 ```
 
 ## Links
