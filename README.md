@@ -47,7 +47,9 @@
 
 <!-- Project Description -->
 ## Project Description
-This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL database of golf data. It is the culmination of an entire term's worth of effort using a development process involving multiple iterative steps of designing, developing, and implementing feedback from peer and staff reviews on our Entity Relationship Diagram (ERD), schema diagram, Data Definition Query (DDQ) and Data Manipulation Query (DMQ) files, and the frontend web-based UI/UX. **Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The main purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
+This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL database of golf data. It is the culmination of an entire term's worth of effort using a development process involving multiple iterative steps of designing, developing, and implementing feedback from peer and staff reviews on our Entity Relationship Diagram (ERD), schema diagram, Data Definition Query (DDQ) and Data Manipulation Query (DMQ) files, and the frontend web-based UI/UX.
+
+**Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The main purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
 
 <!-- Technologies Used -->
 ## Technologies Used
@@ -63,15 +65,29 @@ This project is a Golf Tracking application that provides a web-based user inter
 
 <!-- Features -->
 ## Features
-   
-Short descriptions
+Golf Tracker offers an array of features for a Database Admin to interact with the Golf Tracker's database.
+  - **Data Management**: Provides requisite create, read, update, and delete (CRUD) operations for the admin to manage the golf data in the database.
+  - **Easy-to-use, Simple UI**: Implemented as a simple website, the UI is easy to use and navigate and does not have extensive styling.
+  - **Website Functionality**: The website allows the admin to easily view each table in the database and to easily perform insertions, updates, and deletions on the data in those tables.
+  - **Input Validation**: Validates any data input on create and update operations' pages before submission via required inputs and regular expressions (RegEx).
+  - **Search Many-to-Many Relationships**: Allows the admin to search the Players-Clubs intersection table for certain relationships between players and the clubs they own.
+  - **Resolves Relationship Dependencies**: Resolves relationship issues that arise via editing or deleting an entity by properly updating any of its dependent entities.
+  - **Data Definition Queries** (DDQ): [SQL file](/database/golf-tracker-DDQ.sql) that can be used to create the database schema and populate it with data.
+  - **Data Manipulation Queries** (DMQ): [SQL file](/database/golf-tracker-DDQ.sql) that contains all of the data manipulation queries used when the application communicates with the database.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Usage -->
 ## Usage
+This application was deployed on Oregon State's own servers and used a cloud-hosted MySQL database for data persistence. I do not have access to those servers or the database anymore so this project will not run in its current form. To see the old setup steps, check out the [STARTUP-README](/STARTUP-README.md), which is the old version and contains how we set up the project on our school systems.
 
-Explain how to use or interact with your project
+TODO:
+  - Add homepage screenshot and description
+  - Add a view entity screenshot and description
+  - Add a create entity screenshot and description
+  - Add a update entity screenshot and description
+  - Add a delete entity screenshot and description
+  - Add a player-clubs entity and description
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
