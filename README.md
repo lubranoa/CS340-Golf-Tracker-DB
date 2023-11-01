@@ -84,11 +84,29 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
 This application was deployed on Oregon State's own servers and used a cloud-hosted MySQL database for data persistence. I do not have access to those servers or the database anymore so this project will not run anymore in its current form. To see the old setup steps, check out the [STARTUP-README](/STARTUP-README.md), which is the old version and contains how we set up the project using our school systems.
 
 ### Database Layout
-This database has six different tables of entities that it holds, plus one intersection table of the single Many-to-Many relationship in the database. This layout can be seen in the project's Entity Relationship Diagram (ERD) below.
+This database has seven different tables of entities that it holds, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
 
-<div align="center">
-  <img src="./screenshots/340-ERD.png" width="750">
-</div>
+  - `courses` Entity
+    - Stores golf courses with a name and a US state location.
+    - Deletions cascade to delete rounds.
+  - `holes` Entity
+    - Stores holes of a golf course with a hole number, par swing count, hole distance, and the course it's part of (uses course ID number). Dependent on `courses`.
+  - `clubs` Entity
+    - Stores golf clubs with a brand name, club name, and a club type. These are not directly tied to players inside the `clubs` table due to the many-to-many relationship needing an intersection table to hold the relationships.
+    - Deletions cascade to delete player-club relationships and removes the club from any `swings` they were used for.
+  - `players` Entity
+    - Stores players with a name, a city, and a US state.
+    - Deletions cascade to delete rounds and player-club relationships.
+  - `player_clubs` Entity
+    - Stores the relationships of players and the clubs they own. These are many-to-many relationships because a player can own multiple clubs and a single club can be owned by multiple people.
+  - `rounds` Entity
+    - Stores players' rounds of golf with a date, the score, the player whose round it is, and which course it was on. Dependent on `courses` and `players`.
+    - Deletions cascade to delete swings.
+  - `swings` Entity
+    - Stores players' swings taken with a distance traveled, the club used, the player who swung, the hole it was done on, and the round in which it occurred. Dependent on `clubs`, `players,`, `rounds`, and `holes`.
+
+For detailed specifics on the database design, take a look at the database's [ERD](/screenshots/340-ERD.png), [schema](/screenshots/340-schema.png), and the *Database Outline* section of the [project document](/docs/Group%2066%20Step%205%20Final.pdf).
+
 ### Simple Administrator Website
 When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `https://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
 
