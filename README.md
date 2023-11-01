@@ -71,8 +71,8 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
   - **Data Management**: Provides requisite create, read, update, and delete (CRUD) operations for the admin to manage the golf data in the database.
   - **Easy-to-use, Simple UI**: Implemented as a simple website, the UI is easy to use and navigate and does not have extensive styling.
   - **Website Functionality**: The website allows the admin to easily view each table in the database and to easily perform insertions, updates, and deletions on the data in those tables.
-  - **Input Validation**: Validates any data input on create and update operations' pages before submission via required inputs and regular expressions (RegEx).
-  - **Auto-filled Update Entry Inputs**: The input boxes on "Update" pages auto-fill the input fields with the current data of the entry being updated.
+  - **Input Validation**: Validates any data input on "Create" and "Update" operations' pages before submission via required inputs and regular expressions (RegEx).
+  - **Dynamically Populated Inputs**: Certain dropdown inputs are dynamically populated with choices already in the database in some form. Input fields on "Update" pages are also dynamically populated with the current data of the entry being edited.
   - **Search Many-to-Many Relationships**: Allows the admin to search the Players-Clubs intersection table for certain relationships between players and the clubs they own.
   - **Resolves Relationship Dependencies**: Resolves relationship issues that arise via editing or deleting an entity by properly updating or cascade deleting any of its dependent entities.
   - **Data Definition Queries** (DDQ): [SQL file](/database/golf-tracker-DDQ.sql) that can be used to create the database schema and populate it with data.
@@ -122,8 +122,8 @@ When the application was still deployed and functional, the website was accessib
       ![Screenshot of the players table web page that contains each player's information in the Golf Tracker DB along with create, edit, and delete buttons.](/screenshots/340-player-table.png)
 
   - Insert/Create an Entry
-    - At the bottom of tables on any "View" pages, there is a blue "+" button that directs the admin to another page titled "Insert `entity` Entry". This page has the necessary input fields for each entity in the database. 
-    - All text input is validated by the pages and must be correct before sending a response to the server. The selections of some dropdowns are populated with database data, such as in the example below. The "Course Name" and "Player Name" dropdowns will only contain courses and players already in the database.
+    - At the bottom of tables on any "View" pages, there is a blue "+" button that directs the admin to another page titled "Insert `entity` Entry". These pages have all necessary input fields for each entity in the database. 
+    - All text input is validated by the pages and must be correct before submitting. The selections of some dropdowns are dynamically populated with database data, such as in the example below. The "Course Name" and "Player Name" dropdowns will only contain courses and players already in the database.
 
       ![Screenshot of the insert round entry page that has the necessary input fields for a round entry and an insert round button.](/screenshots/340-insert-round.png)
 
