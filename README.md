@@ -72,8 +72,9 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
   - **Easy-to-use, Simple UI**: Implemented as a simple website, the UI is easy to use and navigate and does not have extensive styling.
   - **Website Functionality**: The website allows the admin to easily view each table in the database and to easily perform insertions, updates, and deletions on the data in those tables.
   - **Input Validation**: Validates any data input on create and update operations' pages before submission via required inputs and regular expressions (RegEx).
+  - **Auto-filled Update Entry Inputs**: The input boxes on "Update" pages auto-fill the input fields with the current data of the entry being updated.
   - **Search Many-to-Many Relationships**: Allows the admin to search the Players-Clubs intersection table for certain relationships between players and the clubs they own.
-  - **Resolves Relationship Dependencies**: Resolves relationship issues that arise via editing or deleting an entity by properly updating any of its dependent entities.
+  - **Resolves Relationship Dependencies**: Resolves relationship issues that arise via editing or deleting an entity by properly updating or cascade deleting any of its dependent entities.
   - **Data Definition Queries** (DDQ): [SQL file](/database/golf-tracker-DDQ.sql) that can be used to create the database schema and populate it with data.
   - **Data Manipulation Queries** (DMQ): [SQL file](/database/golf-tracker-DDQ.sql) that contains all of the data manipulation queries used when the application communicates with the database.
 
@@ -111,14 +112,28 @@ For detailed specifics on the database design, take a look at the database's [ER
 When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `https://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
 
   - Home Page
-    - A simple web page that has links to each table in the Golf Tracker database. It also has a button to reset the data in the database back to its original state. 
+    - A simple web page that contains links to each table in the Golf Tracker database. It also has a button to reset the data in the database back to its original state for when peers and staff wanted to reset after testing.
 
       ![Screenshot of the home page of the Golf Tracker website with links to all the tables in the database and a reset database button](/screenshots/340-home-page.png)
 
+  - View/Read a Single Table
+    - Each database table has its own "View" page that displays all entries in the table. For example, below you can see the `players` table, which displays all the data in the table along with an insert button at the bottom and edit and delete buttons for each entry.
+
+      ![Screenshot of the players table web page that contains each player's information in the Golf Tracker DB along with create, edit, and delete buttons.](/screenshots/340-player-table.png)
+
+  - Insert/Create an Entry
+    - At the bottom of tables on any "View" pages, there is a blue "+" button that directs the admin to another page titled "Insert `entity` Entry". This page has the necessary input fields for each entity in the database. 
+    - All text input is validated by the pages and must be correct before sending a response to the server. The selections of some dropdowns are populated with database data, such as in the example below. The "Course Name" and "Player Name" dropdowns will only contain courses and players already in the database.
+
+      ![Screenshot of the insert round entry page that has the necessary input fields for a round entry and an insert round button.](/screenshots/340-insert-round.png)
+
+  - Edit/Update an Entry
+    - Most of the tables on "View" pages have update buttons in the tables next to each entry, which navigates the admin to another page titled "Update `entity` Entry". Only some of the entities in the application are allowed to be edited, which was a design choice to fulfill assignment requirements.
+    - The web page the admin is taken to shows the entry in its entirety in a table, and has the same validating inputs as "Insert" pages that are also pre-populated with the entry's current data.
+
+      ![Screenshot of an update swing entry page that has all of the swing's information displayed in a table, has the necessary input fields for a swing that are pre-populated with all of the swing's current data, and has an update swing button.](/screenshots/340-update-swing.png)
+
 TODO:
-  - Add a view entity screenshot and description
-  - Add a create entity screenshot and description
-  - Add a update entity screenshot and description
   - Add a delete entity screenshot and description
   - Add a player-clubs entity and description
 
