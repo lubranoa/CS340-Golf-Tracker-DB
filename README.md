@@ -38,6 +38,8 @@
   - [Technologies Used](#technologies-used)
   - [Features](#features)
   - [Usage](#usage)
+    - [Database Layout](#database-layout)
+    - [Simple Admin Website](#simple-administrator-website)
   - [Skills Applied](#skills-applied)
     - [Skill 1](#skill-1)
     - [Skill 2](#skill-2)
@@ -57,10 +59,10 @@ This project is a Golf Tracking application that provides a web-based user inter
     - [![python][python]][python-url]
     - [![flask][flask]][flask-url]
     - [![mysql][mysql]][mysql-url]
+    - [![gunicorn][gunicorn]][gunicorn-url]
     - [![dotenv][dotenv]][dotenv-url]
   - Frontend:
     - [![jinja][jinja]][jinja-url]
-    - [![gunicorn][gunicorn]][gunicorn-url]
     - [![css][css]][css-url]
 
 <!-- Features -->
@@ -81,12 +83,21 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
 ## Usage
 This application was deployed on Oregon State's own servers and used a cloud-hosted MySQL database for data persistence. I do not have access to those servers or the database anymore so this project will not run anymore in its current form. To see the old setup steps, check out the [STARTUP-README](/STARTUP-README.md), which is the old version and contains how we set up the project using our school systems.
 
-When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers with our choice of a port number. There were no login requirements laid out by the assignment specifications. The following are some of the pages that could be seen on the website.
+### Database Layout
+This database has six different tables of entities that it holds, plus one intersection table of the single Many-to-Many relationship in the database. This layout can be seen in the project's Entity Relationship Diagram (ERD) below.
+
+<div align="center">
+  <img src="./screenshots/340-ERD.png" width="750">
+</div>
+### Simple Administrator Website
+When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `https://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
 
   - Home Page
+    - A simple web page that has links to each table in the Golf Tracker database. It also has a button to reset the data in the database back to its original state. 
+
+      ![Screenshot of the home page of the Golf Tracker website with links to all the tables in the database and a reset database button](/screenshots/340-home-page.png)
 
 TODO:
-  - Add homepage screenshot and description
   - Add a view entity screenshot and description
   - Add a create entity screenshot and description
   - Add a update entity screenshot and description
