@@ -41,8 +41,7 @@
     - [Database Layout](#database-layout)
     - [Simple Admin Website](#simple-administrator-website)
   - [Skills Applied](#skills-applied)
-    - [Skill 1](#skill-1)
-    - [Skill 2](#skill-2)
+  - [Contact](#contact)
   - [Acknowledgements](#acknowledgements)
 
 </details>
@@ -111,7 +110,7 @@ For detailed specifics on the database design, take a look at the database's [ER
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Simple Administrator Website
-When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `https://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
+When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `http://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
 
   - Home Page
     - A simple web page that contains links to each table in the Golf Tracker database. It also has a button to reset the data in the database back to its original state for when peers and staff wanted to reset after testing.
@@ -151,16 +150,24 @@ When the application was still deployed and functional, the website was accessib
 
 <!-- Skills Applied -->
 ## Skills Applied
-#### Skill 1:
-  - description
-#### Skill 2:
-  - description
+The term-long development of the Golf Tracker project involved the application of a wide range of skills and technologies, making it a comprehensive learning experience. The key skills utilized in the project include:
+  - Database design and schema/ERD creation
+  - Python-based web application development with Flask
+  - Front-end development using Jinja, HTML, and CSS
+  - Creating CRUD operations for various entities
+  - Handling user input and form submissioins
+  - Data validation and consistency
+  - Data relationship management
+  - User interface design and user experience improvements
+
+These skills were applied collaboratively to create Golf Tracker. The project not only demonstrates proficiency in web development and database management but also showcases the ability to transform a conceptual idea into a fully functional web application.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Contact -->
 ## Contact
 Alexander Lubrano - [lubrano.alexander@gmail.com][email] - [LinkedIn][linkedin-url]
+
 Conner Marchell - [GitHub][conner-github-url]
 
 Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
