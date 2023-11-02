@@ -99,7 +99,7 @@ This database has seven different tables of entities that it holds, including on
     - Stores players with a name, a city, and a US state.
     - Deletions cascade to delete rounds and player-club relationships.
   - `player_clubs` Entity
-    - Stores the relationships of players and the clubs they own. These are many-to-many relationships because a player can own multiple clubs and a single club can be owned by multiple people.
+    - Stores the relationships of players and the clubs they own. These are many-to-many relationships because a player can own multiple clubs and a single club can be owned by multiple players.
   - `rounds` Entity
     - Stores players' rounds of golf with a date, the score, the player whose round it is, and which course it was on. Dependent on `courses` and `players`.
     - Deletions cascade to delete swings.
@@ -107,6 +107,8 @@ This database has seven different tables of entities that it holds, including on
     - Stores players' swings taken with a distance traveled, the club used, the player who swung, the hole it was done on, and the round in which it occurred. Dependent on `clubs`, `players,`, `rounds`, and `holes`.
 
 For detailed specifics on the database design, take a look at the database's [ERD](/screenshots/340-ERD.png), [schema](/screenshots/340-schema.png), and the *Database Outline* section of the [project document](/docs/Group%2066%20Step%205%20Final.pdf).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Simple Administrator Website
 When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `https://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
@@ -122,20 +124,28 @@ When the application was still deployed and functional, the website was accessib
       ![Screenshot of the players table web page that contains each player's information in the Golf Tracker DB along with create, edit, and delete buttons.](/screenshots/340-player-table.png)
 
   - Insert/Create an Entry
-    - At the bottom of tables on any "View" pages, there is a blue "+" button that directs the admin to another page titled "Insert `entity` Entry". These pages have all necessary input fields for each entity in the database. 
-    - All text input is validated by the pages and must be correct before submitting. The selections of some dropdowns are dynamically populated with database data, such as in the example below. The "Course Name" and "Player Name" dropdowns will only contain courses and players already in the database.
+    - At the bottom of tables on any "View" pages, there is a blue "+" button that takes the admin to another page titled "Insert `entity` Entry". These pages have all necessary input fields for each entity in the database. 
+    - All text input is validated by the pages and must be correct before submission. The selections of some dropdowns are dynamically populated with database data, such as in the screenshot below where the "Course Name" and "Player Name" dropdowns will only contain choices of courses and players already in the database.
 
       ![Screenshot of the insert round entry page that has the necessary input fields for a round entry and an insert round button.](/screenshots/340-insert-round.png)
 
   - Edit/Update an Entry
     - Most of the tables on "View" pages have update buttons in the tables next to each entry, which navigates the admin to another page titled "Update `entity` Entry". Only some of the entities in the application are allowed to be edited, which was a design choice to fulfill assignment requirements.
-    - The web page the admin is taken to shows the entry in its entirety in a table, and has the same validating inputs as "Insert" pages that are also pre-populated with the entry's current data.
+    - These "Update" web pages show the entry being updated in a table and have the same validating and dynamically populated inputs as "Insert" pages. The input fields are pre-populated with the entry's current data.
 
       ![Screenshot of an update swing entry page that has all of the swing's information displayed in a table, has the necessary input fields for a swing that are pre-populated with all of the swing's current data, and has an update swing button.](/screenshots/340-update-swing.png)
+  
+  - Delete an Entry
+    - Most of the tables on "View" pages also have delete buttons for each entry in the table. This navigates the admin to a page of the application confirming whether or not they want to delete the entry.
+    - On submit, the entry will be deleted along with any cascading deletions that need to be carried out by the database's `CASCADE` rules.
 
-TODO:
-  - Add a delete entity screenshot and description
-  - Add a player-clubs entity and description
+      ![Screenshot of an entry deletion confirmation page that asks if the user is sure if they want to delete an entry and has radio buttons for yes and no and a submit button.](/screenshots/340-delete-player.png)
+
+  - View and Search Intersection Table of M:M Relationship
+    - This intersection table shows which player owns what clubs in the database. This relationship is many-to-many since a player can own multiple clubs and a club can be owned by multiple players, as described in the [Database Layout section](#database-layout).
+    - This web page also has the functionality to search for relationships by player. For a screenshot of how that looks, take a look at this [screenshot of a search](/screenshots/340-player-club-search.png) when the admin searches for "Happy".
+
+      ![Screenshot of the player-clubs intersection table that shows which players own what clubs with delete buttons next to each entry, an insert button at the bottom of the table, and a search bar below the table for the user to search for relationships by player](/screenshots/340-player-club-table.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -151,6 +161,7 @@ TODO:
 <!-- Contact -->
 ## Contact
 Alexander Lubrano - [lubrano.alexander@gmail.com][email] - [LinkedIn][linkedin-url]
+Conner Marchell - [GitHub][conner-github-url]
 
 Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 
@@ -193,3 +204,4 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 [email]: mailto:lubrano.alexander@gmail.com
 [linkedin-url]: www.linkedin.com/in/lubrano-alexander
 [repo-url]: https://github.com/lubranoa/CS340-Golf-Tracker-DB
+[conner-github-url]: https://github.com/CMarchell
