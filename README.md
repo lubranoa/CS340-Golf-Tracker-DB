@@ -48,24 +48,29 @@
 
 <!-- Project Description -->
 ## Project Description
+
 This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL database of golf data. It is the culmination of an entire term's worth of effort to deploy this database administration application using a development process involving multiple iterative steps of designing, developing, and implementing peer and staff feedback on our database modeling and diagrams, SQL queries, client and server-side code, and UI/UX of the web application.
 
 **Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The main purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
 
 <!-- Technologies Used -->
 ## Technologies Used
+
   - Backend:
     - [![python][python]][python-url]
     - [![flask][flask]][flask-url]
-    - [![mysql][mysql]][mysql-url]
     - [![gunicorn][gunicorn]][gunicorn-url]
     - [![dotenv][dotenv]][dotenv-url]
   - Frontend:
     - [![jinja][jinja]][jinja-url]
     - [![css][css]][css-url]
+  - Database:
+    - [![mysql-cli][mysql-cli]][mysql-cli-url]
+    - [![phpmyadmin][phpmyadmin]][phpmyadmin-url]
 
 <!-- Features -->
 ## Features
+
 Golf Tracker offers an array of features for a Database Admin to interact with the Golf Tracker's database.
   - **Data Management**: Provides requisite create, read, update, and delete (CRUD) operations for the admin to manage the golf data in the database.
   - **Easy-to-use, Simple UI**: Implemented as a simple website, the UI is easy to use and navigate and does not have extensive styling.
@@ -81,9 +86,11 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
 
 <!-- Usage -->
 ## Usage
+
 This application was deployed on Oregon State's own servers and used a cloud-hosted MySQL database for data persistence. I do not have access to those servers or the database anymore so this project will not run anymore in its current form. To see the old setup steps, check out the [STARTUP-README](/STARTUP-README.md), which is the old version and contains how we set up the project using our school systems.
 
 ### Database Layout
+
 This database has seven different tables of entities that it holds, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
 
   - `courses` Entity
@@ -110,6 +117,7 @@ For detailed specifics on the database design, take a look at the database's [ER
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Simple Administrator Website
+
 When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `http://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
 
   - Home Page
@@ -150,6 +158,7 @@ When the application was still deployed and functional, the website was accessib
 
 <!-- Skills Applied -->
 ## Skills Applied
+
 The term-long development of the Golf Tracker project involved the application of a wide range of skills and technologies, making it a comprehensive learning experience. The key skills utilized in the project include:
   - Database design and schema/ERD creation
   - Python-based web application development with Flask
@@ -166,6 +175,7 @@ These skills were applied collaboratively to create Golf Tracker. The project no
 
 <!-- Contact -->
 ## Contact
+
 Alexander Lubrano - [lubrano.alexander@gmail.com][email] - [LinkedIn][linkedin-url]
 
 Conner Marchell - [GitHub][conner-github-url]
@@ -175,10 +185,13 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Acknowledgements
-
-- OSU starter app linked in our course: [OSU Flask Starter App](https://github.com/osu-cs340-ecampus/flask-starter-app)
-- OSU starter app repo references this repo sometimes: [CS340_starter_app](https://github.com/mlapresta/cs340_starter_app)
-- [Jinja 2.11.x Template Designer Documentation](https://jinja.palletsprojects.com/en/2.11.x/templates/)
+- [Jinja 2.11.x Template Designer Documentation][jinja-url]
+- [Flask Documentation][flask-url]
+- [MySQL CLI Documentation][mysql-url]
+- [Diagrams.net (formerly Draw.io)][drawio-url]
+- [Shields.io][shields-url]
+- [Simple Icons][icons-url]
+- [Adapted README from Best-README-TEMPLATE][readme-template-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -193,8 +206,11 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 [dotenv]: https://img.shields.io/badge/Dotenv-grey?style=for-the-badge&logo=dotenv&logoColor=ecd53f
 [dotenv-url]: https://pypi.org/project/python-dotenv/
 
-[mysql]: https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white
-[mysql-url]: https://www.mysql.com/
+[mysql-cli]: https://img.shields.io/badge/MySQL_CLI_Client-4479A1?style=for-the-badge&logo=mysql&logoColor=white
+[mysql-cli-url]: https://dev.mysql.com/doc/refman/8.0/en/mysql.html
+
+[phpmyadmin]: https://img.shields.io/badge/phpMyAdmin-6C78AF?style=for-the-badge&logo=phpmyadmin&logoColor=white
+[phpmyadmin-url]: https://www.phpmyadmin.net/
 
 [gunicorn]: https://img.shields.io/badge/Gunicorn-grey?style=for-the-badge&logo=gunicorn
 [gunicorn-url]: https://gunicorn.org/
@@ -205,10 +221,12 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 [css]: https://shields.io/badge/CSS-grey?style=for-the-badge&logo=css3&logoColor=1572B6
 [css-url]: https://www.w3.org/Style/CSS/
 
-[shields-url]: https://shields.io/
-[icons-url]: https://simpleicons.org/
-
 [email]: mailto:lubrano.alexander@gmail.com
 [linkedin-url]: www.linkedin.com/in/lubrano-alexander
 [repo-url]: https://github.com/lubranoa/CS340-Golf-Tracker-DB
 [conner-github-url]: https://github.com/CMarchell
+
+[shields-url]: https://shields.io/
+[icons-url]: https://simpleicons.org/
+[readme-template-url]: https://github.com/othneildrew/Best-README-Template/blob/master/README.md
+[drawio-url]: https://app.diagrams.net/
