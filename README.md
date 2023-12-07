@@ -5,7 +5,7 @@
 <div align="center">
   <!-- Badges -->
   <p>
-    <a href="www.linkedin.com/in/lubrano-alexander">
+    <a href="https://www.linkedin.com/in/lubrano-alexander">
       <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin" alt="linkedin link" />
     </a>
     <a href="https://lubranoa.github.io">
@@ -71,16 +71,29 @@ This project is a Golf Tracking application that provides a web-based user inter
 <!-- Features -->
 ## Features
 
-Golf Tracker offers an array of features for a Database Admin to interact with the Golf Tracker's database.
-  - **Data Management**: Provides requisite create, read, update, and delete (CRUD) operations for the admin to manage the golf data in the database.
-  - **Easy-to-use, Simple UI**: Implemented as a simple website, the UI is easy to use and navigate and does not have extensive styling.
-  - **Website Functionality**: The website allows the admin to easily view each table in the database and to easily perform insertions, updates, and deletions on the data in those tables.
-  - **Input Validation**: Validates any data input on "Create" and "Update" operations' pages before submission via required inputs and regular expressions (RegEx).
-  - **Dynamically Populated Inputs**: Certain dropdown inputs are dynamically populated with choices already in the database in some form. Input fields on "Update" pages are also dynamically populated with the current data of the entry being edited.
-  - **Search Many-to-Many Relationships**: Allows the admin to search the Players-Clubs intersection table for certain relationships between players and the clubs they own.
-  - **Resolves Relationship Dependencies**: Resolves relationship issues that arise via editing or deleting an entity by properly updating or cascade deleting any of its dependent entities.
-  - **Data Definition Queries** (DDQ): [SQL file](/database/golf-tracker-DDQ.sql) that can be used to create the database schema and populate it with data.
-  - **Data Manipulation Queries** (DMQ): [SQL file](/database/golf-tracker-DDQ.sql) that contains all of the data manipulation queries used when the application communicates with the database.
+Golf Tracker offers an array of features for a Database Admin to interact with the Golf Tracker's database:
+
+  - Provides CRUD operations for golf data management
+
+  - Simple website with an intuitive user interface
+
+  - Website displays each table of entities in the database
+
+  - Each table on the site has each entity's requisite CRUD operations
+
+  - User input validation on create and update page inputs
+  
+  - Dynamically populates dropdown inputs with necessary database entries
+  
+  - Update page inputs are pre-populated with the data being edited
+
+  - Search the player-club intersection table for players and the clubs they own
+
+  - Resolves relationship dependency issues that arise via editing or deleting an entity
+
+  - Data Definition Queries (DDQ) [SQL file](/database/golf-tracker-DDQ.sql) used to create the database schema and populate it with data
+
+  - Data Manipulation Queries (DMQ) [SQL file](/database/golf-tracker-DDQ.sql) contains all of the data manipulation queries used when the application communicates with the database
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -91,24 +104,30 @@ This application was deployed on Oregon State's own servers and used a cloud-hos
 
 ### Database Layout
 
-This database has seven different tables of entities that it holds, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
+This database has seven different tables of entities that it stores, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
 
   - `courses` Entity
     - Stores golf courses with a name and a US state location.
     - Deletions cascade to delete rounds.
+
   - `holes` Entity
     - Stores holes of a golf course with a hole number, par swing count, hole distance, and the course it's part of (uses course ID number). Dependent on `courses`.
+
   - `clubs` Entity
     - Stores golf clubs with a brand name, club name, and a club type. These are not directly tied to players inside the `clubs` table due to the many-to-many relationship needing an intersection table to hold the relationships.
     - Deletions cascade to delete player-club relationships and removes the club from any `swings` they were used for.
+    
   - `players` Entity
     - Stores players with a name, a city, and a US state.
     - Deletions cascade to delete rounds and player-club relationships.
+
   - `player_clubs` Entity
     - Stores the relationships of players and the clubs they own. These are many-to-many relationships because a player can own multiple clubs and a single club can be owned by multiple players.
+    
   - `rounds` Entity
     - Stores players' rounds of golf with a date, the score, the player whose round it is, and which course it was on. Dependent on `courses` and `players`.
     - Deletions cascade to delete swings.
+
   - `swings` Entity
     - Stores players' swings taken with a distance traveled, the club used, the player who swung, the hole it was done on, and the round in which it occurred. Dependent on `clubs`, `players,`, `rounds`, and `holes`.
 
@@ -160,13 +179,21 @@ When the application was still deployed and functional, the website was accessib
 ## Skills Applied
 
 The term-long development of the Golf Tracker project involved the application of a wide range of skills and technologies, making it a comprehensive learning experience. The key skills utilized in the project include:
+
   - Database design and schema/ERD creation
+
   - Python-based web application development with Flask
+
   - Front-end development using Jinja, HTML, and CSS
+
   - Creating CRUD operations for various entities
-  - Handling user input and form submissioins
+  
+  - Handling user input and form submissions
+
   - Data validation and consistency
+
   - Data relationship management
+
   - User interface design and user experience improvements
 
 These skills were applied collaboratively to create Golf Tracker. The project not only demonstrates proficiency in web development and database management but also showcases the ability to transform a conceptual idea into a fully functional web application.
@@ -187,7 +214,7 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 ## Acknowledgements
 - [Jinja 2.11.x Template Designer Documentation][jinja-url]
 - [Flask Documentation][flask-url]
-- [MySQL CLI Documentation][mysql-url]
+- [MySQL CLI Documentation][mysql-cli-url]
 - [Diagrams.net (formerly Draw.io)][drawio-url]
 - [Shields.io][shields-url]
 - [Simple Icons][icons-url]
@@ -222,7 +249,7 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 [css-url]: https://www.w3.org/Style/CSS/
 
 [email]: mailto:lubrano.alexander@gmail.com
-[linkedin-url]: www.linkedin.com/in/lubrano-alexander
+[linkedin-url]: https://www.linkedin.com/in/lubrano-alexander
 [repo-url]: https://github.com/lubranoa/CS340-Golf-Tracker-DB
 [conner-github-url]: https://github.com/CMarchell
 
