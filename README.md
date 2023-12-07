@@ -42,7 +42,7 @@
     - [Simple Admin Website](#simple-administrator-website)
   - [Skills Applied](#skills-applied)
   - [Contact](#contact)
-  - [Acknowledgments](#acknowledgemnts)
+  - [Acknowledgments](#acknowledgments)
 
 </details>
 
@@ -97,7 +97,7 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
 
   - Data Definition Queries (DDQ) [SQL file](/database/golf-tracker-DDQ.sql) used to create the database schema and populate it with data
 
-  - Data Manipulation Queries (DMQ) [SQL file](/database/golf-tracker-DDQ.sql) contains all of the data manipulation queries used when the application communicates with the database
+  - Data Manipulation Queries (DMQ) [SQL file](/database/golf-tracker-DMQ.sql) contains all of the data manipulation queries used when the application communicates with the database
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
