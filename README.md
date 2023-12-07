@@ -42,7 +42,7 @@
     - [Simple Admin Website](#simple-administrator-website)
   - [Skills Applied](#skills-applied)
   - [Contact](#contact)
-  - [Acknowledgements](#acknowledgements)
+  - [Acknowledgments](#acknowledgemnts)
 
 </details>
 
@@ -215,7 +215,9 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Acknowledgements
+<!-- Acknowledgments -->
+## Acknowledgments
+
 - [Jinja 2.11.x Template Designer Documentation][jinja-url]
 - [Flask Documentation][flask-url]
 - [MySQL CLI Documentation][mysql-cli-url]
