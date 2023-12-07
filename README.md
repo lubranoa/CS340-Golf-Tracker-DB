@@ -53,6 +53,8 @@ This project is a Golf Tracking application that provides a web-based user inter
 
 **Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The main purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- Technologies Used -->
 ## Technologies Used
 
@@ -67,6 +69,8 @@ This project is a Golf Tracking application that provides a web-based user inter
   - Database:
     - [![mysql-cli][mysql-cli]][mysql-cli-url]
     - [![phpmyadmin][phpmyadmin]][phpmyadmin-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Features -->
 ## Features
@@ -218,7 +222,6 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 - [Diagrams.net (formerly Draw.io)][drawio-url]
 - [Shields.io][shields-url]
 - [Simple Icons][icons-url]
-- [Adapted README from Best-README-TEMPLATE][readme-template-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -255,5 +258,4 @@ Project Link: [https://github.com/lubranoa/CS340-Golf-Tracker-DB][repo-url]
 
 [shields-url]: https://shields.io/
 [icons-url]: https://simpleicons.org/
-[readme-template-url]: https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 [drawio-url]: https://app.diagrams.net/
