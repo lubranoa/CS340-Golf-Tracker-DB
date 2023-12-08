@@ -19,7 +19,7 @@
   <!-- Titles and Subtitles -->
   <h1 align="center">Golf Tracker Database</h1>
   <p align="center">
-    <b>A Database Administrator's Flask Web Application for Managing Golf Data on a Cloud-hosted MySQL Database</b>
+    <b>A Database Administrator's Flask Web Application for Managing Golf Data on a Cloud-hosted MySQL Relational Database</b>
   </p>
   <p align="center">
     By Conner Marchell and Alexander Lubrano
@@ -49,7 +49,7 @@
 <!-- Project Description -->
 ## Project Description
 
-This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL database of golf data. It is the culmination of an entire term's worth of effort to deploy this database administration application using a development process involving multiple iterative steps of designing, developing, and implementing peer and staff feedback on our database modeling and diagrams, SQL queries, client and server-side code, and UI/UX of the web application.
+This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL relational database of golf data. It is the culmination of an entire term's worth of effort to deploy this database administration application using a development process involving multiple iterative steps of designing, developing, and implementing peer and staff feedback on our database modeling and diagrams, SQL queries, client and server-side code, and UI/UX of the web application.
 
 **Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The main purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
 
@@ -108,7 +108,7 @@ This application was deployed on Oregon State's own servers and used a cloud-hos
 
 ### Database Layout
 
-This database has seven different tables of entities that it stores, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
+This relational database has seven different tables of entities that it stores, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
 
   - `courses` Entity
     - Stores golf courses with a name and a US state location.
@@ -135,7 +135,7 @@ This database has seven different tables of entities that it stores, including o
   - `swings` Entity
     - Stores players' swings taken with a distance traveled, the club used, the player who swung, the hole it was done on, and the round in which it occurred. Dependent on `clubs`, `players,`, `rounds`, and `holes`.
 
-For detailed specifics on the database design, take a look at the database's [ERD](/screenshots/340-ERD.png), [schema](/screenshots/340-schema.png), and the *Database Outline* section of the [project document](/docs/Group%2066%20Step%205%20Final.pdf).
+For detailed specifics on the database's design, take a look at its [ERD](/screenshots/340-ERD.png), [schema](/screenshots/340-schema.png), and the *Database Outline* section of the [project document](/docs/Group%2066%20Step%205%20Final.pdf).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -184,7 +184,7 @@ When the application was still deployed and functional, the website was accessib
 
 The term-long development of the Golf Tracker project involved the application of a wide range of skills and technologies, making it a comprehensive learning experience. The key skills utilized in the project include:
 
-  - Database design and schema/ERD creation
+  - Relational database design and schema/ERD creation
 
   - Python-based web application development with Flask
 
