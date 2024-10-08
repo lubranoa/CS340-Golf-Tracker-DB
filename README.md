@@ -17,7 +17,7 @@
   </p>
   <br />
   <!-- Titles and Subtitles -->
-  <h1 align="center">Golf Tracker Database</h1>
+  <h1 align="center">Golf Tracking Database Administration Web App</h1>
   <p align="center">
     <b>A Database Administrator's Flask Web Application for Managing Golf Data on a Cloud-hosted MySQL Relational Database</b>
   </p>
