@@ -49,9 +49,7 @@
 <!-- Project Description -->
 ## Project Description
 
-This project is a Golf Tracking application that provides a web-based user interface (UI) for a Database Administrator to interact with a cloud-hosted MySQL relational database of golf data. It is the culmination of an entire term's worth of effort to deploy this database administration application using a development process involving multiple iterative steps of designing, developing, and implementing peer and staff feedback on our database modeling and diagrams, SQL queries, client and server-side code, and UI/UX of the web application.
-
-**Note:** The assignment specifications did not require the use of RESTful practices in the application. The specifications also stated that this would *not* be a customer facing application, thus there was no need for login pages, sessions, registering users, etc. The main purpose of the project was to provide the primary user, a Database Admin, with a web interface for data tables.
+This project is a web-based Golf Tracking application designed for Database Administrators to manage and interact with a cloud-hosted MySQL relational database containing golf-related data. Developed over one academic term, the application underwent multiple iterations, incorporating peer and instructor feedback to refine database modeling, SQL queries, client and server-side code, and the user interface and experience. <ins>Note</ins>: As per assignment specifications, the application does not implement RESTful practices or user authentication features, as it is intended solely for administrative use. The primary objective of this project is to offer Database Administrators an intuitive web interface for efficient data management.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -61,14 +59,11 @@ This project is a Golf Tracking application that provides a web-based user inter
   - Backend:
     - [![python][python]][python-url]
     - [![flask][flask]][flask-url]
-    - [![gunicorn][gunicorn]][gunicorn-url]
-    - [![dotenv][dotenv]][dotenv-url]
   - Frontend:
     - [![jinja][jinja]][jinja-url]
     - [![css][css]][css-url]
   - Database:
     - [![mysql-cli][mysql-cli]][mysql-cli-url]
-    - [![phpmyadmin][phpmyadmin]][phpmyadmin-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -77,28 +72,16 @@ This project is a Golf Tracking application that provides a web-based user inter
 
 Golf Tracker offers an array of features for a Database Admin to interact with the Golf Tracker's database:
 
-  - Provides CRUD operations for golf data management
+  - Provides comprehensive CRUD operations for managing golf-related data.
 
-  - Simple website with an intuitive user interface
+  - Offers a user-friendly web interface with dynamic dropdown menus and pre-filled update forms.
 
-  - Website displays each table of entities in the database
+  - Ensures data integrity through user input validation and relational dependency handling.
 
-  - Each table on the site has each entity's requisite CRUD operations
+  - Enables search functionality within the player-club association table.
 
-  - User input validation on create and update page inputs
+  - Includes SQL scripts for database schema creation and data manipulation.
   
-  - Dynamically populates dropdown inputs with necessary database entries
-  
-  - Update page inputs are pre-populated with the data being edited
-
-  - Search the player-club intersection table for players and the clubs they own
-
-  - Resolves relationship dependency issues that arise via editing or deleting an entity
-
-  - Data Definition Queries (DDQ) [SQL file](/database/golf-tracker-DDQ.sql) used to create the database schema and populate it with data
-
-  - Data Manipulation Queries (DMQ) [SQL file](/database/golf-tracker-DMQ.sql) contains all of the data manipulation queries used when the application communicates with the database
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Usage -->
