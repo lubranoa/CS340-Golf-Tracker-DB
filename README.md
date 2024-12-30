@@ -81,48 +81,49 @@ Golf Tracker offers an array of features for a Database Admin to interact with t
   - Enables search functionality within the player-club association table.
 
   - Includes SQL scripts for database schema creation and data manipulation.
-  
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Usage -->
 ## Usage
 
-This application was deployed on Oregon State's own servers and used a cloud-hosted MySQL database for data persistence. I do not have access to those servers or the database anymore so this project will not run anymore in its current form. To see the old setup steps, check out the [STARTUP-README](/STARTUP-README.md), which is the old version and contains how we set up the project using our school systems.
+This application was previously deployed on Oregon State University's servers, utilizing a cloud-hosted MySQL database for data persistence. As access to these servers and the database is no longer available, the application is currently non-operational in its existing form.
+
+For detailed setup instructions used during the initial deployment, please refer to the [STARTUP-README](https://github.com/lubranoa/CS340-Golf-Tracker-DB/blob/main/STARTUP-README.md), which outlines the procedures followed using the university's systems.
+
+To run this application locally, you would need to set up a compatible environment, including a local MySQL database and a Flask server. Please note that modifications to the configuration files may be necessary to accommodate a local setup.
 
 ### Database Layout
 
-This relational database has seven different tables of entities that it stores, including one intersection table of the single Many-to-Many relationship in the database. Each entity has its own unique (per-table) ID number along with other notable attributes and any relationships it has with other entities.
+The Golf Tracker database uses a relational model to manage golf-related data. Below is an overview of its entities, attributes, and relationships:
 
-  - `courses` Entity
-    - Stores golf courses with a name and a US state location.
-    - Deletions cascade to delete rounds.
+#### Entities and Attributes
 
-  - `holes` Entity
-    - Stores holes of a golf course with a hole number, par swing count, hole distance, and the course it's part of (uses course ID number). Dependent on `courses`.
+| Entity       | Attributes                                                                 | Description                                  |
+|--------------|-----------------------------------------------------------------------------|----------------------------------------------|
+| **Players**  | `player_id` (PK), `player_name`, `player_city`, `player_state`             | Stores details of registered players.        |
+| **Clubs**    | `club_id` (PK), `brand`, `club_name`, `club_type`                          | Records details about available golf clubs.  |
+| **Courses**  | `course_id` (PK), `course_name`, `course_state`                            | Tracks information about golf courses.       |
+| **Rounds**   | `round_id` (PK), `player_id` (FK), `course_id` (FK), `round_score`         | Records individual rounds of golf.          |
+| **Swings**   | `swing_id` (PK), `round_id` (FK), `hole_id` (FK), `club_id` (FK)           | Tracks each swing during a round of golf.    |
+| **Holes**    | `hole_id` (PK), `course_id` (FK), `hole_number`, `par_swing_count`, `distance` | Stores details about individual holes.      |
+| **Player-Clubs** | `player_id` (FK), `club_id` (FK)                                       | Manages the many-to-many relationship between players and clubs. |
 
-  - `clubs` Entity
-    - Stores golf clubs with a brand name, club name, and a club type. These are not directly tied to players inside the `clubs` table due to the many-to-many relationship needing an intersection table to hold the relationships.
-    - Deletions cascade to delete player-club relationships and removes the club from any `swings` they were used for.
-    
-  - `players` Entity
-    - Stores players with a name, a city, and a US state.
-    - Deletions cascade to delete rounds and player-club relationships.
+#### Relationships
 
-  - `player_clubs` Entity
-    - Stores the relationships of players and the clubs they own. These are many-to-many relationships because a player can own multiple clubs and a single club can be owned by multiple players.
-    
-  - `rounds` Entity
-    - Stores players' rounds of golf with a date, the score, the player whose round it is, and which course it was on. Dependent on `courses` and `players`.
-    - Deletions cascade to delete swings.
+- **Players and Rounds:** One player can participate in many rounds (`1:M`).
 
-  - `swings` Entity
-    - Stores players' swings taken with a distance traveled, the club used, the player who swung, the hole it was done on, and the round in which it occurred. Dependent on `clubs`, `players,`, `rounds`, and `holes`.
+- **Rounds and Swings:** Each round consists of multiple swings (`1:M`).
+
+- **Players and Clubs:** Players can own multiple clubs, and each club can belong to multiple players (`M:M`).
+
+- **Courses and Holes:** Each course consists of multiple holes (`1:M`).
 
 For detailed specifics on the database's design, take a look at its [ERD](/screenshots/340-ERD.png), [schema](/screenshots/340-schema.png), and the *Database Outline* section of the [project document](/docs/Group%2066%20Step%205%20Final.pdf).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Simple Administrator Website
+### Web-Based Administration Interface
 
 When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `http://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
 
