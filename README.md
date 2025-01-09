@@ -56,14 +56,14 @@ This project is a web-based Golf Tracking application designed for Database Admi
 <!-- Technologies Used -->
 ## Technologies Used
 
-  - Backend:
-    - [![python][python]][python-url]
-    - [![flask][flask]][flask-url]
-  - Frontend:
-    - [![jinja][jinja]][jinja-url]
-    - [![css][css]][css-url]
-  - Database:
-    - [![mysql-cli][mysql-cli]][mysql-cli-url]
+- Backend:
+  - [![python][python]][python-url]
+  - [![flask][flask]][flask-url]
+- Frontend:
+  - [![jinja][jinja]][jinja-url]
+  - [![css][css]][css-url]
+- Database:
+  - [![mysql-cli][mysql-cli]][mysql-cli-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -72,15 +72,15 @@ This project is a web-based Golf Tracking application designed for Database Admi
 
 Golf Tracker offers an array of features for a Database Admin to interact with the Golf Tracker's database:
 
-  - Provides comprehensive CRUD operations for managing golf-related data.
+- Provides comprehensive CRUD operations for managing golf-related data.
 
-  - Offers a user-friendly web interface with dynamic dropdown menus and pre-filled update forms.
+- Offers a user-friendly web interface with dynamic dropdown menus and pre-filled update forms.
 
-  - Ensures data integrity through user input validation and relational dependency handling.
+- Ensures data integrity through user input validation and relational dependency handling.
 
-  - Enables search functionality within the player-club association table.
+- Enables search functionality within the player-club association table.
 
-  - Includes SQL scripts for database schema creation and data manipulation.
+- Includes SQL scripts for database schema creation and data manipulation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,64 +125,66 @@ For detailed specifics on the database's design, take a look at its [ERD](/scree
 
 ### Web-Based Administration Interface
 
-When the application was still deployed and functional, the website was accessible through a URL to the deployed application on the OSU servers along with our choice of a port number, something like `http://flipX.engr.oregonstate.edu:15432`. There were no login requirements laid out by the assignment specifications. The following are some of the highlights of the Golf Tracker's admin website. Take a look at the [Project Document](/docs/Group%2066%20Step%205%20Final.pdf) for more. 
+This interface was designed to facilitate efficient database management through the following key workflows:
 
-  - Home Page
-    - A simple web page that contains links to each table in the Golf Tracker database. It also has a button to reset the data in the database back to its original state for when peers and staff wanted to reset after testing.
+#### Access the Home Page
+- Provides an overview of the database with navigation links to all entities.
+- Displays summary statistics, such as the total number of players, clubs, and rounds.
 
-      ![Screenshot of the home page of the Golf Tracker website with links to all the tables in the database and a reset database button](/screenshots/340-home-page.png)
+  ![Screenshot of the home page of the Golf Tracker website with links to all the tables in the database and a reset database button](/screenshots/340-home-page.png)
 
-  - View/Read a Single Table
-    - Each database table has its own "View" page that displays all entries in the table. For example, below you can see the `players` table, which displays all the data in the table along with an insert button at the bottom and edit and delete buttons for each entry.
+#### View Records in a Table
+- Allows administrators to browse entity data (e.g., players, courses) in a clean, tabular format.
+- Includes sortable columns and pagination for improved data exploration.
 
-      ![Screenshot of the players table web page that contains each player's information in the Golf Tracker DB along with create, edit, and delete buttons.](/screenshots/340-player-table.png)
+  ![Screenshot of the players table web page that contains each player's information in the Golf Tracker DB along with create, edit, and delete buttons.](/screenshots/340-player-table.png)
 
-  - Insert/Create an Entry
-    - At the bottom of tables on any "View" pages, there is a blue "+" button that takes the admin to another page titled "Insert `entity` Entry". These pages have all necessary input fields for each entity in the database. 
-    - All text input is validated by the pages and must be correct before submission. The selections of some dropdowns are dynamically populated with database data, such as in the screenshot below where the "Course Name" and "Player Name" dropdowns will only contain choices of courses and players already in the database.
+#### Add a New Entry
+- Supports the creation of new records for all entities (e.g., players, clubs).
+- Includes dynamic dropdown menus to ensure accurate foreign key selection.
 
-      ![Screenshot of the insert round entry page that has the necessary input fields for a round entry and an insert round button.](/screenshots/340-insert-round.png)
+  ![Screenshot of the insert round entry page that has the necessary input fields for a round entry and an insert round button.](/screenshots/340-insert-round.png)
 
-  - Edit/Update an Entry
-    - Most of the tables on "View" pages have update buttons in the tables next to each entry, which navigates the admin to another page titled "Update `entity` Entry". Only some of the entities in the application are allowed to be edited, which was a design choice to fulfill assignment requirements.
-    - These "Update" web pages show the entry being updated in a table and have the same validating and dynamically populated inputs as "Insert" pages. The input fields are pre-populated with the entry's current data.
+#### Update Existing Records
+- Offers pre-filled forms for quick editing of existing records.
+- Automatically validates input to maintain data consistency.
 
-      ![Screenshot of an update swing entry page that has all of the swing's information displayed in a table, has the necessary input fields for a swing that are pre-populated with all of the swing's current data, and has an update swing button.](/screenshots/340-update-swing.png)
-  
-  - Delete an Entry
-    - Most of the tables on "View" pages also have delete buttons for each entry in the table. This navigates the admin to a page of the application confirming whether or not they want to delete the entry.
-    - On submit, the entry will be deleted along with any cascading deletions that need to be carried out by the database's `CASCADE` rules.
+  ![Screenshot of an update swing entry page that has all of the swing's information displayed in a table, has the necessary input fields for a swing that are pre-populated with all of the swing's current data, and has an update swing button.](/screenshots/340-update-swing.png)
 
-      ![Screenshot of an entry deletion confirmation page that asks if the user is sure if they want to delete an entry and has radio buttons for yes and no and a submit button.](/screenshots/340-delete-player.png)
+#### Delete a Record
+- Enables safe record deletion with confirmation prompts to avoid errors.
+- Manages relational dependencies to ensure database integrity.
 
-  - View and Search Intersection Table of M:M Relationship
-    - This intersection table shows which player owns what clubs in the database. This relationship is many-to-many since a player can own multiple clubs and a club can be owned by multiple players, as described in the [Database Layout section](#database-layout).
-    - This web page also has the functionality to search for relationships by player. For a screenshot of how that looks, take a look at this [screenshot of a search](/screenshots/340-player-club-search.png) when the admin searches for "Happy".
+  ![Screenshot of an entry deletion confirmation page that asks if the user is sure if they want to delete an entry and has radio buttons for yes and no and a submit button.](/screenshots/340-delete-player.png)
 
-      ![Screenshot of the player-clubs intersection table that shows which players own what clubs with delete buttons next to each entry, an insert button at the bottom of the table, and a search bar below the table for the user to search for relationships by player](/screenshots/340-player-club-table.png)
+#### Search Many-to-Many Relationships
+- Provides a searchable interface for viewing and managing relationships, such as players and their associated clubs.
+- Supports rapid filtering to locate specific records efficiently.
+
+  ![Screenshot of the player-clubs intersection table that shows which players own what clubs with delete buttons next to each entry, an insert button at the bottom of the table, and a search bar below the table for the user to search for relationships by player](/screenshots/340-player-club-table.png)
+
+This design highlights an emphasis on usability and functionality, ensuring that database administrators can perform key operations seamlessly.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Skills Applied -->
 ## Skills Applied
 
-The term-long development of the Golf Tracker project involved the application of a wide range of skills and technologies, making it a comprehensive learning experience. The key skills utilized in the project include:
+- Designed and implemented a normalized relational database schema to support CRUD operations and complex queries.
 
-  - Relational database design and schema/ERD creation
+- Utilized MySQL to manage persistent data storage and enforce data integrity through primary and foreign key constraints.
 
-  - Python-based web application development with Flask
+- Developed a Flask-based backend to handle routing and server-side logic for the web application.
 
-  - Front-end development using Jinja, HTML, and CSS
+- Created dynamic and responsive user interfaces using Jinja templates, HTML, and CSS.
 
-  - Creating CRUD operations for various entities
-  
-  - Handling user input and form submissions
+- Incorporated user-friendly features such as pre-filled forms, dropdown menus, and search functionality for many-to-many relationships.
 
-  - Data validation and consistency
+- Iteratively designed, tested, and refined database and application components based on peer and instructor feedback.
 
-  - Data relationship management
+- Conducted detailed testing of SQL queries to optimize performance and ensure reliable data manipulation.
 
-  - User interface design and user experience improvements
+- Gained hands-on experience with debugging relational dependency issues and ensuring safe data deletions.
 
 These skills were applied collaboratively to create Golf Tracker. The project not only demonstrates proficiency in web development and database management but also showcases the ability to transform a conceptual idea into a fully functional web application.
 
